@@ -1,4 +1,4 @@
-@extends('Nhome')
+@extends('home')
 @section('tabel-group')
   <div class="table">
     <table class="main-content select-list">
@@ -27,7 +27,34 @@
                         {{ $student->lastname }}
                     </td>
                     <td>
-                        
+                        @php
+                        $x = false;
+                            foreach ($selected as $value) {
+                                if( !$x ) {
+                                    if( !($value->name == $student->name && $value->surname == $student->surname) ) {
+                                        continue;
+                                    } 
+                                    $x = true;
+                                    echo 1;
+                                    
+                                }
+                                
+                            }
+                        @endphp
+                        @php
+                        $x = false;
+                            foreach ($selected as $value) {
+                                if( !$x ) {
+                                    if( !($value->name == $student->name && $value->surname == $student->surname) ) {
+                                        continue;
+                                        
+                                    }
+                                    $x = true;
+                                    echo 0;
+                                }
+                                
+                            }
+                        @endphp
                     </td>
                     <td class="td">
                         <button 

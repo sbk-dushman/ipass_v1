@@ -12,15 +12,14 @@
 	<div class="grid-containerr">
 			@section('groups')
 				<div class="groups">
-
-					{{-- @foreach ($groups as $group) --}}
+					@foreach ($groups as $group)
 						<div class="box_group ">
-							<a  class="group-title" href="{{--route('group-URL')}}{{$group->codegroup--}}">{{--$group->group--}}</a>
+							<a class="group-title" href="group{{$group->group_id}}">{{$group->group}}</a>
 						</div>
-					{{-- @endforeach --}}
+					@endforeach
 				</div>
 				<div class="pag-group">
-					{{-- @if ($groups->total() > $groups->count())
+					@if ($groups->total() > $groups->count())
 						<ul class="pagination">
 							<li class="pagination__item">
 								<div>
@@ -28,23 +27,11 @@
 								</div>
 							</li>
 						</ul>
-					@endif --}}
+					@endif
 				</div>
 			@show
-            @if (Request::is('/'))
-                 {{-- <div class="non-select-alert">
-                    <h2> Группа не выбрана..</h2>
-                 </div> --}}
 
-                       @else
-                       @yield('tabel-group')
-            @endif
-
-
-
-
+            @yield('tabel-group')
 	</div>
-
-
 @endsection
 

@@ -1,13 +1,13 @@
 @extends('master')
 @section('content')
-{{-- <div class="grid-container-search">
-    <div class="tabel_personal"></div>
+<div class="grid-container-search">
+    {{-- <div class="tabel_personal"></div> --}}
     <div class="tabel_students">
         <h2 class="main-title">Поиск</h2>
         @if  ($results==NULL)
         <div class="alert alert-success alert-block">
           Пока нет резултвтов
-            </div> 
+            </div>
 
         @elseif ($results->count()<=0)
                             <div class="alert alert-success alert-block">
@@ -31,11 +31,11 @@
                         <td>{{$item->surname}}</td>
 
                         <td>
-                            <a href="{{ route('group-URL') }}{{ $item->group }}">{{$item->group_rus}}</a>
+                            <a href="/group{{ $item->group }}">{{$item->group_id}}</a>
                         </td>
                         <td>
                             <button data-studID="{{$item->id}}" id="btn_add_from_search" class="btn_add_from_search">
-                           <i class="fas fa-plus-circle"></i>
+                                <i class="fas fa-plus-circle"></i>
                             </button>
                         </td>
 
@@ -55,8 +55,8 @@
                 </form>
             </div>
 </div>
-    <div class="main-content search">
-         <div class="main-content__header">
+    {{-- <div class="main-content search"> --}}
+         {{-- <div class="main-content__header">
             </div>
 
                 <h2 class="man-title">Поиск</h2>
@@ -110,16 +110,16 @@
                         </tbody>
                     </table>
                      @if ( $results->total() > $results->count())
-                         <ul class="pagination">
+                        {{-- <ul class="pagination">
                               <li class="pagination__item">
                                     <div>
                                           {{$results->onEachSide(1)->links()}}
                                     </div>
                               </li>
                         </ul>
-                  @endif
+                  @endif --}}
 
 
-    </div> --}}
+    {{-- </div> --}}
 
 @endsection

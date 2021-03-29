@@ -25,9 +25,53 @@ class MainController extends Controller
           return view('cardOrder');
     }
 
-    public function search()
+    public function searchGet()
     {
-        return view('search');
+        $results = null;
+
+        return view('search', compact('results'));
+    }
+
+    public function searchPost(Request $request)
+    {
+        // dd($request->all());
+
+        if( $request->search_req ) {
+            $data = $request->search_req;
+            $results = Student::where('name', 'LIKE', '%' . $data . '%')
+                                ->orWhere('surname', 'LIKE', '%' . $data . '%')
+                                ->orWhere('lastname', 'LIKE', '%' . $data . '%')
+                                ->orWhere('group_id', 'LIKE', '%' . $data . '%')
+                                ->orderBy('surname', 'ASC')
+                        // ->paginate(1);
+                        ->get();
+            $cartStudents = Selected::get();
+
+            return view('search', compact('results', 'cartStudents'));
+        }
+        elseif($request->test) {
+            $data = $request->test;
+            $StudName = Student::where('id', $data)->value('name');
+            $StudSurname = Student::where('id', $data)->value('surname');
+            $StudLastname = Student::where('id', $data)->value('lastname');
+            $StudGroup = Student::where('id', $data)->value('group_id');
+            $issetName = Selected::where([
+                'name' => $StudName,
+                'surname' => $StudSurname,
+                'lastname' => $StudLastname,
+                'group' => $StudGroup
+            ])->value('id');
+            if( $issetName == true ) {
+                return 1;
+            }else {
+                Selected::insert([
+                    'name' => $StudName,
+                    'surname' => $StudSurname,
+                    'lastname' => $StudLastname,
+                    'group' => $StudGroup
+                ]);
+            }
+        }
     }
 
     public function selected()

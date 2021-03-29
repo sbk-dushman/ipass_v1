@@ -46,11 +46,11 @@
                             <td>{{ $data->position }}</td>
                             <td>
                                 @if ($data->group)
-                                    <select name="{{ $data->id }}">
+                                    <select class="select" name="{{ $data->id }}">
                                         <option selected value="2">Студент</option>
                                     </select>
                                 @else
-                                    <select name="{{ $data->id }}">
+                                    <select class="select" name="{{ $data->id }}">
                                         <option value="1">Преподователь</option>
                                         <option selected value="2">Студент</option>
                                     </select>

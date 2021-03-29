@@ -12,5 +12,17 @@
 */
 
 use App\Http\Controllers\MainController;
-
+Auth::routes([
+    'reset' => false,
+    'confirm' => false,
+    'verify' => false,
+]);
 Route::get('/', 'MainController@index');
+Route::get('/print', 'PrintController@getPrint')->name('print-get');
+
+Route::post('/search', 'SearchController@searchPost')->name('search-post');
+
+Route::get('/search', 'SearchController@searchGet')->name('search-get');
+
+
+Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');

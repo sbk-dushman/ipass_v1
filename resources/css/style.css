@@ -699,3 +699,11 @@ button .add_logo:hover{
     box-shadow: none;
     border: 1px solid lightgray;
 }
+
+
+.workeredit {
+    /* margin-top: 100px; */
+    height: 500px;
+    width: 20%;
+    background: #fff;
+}

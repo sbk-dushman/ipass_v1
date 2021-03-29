@@ -6,7 +6,6 @@
             <th>Фамилия</th>
             <th>Имя</th>
             <th>Отчество</th>
-            <th>Группа</th>
             <th>Дествия</th>
         </tr>
         <tbody>
@@ -26,36 +25,33 @@
                     <td>
                         {{ $student->lastname }}
                     </td>
-                    <td>
+                    {{-- <td>
                         @php
                         $x = false;
                             foreach ($selected as $value) {
                                 if( !$x ) {
                                     if( !($value->name == $student->name && $value->surname == $student->surname) ) {
                                         continue;
-                                    } 
-                                    $x = true;
-                                    echo 1;
-                                    
+                                    }else {
+                                        $x = true;
+                                        echo 1;
+                                    }      
                                 }
-                                
                             }
                         @endphp
                         @php
                         $x = false;
                             foreach ($selected as $value) {
                                 if( !$x ) {
-                                    if( !($value->name == $student->name && $value->surname == $student->surname) ) {
-                                        continue;
-                                        
-                                    }
-                                    $x = true;
-                                    echo 0;
-                                }
-                                
+                                    if( ($value->name == $student->name && $value->surname == $student->surname) ) {
+                                        continue; 
+                                        $x = true;  
+                                        echo 0;
+                                    }   
+                                } 
                             }
                         @endphp
-                    </td>
+                    </td> --}}
                     <td class="td">
                         <button 
                             class="btn_add"

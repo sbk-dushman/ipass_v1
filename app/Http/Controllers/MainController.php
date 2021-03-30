@@ -11,7 +11,11 @@ class MainController extends Controller
     public function index()
     {
         $group = Group::with('group')->get();
-        dd($group);
-        return view('welcome');
+        // dd($group);
+        return view('home');
+    }
+    public function Cardorder ()
+    {
+          return view('cardOrder');
     }
 }

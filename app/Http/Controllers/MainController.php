@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    public function index()
+    public function group()
     {
         $group = Group::with('group')->get();
         // dd($group);
@@ -17,5 +17,15 @@ class MainController extends Controller
     public function Cardorder ()
     {
           return view('cardOrder');
+    }
+
+    public function search()
+    {
+        return view('search');
+    }
+
+    public function selected()
+    {
+        return view('selected');
     }
 }

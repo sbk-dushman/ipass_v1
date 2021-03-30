@@ -1,7 +1,7 @@
 @extends('master')
 @section('content')
-<div class="main-content container-selected">
-   {{-- <div class="main-content__header">
+{{-- <div class="main-content container-selected">
+   <div class="main-content__header">
 
 
             <a class="step-back" href="{{ route('home-URL') }}">
@@ -56,7 +56,7 @@
         </select>
     </label>
 
-   </div> --}}
+   </div>
 
     <h2 class="main-title">Печать</h2>
     <div class="table_conrainer ">
@@ -66,7 +66,7 @@
                     </div>
                 @else
         <table class="main-content select-list">
-            {{-- <caption></caption> --}}
+            <caption></caption>
             <tr>
                 <th>Фамилия:</th>
                 <th>Имя:</th>
@@ -128,6 +128,6 @@
 
     </div>
 
-</div>
+</div> --}}
 
 @endsection

@@ -19,7 +19,7 @@
                         <li class="link-list__item"><a title="Список групп" href="/group"><i class="fas fa-table"></i></a></li>
                         <li class="link-list__item"><a title="Список для печати" href="/selected"><i class="fas fa-user-check"></i></a></li>
                         <li class="link-list__item"><a title="Таблица сотрудников" href="{{-- route('personal')--}}"><i class="fas fa-user-tie"></i></a></li>
-                        <li class="link-list__item"><a title="Загрузка данных сотрудников" href="{{-- route('file.upload') --}}"><i class="fas fa-file-download"></i></a></li>
+                        {{-- <li class="link-list__item"><a title="Загрузка данных сотрудников" href="route('file.upload')"><i class="fas fa-file-download"></i></a></li> --}}
                         <li class="link-list__item"><a title="Синхронизация с 1С" href="#"><i class="fas fa-sync-alt"></i></a></li>
                     </ul>
                 </div>

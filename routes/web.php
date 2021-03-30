@@ -27,7 +27,7 @@ Route::post('/selected', 'MainController@postSelected');
 Route::get('/group{group_id?}', 'MainController@getTableList');
 Route::get('/workeredit', 'MainController@workerEdit');
 Route::post('/group{group_id?}', 'MainController@postTableList');
-Route::post('/workeredit', 'MainController@workerEdit');
+Route::post('/workeredit', 'MainController@workerEditPost');
 // Route::group(['middleware'=>'auth'],function () { //если забыл пароль админа коментируй эту строчку
 // // Route::get('/', 'MainController@index');
     Route::get('/print', 'MainController@getPrint')->name('print-get');

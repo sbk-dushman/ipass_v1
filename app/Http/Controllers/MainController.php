@@ -172,9 +172,15 @@ class MainController extends Controller
         return view('print', compact('datas', 'dateNow', 'select'));
     }
 
-    public function workerEdit()
+    public function workerEdit(Request $request)
     {
+        dump($request->all());
         $datas = Selected::get();
         return view('workeredit', compact('datas'));
+    }
+
+    public function workerEditPost(Request $request)
+    {
+        dd($request->all());
     }
 }

@@ -21,7 +21,7 @@ Auth::routes([
 Route::get('/card-order', 'MainController@Cardorder')->name('cardOrder-URL');
 
 Route::get('/group{group_id?}', 'MainController@group');
-Route::get('/search', 'MainController@search');
+// Route::get('/search', 'MainController@search');
 Route::get('/selected', 'MainController@selected');
 Route::post('/selected', 'MainController@postSelected');
 Route::get('/group{group_id?}', 'MainController@getTableList');
@@ -32,9 +32,9 @@ Route::group(['middleware'=>'auth'],function () { //если забыл паро
 // Route::get('/', 'MainController@index');
 Route::get('/print', 'MainController@getPrint')->name('print-get');
 
-// Route::post('/search', 'SearchController@searchPost')->name('search-post');
+Route::post('/search', 'MainController@searchPost')->name('search-post');
 
-// Route::get('/search', 'SearchController@searchGet')->name('search-get');
+Route::get('/search', 'MainController@searchGet')->name('search-get');
 
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');

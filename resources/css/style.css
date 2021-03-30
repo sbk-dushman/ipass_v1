@@ -707,3 +707,10 @@ button .add_logo:hover{
     width: 20%;
     background: #fff;
 }
+
+select {
+    width: 150px;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    transition: 0.5s;
+}

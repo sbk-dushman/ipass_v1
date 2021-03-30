@@ -28,16 +28,16 @@ Route::get('/group{group_id?}', 'MainController@getTableList');
 Route::get('/workeredit', 'MainController@workerEdit');
 Route::post('/group{group_id?}', 'MainController@postTableList');
 Route::post('/workeredit', 'MainController@workerEdit');
-Route::group(['middleware'=>'auth'],function () { //если забыл пароль админа коментируй эту строчку
-// Route::get('/', 'MainController@index');
-Route::get('/print', 'MainController@getPrint')->name('print-get');
+// Route::group(['middleware'=>'auth'],function () { //если забыл пароль админа коментируй эту строчку
+// // Route::get('/', 'MainController@index');
+    Route::get('/print', 'MainController@getPrint')->name('print-get');
 
-Route::post('/search', 'MainController@searchPost')->name('search-post');
+    Route::post('/search', 'MainController@searchPost')->name('search-post');
 
-Route::get('/search', 'MainController@searchGet')->name('search-get');
+    Route::get('/search', 'MainController@searchGet')->name('search-get');
 
 
-Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
-}); //и эту строчку
+    Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
+// }); //и эту строчку
 
 

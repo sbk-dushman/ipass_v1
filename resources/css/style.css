@@ -705,7 +705,10 @@ button .add_logo:hover{
     /* margin-top: 100px; */
     height: 500px;
     width: 20%;
+    padding: 20px;
     background: #fff;
+    margin: 0 auto;
+    display: flex;
 }
 
 select {

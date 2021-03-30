@@ -1,6 +1,8 @@
 @extends('selected')
 @section('content')
     <div class="workeredit">
-		1
+	    <form>
+            <h2>Редактирование данных</h2>
+        </form>
     </div>
 @endsection

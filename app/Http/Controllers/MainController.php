@@ -14,4 +14,8 @@ class MainController extends Controller
         // dd($group);
         return view('home');
     }
+    public function Cardorder ()
+    {
+          return view('cardOrder');
+    }
 }

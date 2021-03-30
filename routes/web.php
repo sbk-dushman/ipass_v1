@@ -17,12 +17,18 @@ Auth::routes([
     'confirm' => false,
     'verify' => false,
 ]);
-Route::get('/', 'MainController@index');
-Route::get('/print', 'PrintController@getPrint')->name('print-get');
+Route::get('/card-order', 'MainController@Cardorder')->name('cardOrder-URL');
 
-Route::post('/search', 'SearchController@searchPost')->name('search-post');
+Route::group(['middleware'=>'auth'],function () { //если забыл пароль админа коментируй эту строчку
+    Route::get('/', 'MainController@index');
+    Route::get('/print', 'PrintController@getPrint')->name('print-get');
 
-Route::get('/search', 'SearchController@searchGet')->name('search-get');
+    Route::post('/search', 'SearchController@searchPost')->name('search-post');
+
+    Route::get('/search', 'SearchController@searchGet')->name('search-get');
 
 
-Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
+    Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
+}); //и эту строчку
+
+

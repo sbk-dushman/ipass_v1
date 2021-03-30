@@ -23,11 +23,14 @@ Route::get('/card-order', 'MainController@Cardorder')->name('cardOrder-URL');
 Route::get('/group{group_id?}', 'MainController@group');
 Route::get('/search', 'MainController@search');
 Route::get('/selected', 'MainController@selected');
+Route::post('/selected', 'MainController@postSelected');
 Route::get('/group{group_id?}', 'MainController@getTableList');
-
+Route::get('/workeredit', 'MainController@workerEdit');
+Route::post('/group{group_id?}', 'MainController@postTableList');
+Route::post('/workeredit', 'MainController@workerEdit');
 Route::group(['middleware'=>'auth'],function () { //если забыл пароль админа коментируй эту строчку
 // Route::get('/', 'MainController@index');
-// Route::get('/print', 'PrintController@getPrint')->name('print-get');
+Route::get('/print', 'MainController@getPrint')->name('print-get');
 
 // Route::post('/search', 'SearchController@searchPost')->name('search-post');
 

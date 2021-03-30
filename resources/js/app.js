@@ -78,6 +78,20 @@ $(document).ready(function() {
 			}
 		});
     })
+
+    $('.selected_edit').on("click", function(e) {
+      e.preventDefault();
+      let workerid = $(this).attr("data-workerID");
+      $.ajax({
+        url: '/workeredit',
+        data: { workerid },
+        method: 'POST',
+    
+        success: function (data) {
+          console.log(1);
+        }
+      });
+    })
     // поисковой запрос
 
     // $('#search-btn').on("click", function (e) {

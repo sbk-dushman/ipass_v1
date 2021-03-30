@@ -630,7 +630,7 @@
         }
         });
         });
-</script> --}}
+</script> 
 </body>
 </html>
 

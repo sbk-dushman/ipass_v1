@@ -35,7 +35,7 @@ Route::post('/workeredit', 'MainController@workerEditPost');
     Route::post('/search', 'MainController@searchPost')->name('search-post');
 
     Route::get('/search', 'MainController@searchGet')->name('search-get');
-
+Route::get('/personal', 'MainController@getPersonal')->name('personal');
 
     Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
 // }); //и эту строчку

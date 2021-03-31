@@ -13,6 +13,7 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+    {{--dump($datas)--}}
 <div class="cards">
     <div class="card-block">
         @foreach ($datas as $data)
@@ -85,9 +86,11 @@
                 </div>
                 </div>
             @endif
+            <div class="breaker"></div>
         @endforeach
     </div>
 </div>
+
 {{-- <div class="cards">
     <div class="card-block">
         <div class="stud-card card-wrap">
@@ -326,7 +329,9 @@
         font-size: 11px;
         margin-left: 10px;
     }
-
+    .breaker {
+            page-break-after: always;
+        }
     @font-face {
         font-family: 'Times New Roman';
         src: url('11874.ttf');
@@ -341,12 +346,16 @@
             margin-top: 1px;
             /*display: none;*/
         }
+        .card-block:nth-child(n5-5){
+            color: red;
+        }
         .teach-card,.card-wrap-figure2,.card-wrap-figure  {
         -webkit-print-color-adjust: exact;
         }
-        .studcard {
-            page-break-inside: avoid;
+   .teach-card,.studcard{
+        page-break-before: always;
     }
+
 
 
 
@@ -630,7 +639,7 @@
         }
         });
         });
-</script> 
+</script>
 </body>
 </html>
 

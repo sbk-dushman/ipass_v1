@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Group;
 use App\Selected;
 use App\Student;
+use App\Worker;
 use Illuminate\Foundation\Console\Presets\Vue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -98,7 +99,7 @@ class MainController extends Controller
         foreach( Student::get() as $x ) {
             foreach( Selected::get() as $y ) {
                 if( $x->name == $y->name && $x->surname == $y->surname && $x->lastname == $y->lastname && $x->group_id == $y->group ) {
-                    $arr = [ 
+                    $arr = [
                         'name' => $x->name,
                         'surname' => $x->surname,
                         'lastname' => $x->lastname,
@@ -182,5 +183,10 @@ class MainController extends Controller
     public function workerEditPost(Request $request)
     {
         dd($request->all());
+    }
+    public function getPersonal()
+    {
+        $personal = Worker::get();
+        return view('personal', compact('personal'));
     }
 }

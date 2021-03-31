@@ -64,7 +64,7 @@
                             </td>
                             <td>
                                 @if (!($data->group))
-                                    <a href="/workeredit" data-workerID="{{ $data->id }}">
+                                    <a href="/workeredit{{ $data->id }}" data-workerID="{{ $data->id }}">
                                         <i class="fas fa-pen"></i>
                                     </a>
                                 @endif

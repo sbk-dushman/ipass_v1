@@ -22,10 +22,10 @@ Route::get('/card-order', 'MainController@Cardorder')->name('cardOrder-URL');
 
 Route::get('/group{group_id?}', 'MainController@group');
 // Route::get('/search', 'MainController@search');
-Route::get('/selected', 'MainController@selected');
+Route::get('/selected', 'MainController@selected')->name('selecteds');
 Route::post('/selected', 'MainController@postSelected');
 Route::get('/group{group_id?}', 'MainController@getTableList');
-Route::get('/workeredit', 'MainController@workerEdit');
+Route::get('/workeredit{workerid?}', 'MainController@workerEdit');
 Route::post('/group{group_id?}', 'MainController@postTableList');
 Route::post('/workeredit', 'MainController@workerEditPost');
 // Route::group(['middleware'=>'auth'],function () { //если забыл пароль админа коментируй эту строчку

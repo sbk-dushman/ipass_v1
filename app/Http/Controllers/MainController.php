@@ -95,18 +95,6 @@ class MainController extends Controller
         $arr = [];
         $arr = 0;
         $selected = Selected::get();
-        foreach( Student::get() as $x ) {
-            foreach( Selected::get() as $y ) {
-                if( $x->name == $y->name && $x->surname == $y->surname && $x->lastname == $y->lastname && $x->group_id == $y->group ) {
-                    $arr = [ 
-                        'name' => $x->name,
-                        'surname' => $x->surname,
-                        'lastname' => $x->lastname,
-                        'group_id' => $x->group_id
-                    ];
-                }
-            }
-        }
         // dump($arr);
         return view('tabelGroup',compact('students', 'groups', 'selected'));
     }
@@ -172,15 +160,29 @@ class MainController extends Controller
         return view('print', compact('datas', 'dateNow', 'select'));
     }
 
-    public function workerEdit(Request $request)
+    public function workerEdit(Request $request, $workerid)
     {
-        dump($request->all());
+        $data = Selected::where( 'id', $workerid )->get();
         $datas = Selected::get();
-        return view('workeredit', compact('datas'));
+        dump($data);
+        return view('workeredit', compact('datas', 'data'));
     }
 
     public function workerEditPost(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
+        DB::table('selecteds')->where('id', $request->workerid)->update([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'lastname' => $request->lastname,
+            'position' => $request->position
+        ]);
+        // DB::table('workers')->where('id', $request->workerid)->update([
+        //     'name' => $request->name,
+        //     'surname' => $request->surname,
+        //     'lastname' => $request->lastname,
+        //     'position' => $request->position
+        // ]);
+        return redirect()->route('selecteds');
     }
 }

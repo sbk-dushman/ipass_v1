@@ -39,14 +39,14 @@
                             @endif
                             1
                         @endforeach
-                        {{-- <button 
+                        <button 
                             class="btn_add"
                             type="submit"
                             name="add_to_cart"
                             value="{{ $student->id }}"
                         >  
                             <i class="add_logo fas fa-plus-circle"></i>
-                        </button> --}}
+                        </button>
                     </td>
                 </form>
             </tr>

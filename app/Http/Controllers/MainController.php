@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Group;
 use App\Selected;
 use App\Student;
+use App\Worker;
 use Illuminate\Foundation\Console\Presets\Vue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -95,6 +96,18 @@ class MainController extends Controller
         $arr = [];
         $arr = 0;
         $selected = Selected::get();
+        foreach( Student::get() as $x ) {
+            foreach( Selected::get() as $y ) {
+                if( $x->name == $y->name && $x->surname == $y->surname && $x->lastname == $y->lastname && $x->group_id == $y->group ) {
+                    $arr = [
+                        'name' => $x->name,
+                        'surname' => $x->surname,
+                        'lastname' => $x->lastname,
+                        'group_id' => $x->group_id
+                    ];
+                }
+            }
+        }
         // dump($arr);
         return view('tabelGroup',compact('students', 'groups', 'selected'));
     }
@@ -184,5 +197,10 @@ class MainController extends Controller
         //     'position' => $request->position
         // ]);
         return redirect()->route('selecteds');
+    }
+    public function getPersonal()
+    {
+        $personal = Worker::get();
+        return view('personal', compact('personal'));
     }
 }

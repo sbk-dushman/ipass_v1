@@ -72,7 +72,7 @@ $(document).ready(function() {
 			url: '/selected',
 			data: { studid },
 			method: 'POST',
-	
+
 			success: function (data) {
 			  console.log(data);
 			}
@@ -80,13 +80,13 @@ $(document).ready(function() {
     })
 
     $('.selected_edit').on("click", function(e) {
-      e.preventDefault();
+    //   e.preventDefault();
       let workerid = $(this).attr("data-workerID");
       $.ajax({
         url: '/workeredit',
         data: { workerid },
-        method: 'POST',
-    
+        method: 'GET',
+
         success: function (data) {
           console.log(1);
         }

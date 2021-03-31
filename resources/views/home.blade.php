@@ -9,7 +9,7 @@
 
 @extends('master')
 @section('content')
-	<div class="grid-containerr">
+	{{-- <div class="grid-containerr">
 			@section('groups')
 				<div class="groups">
 					@foreach ($groups as $group)
@@ -32,6 +32,6 @@
 			@show
 
             @yield('tabel-group')
-	</div>
+	</div> --}}
 @endsection
 

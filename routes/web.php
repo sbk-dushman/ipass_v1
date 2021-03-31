@@ -19,8 +19,8 @@ Auth::routes([
     'verify' => false,
 ]);
 Route::get('/card-order', 'MainController@Cardorder')->name('cardOrder-URL');
-
-Route::get('/group{group_id?}', 'MainController@group');
+Route::get('/', 'MainController@group');
+// Route::get('/group{group_id?}', 'MainController@group');
 // Route::get('/search', 'MainController@search');
 Route::get('/selected', 'MainController@selected')->name('selecteds');
 Route::post('/selected', 'MainController@postSelected');
@@ -35,7 +35,7 @@ Route::post('/workeredit', 'MainController@workerEditPost');
     Route::post('/search', 'MainController@searchPost')->name('search-post');
 
     Route::get('/search', 'MainController@searchGet')->name('search-get');
-
+Route::get('/personal', 'MainController@getPersonal')->name('personal');
 
     Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
 // }); //и эту строчку

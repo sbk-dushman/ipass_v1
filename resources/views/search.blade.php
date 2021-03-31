@@ -1,6 +1,33 @@
 @extends('master')
 @section('content')
-<div class="grid-container-search">
+		<table>
+					<tr>
+						<th>#</th>
+						<th>Фамилия</th>
+						<th>Имя</th>
+						<th>Отчество</th>
+						<th>Группа</th>
+						{{-- <th></th> --}}
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>Иванов</td>
+						<td>Иван</td>
+						<td>Иванович</td>
+						<td>17Ис-2</td>
+						<td><i class="fa fa-plus" aria-hidden="true"></i></td>
+                        {{-- <td></td> --}}
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>Иванов</td>
+						<td>Иван</td>
+						<td>Иванович</td>
+						<td>17Ис-2</td>
+						<td><i class="fa fa-plus" aria-hidden="true"></i></td>
+					</tr>
+				</table>
+{{-- <div class="grid-container-search">
     <div class="tabel_students">
         <h2 class="main-title">Поиск</h2>
         @if  ($results==NULL)
@@ -53,5 +80,5 @@
 
                 </form>
             </div>
-</div>
+</div> --}}
 @endsection

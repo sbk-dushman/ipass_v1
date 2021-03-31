@@ -6,7 +6,196 @@
 }
 
 /* новые стили  */
+body, html {
+		margin: 0;
+		padding: 0;
+		height: 100%;
+		width: 100%;
+		box-sizing: border-box;
+		font-family: sans-serif;
+	}
+	.all-container {
+		/* padding-top: 20px; */
+		width: 100%;
+		height: 100%;
+		background-color: #60C4F2;
+	}
+	.all-container .main-container {
+		/* padding-top: 20px; */
+		margin: 0 auto;
+		/* border: 1px solid black; */
+		width: 1200px;
+		height: 100%;
+		background-color: #60C4F2;
+		display: grid;
+		grid-template-rows: 100px 1fr 40px;
+		grid-gap: 5px;
+	}
+	header {
+		display: grid;
+		grid-template-columns: 700px 1fr 200px ;
+		/* border: 1px solid black; */
+		/* align-items: center; */
+	}
+	header .search-box input {
+	    border-radius: 5px;
+    /* margin-left: 16px; */
+    margin-top: 26px;
+    width: 600px;
+    height: 40px;
+    outline: none;
+    border: none;
+    box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
+    font-size: 16px;
+    padding-left: 20px;
+    padding-right: 37px
+	}
+	header .search-box input:active{
+		border:none;
+		outline: none;
+	}
+	header .search-box input:focus {
+		border:none;
+		outline: none;
+	}
+	header nav {
 
+		padding-top: 20px;
+		margin: 0;
+		/* margin-right: 16px; */
+		height: 60px;
+
+	}
+	header nav ul {
+		border-radius: 5px;
+		margin: 0;
+		height: 100%;
+		background-color: #fff;
+		list-style-type: none;
+		display: grid;
+		padding: 0;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		box-shadow: 0 5px 10px rgb(0, 0, 0, 0.2);
+	}
+	header nav ul li {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+	}
+	.search-box {
+		position: relative;
+	}
+	.search-box button {
+	position: absolute;
+    top: 33px;
+    /* left: 584px; */
+    right: 58px;
+    border: none;
+    background-color: #fff;
+}
+    }
+	.search-box button:focus {
+		outline: none;
+		border: none;
+	}
+	.search-box button:active {
+		outline: none;
+		border: none;
+	}
+	header nav ul li:hover {
+		background-color: rgb(223, 223, 223);
+	}
+	header nav ul li:hover:first-child {
+		border-top-left-radius: 5px;
+		border-bottom-left-radius: 5px;
+	}
+	header nav ul li:hover:last-child {
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+	}
+	.table-box {
+		border-radius: 5px;
+		/* border: 1px solid black; */
+		box-shadow: 0 50px 40px rgb(0, 0, 0, 0.2);
+		background-color: #fff;
+	}
+	.table-box table {
+		width: 100%;
+		/* height: 100%; */
+	}
+	.table-box table tr th {
+		height: 40px;
+		padding-left: 20px;
+		text-align: left;
+	}
+	.table-box table tr th:nth-child(7) {
+		height: 40px;
+		padding-left: 0px;
+		text-align: center;
+	}
+	.table-box table tr th:last-child {
+		height: 20px;
+		width: 25px;
+		padding-left: 0px;
+	}
+	.table-box table tr td:last-child {
+		width: 25px;
+		display: flex;
+		align-items: center;
+		padding-right: 10px;
+		/* margin: 10px; */
+	}
+	.table-box table tr td {
+		height: 40px;
+		padding-left: 20px;
+	}
+	.table-box table tr td:nth-child(7) {
+		text-align: center;
+		padding: 0;
+	}
+	.table-box table tr td:nth-child(8) {
+		text-align: center;
+		padding: 0;
+	}
+	.table-box table tr td:first-child {
+		width: 25px;
+	}
+	.table-box table tr {
+		transition: 0.1s ease-in-out;
+	}
+	.table-box table tr:first-child {
+		/* transition: 0.2s ease-in-out; */
+		height: 40px;
+		background-color: rgb(243, 242, 242);
+	}
+	.table-box table tr:hover {
+		background-color: rgb(243, 242, 242);
+	}
+	.fa {
+		font-size: 24px;
+	}
+	.fa:hover {
+		color: #60C4F2;
+	}
+	header .select-box select {
+		margin-top: 26px;
+		width: 200px;
+		height: 43px;
+		border: none;
+		outline: none;
+		border-radius: 5px;
+		box-shadow: 0 5px 10px rgb(0, 0, 0, 0.2);
+	}
+	header .select-box select:active {
+		border: none;
+		outline: none;
+	}
+	header .select-box select:focus {
+		border: none;
+		outline: none;
+	}
+/* конец новых */
 html, body {
     height: 100%;
     max-width: 100%;

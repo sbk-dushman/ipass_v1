@@ -1,4 +1,5 @@
 require('./bootstrap');
+window.$ = window.jQuery = require('jquery');
 function declOfNum(number, titles) {
   cases = [2, 0, 1, 1, 1, 2];
   return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
@@ -13,7 +14,7 @@ function getStudId(contex,url) {
         method: 'POST',
 
         success: function (data) {
-          console.log(data);
+          	console.log(data);
         }
     });
 }
@@ -46,33 +47,56 @@ $fileInput.on('change', function() {
     $textContainer.text(`${'Выбрано: '+ ' '+filesCount + declOfNum(filesCount, [' Файл ', ' Файла ', ' файлов '])}`);
   }
 });
+
 // список выбора
 $(document).ready(function() {
 
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
     // Добавить из  поиска
 
+	$(".add_from_workers").on("click", function(e) {
+		e.preventDefault()
+		let workerid = $(this).attr("data-workerid");
+		
+		$.ajax({
+			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+			url: 'http://ipass/workers',
+			data: { workerid },
+			method: 'POST',
+			success: function (data) {
+				console.log(data);
+			}
+		  });
+	})
+	// console.log(1)
     $('.btn_add_from_search').on("click", function (e) {
         e.preventDefault();
         let studID = $(this).attr("data-studID");
-		let test = studID;
-		$.ajax({
+        let test = studID;
+        $.ajax({
 
-			url: '/search',
-			data: { test },
-			method: 'POST',
-		});
+          url: '/search',
+          data: { test },
+          method: 'POST',
+        });
     });
-
+	// console.log(1)
     $('.select_section__btn-remove').on("click", function(e) {
-        e.preventDefault();  //функция приёма id и url для ajax запроса
+      	console.log(1)
+        e.preventDefault();
         $(this).closest('.select-list__item').remove();
 		let studid = $(this).attr("data-studID");
+		console.log(studid)
 		$.ajax({
 
 			url: '/selected',
 			data: { studid },
 			method: 'POST',
-
+	
 			success: function (data) {
 			  console.log(data);
 			}
@@ -80,18 +104,19 @@ $(document).ready(function() {
     })
 
     $('.selected_edit').on("click", function(e) {
-    //   e.preventDefault();
+      e.preventDefault();
       let workerid = $(this).attr("data-workerID");
       $.ajax({
         url: '/workeredit',
         data: { workerid },
-        method: 'GET',
-
+        method: 'POST',
+    
         success: function (data) {
           console.log(1);
         }
       });
     })
+})
     // поисковой запрос
 
     // $('#search-btn').on("click", function (e) {
@@ -208,7 +233,7 @@ $(document).ready(function() {
 
 
     // });
-});
+// });
 
 // старый дроп
 //     var dropArea = $('#drop-area'),

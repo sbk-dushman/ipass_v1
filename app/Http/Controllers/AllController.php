@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Group;
 use App\Selected;
 use App\Student;
+use App\Worker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +20,6 @@ class AllController extends Controller
 
     public function groupAdd($group_id = null, Request $request)
     {
-        // dd($request->add_to_cart);
         $data = $request->add_to_cart;
         $StudName = Student::where('id', $data)->value('name');
         $StudSurname = Student::where('id', $data)->value('surname');
@@ -52,13 +52,47 @@ class AllController extends Controller
         return view('ready.selected', compact('selecteds'));
     }
 
-    public function selectedPost()
+    public function selectedPost(Request $request)
     {
-        dd(1);
+        if( $request->ajax() ) {
+            $studId = $request->studid;
+            Selected::where('id', $studId)->delete();
+        }
     }
 
     public function workers()
     {
-        return view('ready.workers');
+        $workers = Worker::get();
+        return view('ready.workers', compact('workers'));
+    }
+
+    public function workersAdd(Request $request)
+    {
+        if( $request->ajax() ) {
+            $data = $request->workerid;
+            
+            $StudName = Worker::where('id', $data)->value('name');
+            $StudSurname = Worker::where('id', $data)->value('surname');
+            $StudLastname = Worker::where('id', $data)->value('lastname');
+            $StudPosition = Worker::where('id', $data)->value('position');
+            $issetName = Selected::where([
+                'name' => $StudName,
+                'surname' => $StudSurname,
+                'lastname' => $StudLastname,
+                'position' => $StudPosition
+            ])->value('id');
+            // dd(1);
+            if( $issetName ) {
+                return 1;
+            }else {
+                DB::table('selecteds')->insert([
+                    'name' => $StudName,
+                    'surname' => $StudSurname,
+                    'lastname' => $StudLastname,
+                    'position' => $StudPosition
+                ]);
+                // return redirect()->back();
+            }
+        }
     }
 }

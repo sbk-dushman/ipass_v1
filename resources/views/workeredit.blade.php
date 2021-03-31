@@ -7,17 +7,17 @@
             {{--dd($datas->name)--}}
 
             <label for="edit-name">Имя:</label>
-            <input name="edit-name" value="" type="text">
+            <input   id="edit-name" name="edit-name" value="" type="text">
 
 
             <label for="edit-lastname">Фамилия: </label>
-            <input name="edit-lastname" type="text">
+            <input   id="edit-lastname" name="edit-lastname" type="text">
 
             <label for="edit-surname">Отчество:</label>
-                <input name="edit-surname" value="" type="text">
+                <input   id="edit-surname" name="edit-surname" value="" type="text">
 
                 <label for="edit-surname">Должность:</label>
-                <input name="edit-surname" value="" type="text">
+                <input   id="edit-position" name="edit-position" value="" type="text">
 
             <button class="main-btn" type="submint">Отправить</button>
         </form>

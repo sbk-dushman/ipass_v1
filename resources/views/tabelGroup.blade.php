@@ -25,34 +25,20 @@
                     <td>
                         {{ $student->lastname }}
                     </td>
-                    {{-- <td>
-                        @php
-                        $x = false;
-                            foreach ($selected as $value) {
-                                if( !$x ) {
-                                    if( !($value->name == $student->name && $value->surname == $student->surname) ) {
-                                        continue;
-                                    }else {
-                                        $x = true;
-                                        echo 1;
-                                    }      
-                                }
-                            }
-                        @endphp
-                        @php
-                        $x = false;
-                            foreach ($selected as $value) {
-                                if( !$x ) {
-                                    if( ($value->name == $student->name && $value->surname == $student->surname) ) {
-                                        continue; 
-                                        $x = true;  
-                                        echo 0;
-                                    }   
-                                } 
-                            }
-                        @endphp
-                    </td> --}}
+                    
                     <td class="td">
+                        @foreach ($selected as $item)
+                            @if ($item->name != $student->name)
+                                @continue
+                            @endif
+                            1
+                        @endforeach 
+                        @foreach ($selected as $item)
+                            @if ($item->name != $student->name)
+                                @continue
+                            @endif
+                            1
+                        @endforeach
                         <button 
                             class="btn_add"
                             type="submit"

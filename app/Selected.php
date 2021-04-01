@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Selected extends Model
 {
-    // public function student()
-    // {
-    //     return $this->belongsTo(Group::class);
-    // }
+    public static function Oba()
+    {
+        $sum = 5;
+
+        return $sum;
+    }
 }

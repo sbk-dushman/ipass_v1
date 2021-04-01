@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
-    public function group()
+    public function group(Group $chislo)
     {
         $groups = Group::paginate(2);
         // dd($group);
 
-        return view('home', compact('groups'));
+        return view('home', compact('groups','chislo'));
     }
     public function Cardorder ()
     {

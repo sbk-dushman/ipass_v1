@@ -25,12 +25,13 @@ class AllController extends Controller
         $StudSurname = Student::where('id', $data)->value('surname');
         $StudLastname = Student::where('id', $data)->value('lastname');
         $StudGroup = Student::where('id', $data)->value('group');
-        $StudGroupId = Student::where('id', $data)->value('group_id');
+        $StudStudId = Student::where('id', $data)->value('id');
         $issetName = Selected::where([
             'name' => $StudName,
             'surname' => $StudSurname,
             'lastname' => $StudLastname,
-            'group' => $StudGroup
+            'group' => $StudGroup,
+            'stud_id' => $StudStudId
         ])->value('id');
         if( $issetName == true ) {
             return redirect()->back();
@@ -40,7 +41,7 @@ class AllController extends Controller
                 'surname' => $StudSurname,
                 'lastname' => $StudLastname,
                 'group' => $StudGroup,
-                'group_id' => $StudGroupId
+                'stud_id' => $StudStudId
             ]);
             return redirect()->back();
         }

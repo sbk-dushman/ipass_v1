@@ -8,7 +8,7 @@ class Selected extends Model
 {
     public static function Oba()
     {
-        $sum = 5;
+        $sum = 1>5;
 
         return $sum;
     }

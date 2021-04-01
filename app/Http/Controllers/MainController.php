@@ -173,16 +173,30 @@ class MainController extends Controller
         return view('print', compact('datas', 'dateNow', 'select'));
     }
 
-    public function workerEdit(Request $request)
+    public function workerEdit(Request $request, $workerid)
     {
-        dump($request->all());
+        $data = Selected::where( 'id', $workerid )->get();
         $datas = Selected::get();
-        return view('workeredit', compact('datas'));
+        dump($data);
+        return view('workeredit', compact('datas', 'data'));
     }
 
     public function workerEditPost(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
+        DB::table('selecteds')->where('id', $request->workerid)->update([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'lastname' => $request->lastname,
+            'position' => $request->position
+        ]);
+        // DB::table('workers')->where('id', $request->workerid)->update([
+        //     'name' => $request->name,
+        //     'surname' => $request->surname,
+        //     'lastname' => $request->lastname,
+        //     'position' => $request->position
+        // ]);
+        return redirect()->route('selecteds');
     }
     public function getPersonal()
     {

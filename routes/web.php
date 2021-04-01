@@ -11,7 +11,14 @@
 |
 */
 
+use App\Http\Controllers\AllController;
 use App\Http\Controllers\MainController;
+Route::get('/selected', 'AllController@selected');
+Route::get('/group{group_id?}', 'AllController@group');
+Route::post('/group{group_id?}', 'AllController@groupAdd');
+Route::get('/workers', 'AllController@workers');
+
+
 
 Auth::routes([
     'reset' => false,
@@ -22,11 +29,11 @@ Route::get('/card-order', 'MainController@Cardorder')->name('cardOrder-URL');
 Route::get('/', 'MainController@group');
 // Route::get('/group{group_id?}', 'MainController@group');
 // Route::get('/search', 'MainController@search');
-Route::get('/selected', 'MainController@selected');
-Route::post('/selected', 'MainController@postSelected');
-Route::get('/group{group_id?}', 'MainController@getTableList');
-Route::get('/workeredit', 'MainController@workerEdit');
-Route::post('/group{group_id?}', 'MainController@postTableList');
+// Route::get('/selected', 'MainController@selected')->name('selecteds');
+// Route::post('/selected', 'MainController@postSelected');
+// Route::get('/group{group_id?}', 'MainController@getTableList');
+Route::get('/workeredit{workerid?}', 'MainController@workerEdit');
+// Route::post('/group{group_id?}', 'MainController@postTableList');
 Route::post('/workeredit', 'MainController@workerEditPost');
 // Route::group(['middleware'=>'auth'],function () { //если забыл пароль админа коментируй эту строчку
 // // Route::get('/', 'MainController@index');

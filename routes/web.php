@@ -19,8 +19,8 @@ Auth::routes([
     'verify' => false,
 ]);
 Route::get('/card-order', 'MainController@Cardorder')->name('cardOrder-URL');
-
-Route::get('/group{group_id?}', 'MainController@group');
+Route::get('/', 'MainController@group');
+// Route::get('/group{group_id?}', 'MainController@group');
 // Route::get('/search', 'MainController@search');
 Route::get('/selected', 'MainController@selected');
 Route::post('/selected', 'MainController@postSelected');

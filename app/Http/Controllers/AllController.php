@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class AllController extends Controller
 {
-    public function group($group_id = null)
+    public function group($group_id = null, Selected $addStatus)
     {
         $students = Student::where('group_id', $group_id)->get();
         $groups = Group::get();
-        return view('ready.group', compact('students', 'groups'));
+        return view('ready.group', compact('students', 'groups', 'addStatus'));
     }
 
     public function groupAdd($group_id = null, Request $request)

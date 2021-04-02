@@ -4,6 +4,27 @@ function declOfNum(number, titles) {
   cases = [2, 0, 1, 1, 1, 2];
   return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
 }
+// меню группы
+function myFunction() {
+    document.getElementById("my Dropdown").classList.toggle("show");
+}
+
+function filterFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("my Dropdown");
+    a = div.getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+        txtZnac = a[i].textSod || a[i].innerText;
+        if (txtZnac.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+        } else {
+            a[i].style.display = "none";
+        }
+    }
+}
+
 function getStudId(contex,url) {
     let studID = $(contex).attr("data-studID");
     let test = studID;
@@ -105,6 +126,7 @@ $(document).ready(function() {
 
     $('.selected_edit').on("click", function(e) {
       e.preventDefault();
+
       let workerid = $(this).attr("data-workerID");
       $.ajax({
         url: '/workeredit',

@@ -9,6 +9,8 @@
 
 @extends('master')
 @section('content')
+   {{$chislo->oba()}}
+
 	{{-- <div class="grid-containerr">
 			@section('groups')
 				<div class="groups">

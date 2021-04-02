@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<script src="https://code.jquery.com/jquery-3.6.0.slim.js"
 		integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -362,22 +363,7 @@
 						}
 					}
 				</script>
-				<nav>
-					<ul>
-						<li>
-							<a href="/group"><i class="fa fa-table" aria-hidden="true"></i></a>
-						</li>
-						<li>
-							<a href="/selected"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
-						</li>
-						<li>
-							<a href="/workers"><i class="fa fa-user" aria-hidden="true"></i></a>
-						</li>
-						<li>
-							<a href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
-						</li>
-					</ul>
-				</nav>
+				@include('ready.nav')
 			</header>
 			<div class="table-box">
 				<table>

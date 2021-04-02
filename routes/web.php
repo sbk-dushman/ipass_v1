@@ -13,10 +13,15 @@
 
 use App\Http\Controllers\AllController;
 use App\Http\Controllers\MainController;
+
 Route::get('/selected', 'AllController@selected');
+Route::post('/selected', 'AllController@selectedPost');
+
 Route::get('/group{group_id?}', 'AllController@group');
 Route::post('/group{group_id?}', 'AllController@groupAdd');
+
 Route::get('/workers', 'AllController@workers');
+Route::post('/workers', 'AllController@workersAdd');
 
 
 

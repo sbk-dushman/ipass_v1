@@ -14,13 +14,17 @@
 use App\Http\Controllers\AllController;
 use App\Http\Controllers\MainController;
 
-Route::get('/selected', 'AllController@selected');
+Route::get('/', function() {
+    return view('ready.index');
+});
+
+Route::get('/selected', 'AllController@selected')->name('selected');
 Route::post('/selected', 'AllController@selectedPost');
 
-Route::get('/group{group_id?}', 'AllController@group');
+Route::get('/group{group_id?}', 'AllController@group')->name('group');
 Route::post('/group{group_id?}', 'AllController@groupAdd');
 
-Route::get('/workers', 'AllController@workers');
+Route::get('/workers', 'AllController@workers')->name('workers');
 Route::post('/workers', 'AllController@workersAdd');
 
 
@@ -31,7 +35,7 @@ Auth::routes([
     'verify' => false,
 ]);
 Route::get('/card-order', 'MainController@Cardorder')->name('cardOrder-URL');
-Route::get('/', 'MainController@group');
+// Route::get('/', 'MainController@group');
 // Route::get('/group{group_id?}', 'MainController@group');
 // Route::get('/search', 'MainController@search');
 // Route::get('/selected', 'MainController@selected')->name('selecteds');

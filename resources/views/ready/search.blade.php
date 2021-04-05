@@ -14,6 +14,7 @@
 				<th>Должность</th>
 				<th></th>
 			</tr>
+			
 			@if ((Session::get('resultsStud')) != null)
 				@foreach ((Session::get('resultsStud')) as $item)
 				<tr>
@@ -45,6 +46,13 @@
 			
 				
 		</table>
+		<div class="pag">
+			<ul class="pagination">
+				<li class="pagination__item">
+					{{-- {{Session::get('resultsStud')->links()}} --}}
+				</li>
+			</ul>
+		</div>
 	</div>
 
 @endsection

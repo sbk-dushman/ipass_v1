@@ -49,7 +49,7 @@ class AllController extends Controller
 
     public function selected()
     {
-        $selecteds = Selected::get();
+        $selecteds = Selected::paginate(16);
         return view('ready.selected-section', compact('selecteds'));
     }
 

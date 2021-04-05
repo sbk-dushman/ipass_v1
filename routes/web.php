@@ -28,6 +28,9 @@ Route::post('/workers', 'AllController@workersAdd');
 
 Route::get('/print', 'AllController@getPrint')->name('print');
 
+Route::get('/search', 'AllController@search')->name('search');
+Route::post('/search', 'AllController@searchPost')->name('search-post');
+
 Auth::routes([
     'reset' => false,
     'confirm' => false,
@@ -47,9 +50,9 @@ Route::post('/workeredit', 'MainController@workerEditPost');
 // // Route::get('/', 'MainController@index');
     Route::get('/print', 'MainController@getPrint')->name('print-get');
 
-    Route::post('/search', 'MainController@searchPost')->name('search-post');
+    // Route::post('/search', 'MainController@searchPost')->name('search-post');
 
-    Route::get('/search', 'MainController@searchGet')->name('search-get');
+    // Route::get('/search', 'MainController@searchGet')->name('search-get');
 Route::get('/personal', 'MainController@getPersonal')->name('personal');
 
     Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');

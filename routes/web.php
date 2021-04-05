@@ -31,12 +31,15 @@ Route::get('/print', 'AllController@getPrint')->name('print');
 Route::get('/search{search?}', 'AllController@search')->name('search');
 Route::post('/search', 'AllController@searchPost')->name('search-post');
 
+Route::get('/card-order', 'AllController@Cardorder')->name('cardOrder-URL');
+Route::post('/card-order', 'AllController@CardorderPost');
+
 Auth::routes([
     'reset' => false,
     'confirm' => false,
     'verify' => false,
 ]);
-Route::get('/card-order', 'MainController@Cardorder')->name('cardOrder-URL');
+Route::get('/card-order', 'AllController@Cardorder')->name('cardOrder-URL');
 // Route::get('/', 'MainController@group');
 // Route::get('/group{group_id?}', 'MainController@group');
 // Route::get('/search', 'MainController@search');

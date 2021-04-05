@@ -28,7 +28,7 @@ Route::post('/workers', 'AllController@workersAdd');
 
 Route::get('/print', 'AllController@getPrint')->name('print');
 
-Route::get('/search', 'AllController@search')->name('search');
+Route::get('/search{search?}', 'AllController@search')->name('search');
 Route::post('/search', 'AllController@searchPost')->name('search-post');
 
 Auth::routes([

@@ -187,7 +187,7 @@ class AllController extends Controller
         return view('ready.printt', compact('selectedPrint', 'dateNow'));
     }
 
-    public function search(Request $request, $page = 'page=1', $search = '1')
+    public function search(Request $request, $page = 'page=1', $search = '1', FakeSearch $addStatus)
     {
         // dump($request->ajax());
         $data = $request->search;
@@ -226,14 +226,40 @@ class AllController extends Controller
 
         // $arr1 = $arr1->merge($resultsStud)->merge($resultsWork);
         // $arr1 = paginate(1);
-        return view('ready.search', compact('fake_search'));
+        return view('ready.search', compact('fake_search', 'addStatus'));
     }
 
     public function searchPost(Request $request)
     {
-        dump($request->all());
-        if( $request->sort == 1 ) {
-            dump(1);
+        $addFromSearch = FakeSearch::where('id', $request->add_to_cart)->get();
+        foreach( $addFromSearch as $item ) {
+            if( trim($item->group) == '' ) {
+                if( Selected::where(['name' => $item->name,  'surname' => $item->surname,  'lastname' => $item->lastname, 'position' => $item->position ])->get() == 1) {
+                    return redirect()->back();
+                } else {
+                    Selected::insert([
+                        'name' => trim($item->name), 
+                        'surname' => trim($item->surname), 
+                        'lastname' => trim($item->lastname), 
+                        'position' => trim($item->position),
+                        'shablon' => 1
+                    ]);
+                    return redirect()->back();
+                }
+            }elseif( trim($item->position) == '' ) {
+                if( count(Selected::where(['name' => $item->name, 'surname' => $item->surname, 'lastname' => $item->lastname, 'group' => $item->group,])->get()) == 1 ) {
+                    return redirect()->back();
+                } else {
+                    Selected::insert([
+                        'name' => trim($item->name), 
+                        'surname' => trim($item->surname), 
+                        'lastname' => trim($item->lastname), 
+                        'group' => trim($item->group),
+                        'shablon' => 1
+                    ]);
+                    return redirect()->back();
+                }
+            }
         }
     }
 
@@ -268,5 +294,89 @@ class AllController extends Controller
             $Sort = FakeSearch::orderBy('lastname', 'ASC')->get(); 
             return view('ready.search' ,compact('Sort'));     
         }
+    }
+
+    public function getGroupInfo()
+    {
+        function isNull($e) {
+            return $e === '00000000-0000-0000-0000-000000000000';
+        }
+        
+        function doRequest($url) {
+            $ch = curl_init();
+            $token = base64_encode('АгарковОВ:qzwxec123');
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Basic $token"]);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_URL, $url);
+        
+            $data = curl_exec($ch);
+            curl_close($ch);
+        
+            $data = json_decode($data);
+            return $data;
+        }
+    dd();
+        // $perRequest = 3;
+
+        // // function save () {
+        // //     global $groups;
+        // //     file_put_contents(__DIR__ . '/../db/groups.json', json_encode($groups, JSON_UNESCAPED_UNICODE));
+        // // }
+
+        // $count = count($groups);
+        // $loaded = 0;
+        // $counter = 0;
+
+        // $url = 'http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Catalog_%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D1%8B%D0%B5%D0%93%D1%80%D1%83%D0%BF%D0%BF%D1%8B?$format=json&$filter=';
+        // foreach ($groups as &$group) {
+        //     if (isset($group['_gg'])) continue;
+        //     $counter++;
+        //     if ($counter === $perRequest + 1) {
+        //         break;
+        //     }
+        //     $url .= 'Ref_Key%20eq%20guid%27' . $group['Ref_Key'] . '%27%20or%20';
+        //     $group['_gg'] = true;
+        // }
+
+        // if ($counter === 0) {
+        //     echo json_encode([
+        //         'loaded' => $count,
+        //         'count' => $count,
+        //         'percent' => 100,
+        //     ]);
+        //     return;
+        // }
+
+        // $url = substr($url, 0, strlen($url) - 8);
+
+        // $data = doRequest($url)->value;
+
+        // foreach ($data as $value) {
+        //     $ref = $value->Ref_Key;
+        //     $groups[$ref]['name'] = $value->Description;
+        //     $groups[$ref]['form'] = mb_strtolower($value->{'ФормаОбучения'});
+        // }
+
+        // foreach ($groups as &$group) {
+        //     if (!isset($group['_gg'])) {
+        //         echo json_encode([
+        //             'loaded' => $loaded,
+        //             'count' => $count,
+        //             'percent' => floor($loaded * 100 / $count * 100) / 100,
+        //         ]);
+        //         save();
+        //         return;
+        //     }
+        //     $loaded++;
+        // }
+
+        // save();
+
+        // echo json_encode([
+        //     'loaded' => $loaded,
+        //     'count' => $count,
+        //     'percent' => floor($loaded * 100 / $count * 100) / 100,
+        // ]);
     }
 }

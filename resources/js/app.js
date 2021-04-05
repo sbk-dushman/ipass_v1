@@ -111,6 +111,19 @@ $(document).ready(function() {
 	// 		}
 	// 	})
 	// })
+
+	// $('_1s').on("click", function() {
+	// 	let q = 1
+	// 	$.ajax({
+	// 		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+	// 		url: '/getGroupInfo',
+	// 		data: {  },
+	// 		method: 'POST',
+	// 		success: function (data) {
+	// 			console.log(1);
+	// 		}
+	// 	})
+	// })
 	
 	$('.select').change( function(e) {
 		console.log($(this).val())

@@ -66,8 +66,9 @@
 					@elseif( Request::is('selected') )
 						@include('ready.print')
 					@endif
+                    @include('ready.nav')
 
-					<nav>
+					{{-- <nav>
 						<ul>
 							<li>
 								<a href="{{ route('group') }}"><i class="fa fa-table" aria-hidden="true"></i></a>
@@ -82,7 +83,7 @@
 								<a href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
 							</li>
 						</ul>
-					</nav>
+					</nav> --}}
 
 				</header>
 			@show

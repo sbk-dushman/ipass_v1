@@ -72,19 +72,14 @@ header nav ul {
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	box-shadow: 0 5px 10px rgb(0, 0, 0, 0.2);
 }
-header nav ul li {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 
-}
 .search-box {
 	position: relative;
 }
 .search-box button {
 	position: absolute;
 	top: 33px;
-	left: 584px;
+	left: 561px;
 	border: none;
 	background-color: #fff;
     z-index: 1;
@@ -468,6 +463,7 @@ header nav ul li:hover:last-child {
 	/* border: 1px solid black; */
 	box-shadow: 0 50px 40px rgb(0, 0, 0, 0.2);
 	background-color: #fff;
+    min-height: 296px;
 }
 
 .table-box table {
@@ -522,6 +518,7 @@ header nav ul li:hover:last-child {
 	align-items: center;
 	padding-right: 10px;
 	padding-left: 10px;
+    width: 90px;
 }
 
 .table-box table tr td:nth-child(6) button {
@@ -630,7 +627,9 @@ header .select-box .dropdown {
 	overflow: auto;
 	border: 1px solid #ddd;
 	z-index: 1;
+    top: 0;
 }
+
 
 .dropdown-content a {
 	color: black;
@@ -645,4 +644,58 @@ header .select-box .dropdown {
 
 .show {
 	display: block;
+}
+
+/* нужные стили     */
+.empty-title{
+    min-height: 296px;
+    width: 100%;
+    /* text-align: center; */
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+svg{
+    /* width: 100%; */
+    /* height: 100%; */
+    /* object-fit: cover; */
+}
+
+
+/* .order-card input{
+width: 70%;
+} */
+.send-order{
+    margin-top: 20px;
+}
+.btn_add{
+    max-width: 20px;
+}
+.order-card{
+    padding: 20px 0;
+}
+.nav-link svg{
+    height: 25px;
+    object-fit: cover;
+}
+.nav-link::before {
+     content: "";
+     position: absolute;
+     left: 0;
+     top: 0;
+     right: 0;
+     bottom: 0;
+
+}
+.nav-link:hover svg{
+
+    fill: #60C4F2;
+}
+header nav ul li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    position: relative;
+
 }

@@ -1,11 +1,19 @@
 <div class="select-box">
   <div class="dropdown">
-    <button onclick="myFunction()" class="dropbtn">Выбрать группу</button>
+    <button onclick="myFunction()" class="dropbtn">
+           @if (isset($item->group))
+            {{$item->group}}
+        @else
+            Выбрать группу
+        @endif
+
+
+    </button>
     <div id="my Dropdown" class="dropdown-content">
       <input type="text" placeholder="Поиск.." id="myInput" onkeyup="filterFunction()">
       @foreach ($groups as $item)
         <a href="/group{{$item->group_id}}">{{ $item->group }}</a>
-      @endforeach		
+      @endforeach
     </div>
   </div>
 </div>

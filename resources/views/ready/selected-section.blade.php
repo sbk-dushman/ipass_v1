@@ -15,9 +15,6 @@
                 <th>Должность</th>
                 <th>Шаблон</th>
                 <th>
-					<button type="submit" class="print_button">
-						Печать
-					</button>
 				</th>
             </tr>
             @foreach ($selecteds as $item)
@@ -120,12 +117,17 @@
                     <td class="td" data-td="td">
                         @if ($item->group)
                             <select disabled class="select" name="{{ $item->id }}">
-                                <option selected value="2">Студент</option>
+                                <option selected value="1">Студент</option>
                             </select>
                         @else
-                            <select class="select" name="{{ $item->id }}">
-                                <option class="prepod" value="1">Преподователь</option>
-                                <option selected value="2">Студент</option>
+                            <select data-workid="{{ $item->id }}" class="select" name="{{ $item->id }}">
+                                @if ($item->shablon == 1)
+                                    <option class="prepod" value="2">Преподователь</option>
+                                    <option selected value="1">Студент</option>
+                                @elseif ($item->shablon == 2)
+                                    <option selected class="prepod" value="2">Преподователь</option>
+                                    <option value="1">Студент</option>
+                                @endif                              
                             </select>
                         @endif
                     </td>

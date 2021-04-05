@@ -1,3 +1,3 @@
 <div class="print-box">
-  <button class="btn_ptint"><a href="{{-- rote('p') --}}">Печать<i class="fa fa-print" aria-hidden="true"></i></a></button>
+  <a class="btn_ptint" href="{{ route('print-get') }}">Печать</a>
 </div>

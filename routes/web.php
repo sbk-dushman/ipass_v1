@@ -48,7 +48,7 @@ Route::get('/workeredit{workerid?}', 'MainController@workerEdit');
 Route::post('/workeredit', 'MainController@workerEditPost');
 // Route::group(['middleware'=>'auth'],function () { //если забыл пароль админа коментируй эту строчку
 // // Route::get('/', 'MainController@index');
-    Route::get('/print', 'MainController@getPrint')->name('print-get');
+    Route::get('/print', 'AllController@getPrint')->name('print-get');
 
     // Route::post('/search', 'MainController@searchPost')->name('search-post');
 

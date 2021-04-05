@@ -11,6 +11,7 @@ use App\Worker;
 use Illuminate\Bus\Dispatcher;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 
 class AllController extends Controller
@@ -65,7 +66,7 @@ class AllController extends Controller
                 $studId = $request->studid;
                 Selected::where('id', $studId)->delete();
             }
-            elseif( $request->data || $request->workerireset ) {
+            elseif( $request->data && $request->workerireset ) {
                 $workerid = $request->workerireset;
                 $surname = $request->data[0]['surname'];
                 $name = $request->data[0]['name'];
@@ -107,6 +108,13 @@ class AllController extends Controller
                     'lastname' => trim($lastname),
                     'position' => trim($position)
                 ]);
+            }
+            elseif( $request->select_val && $request->workid) {
+
+                DB::table('selecteds')->where('id', $request->workid)->update([
+                    'shablon' => $request->select_val
+                ]);
+                // return $request->workid;
             }
         }
         dd($request->all());
@@ -159,7 +167,23 @@ class AllController extends Controller
 
     public function getPrint()
     {
-        return view('print');
+        $months = [
+            '01' => 'января',
+            '02' => 'февраля',
+            '03' => 'марта',
+            '04' => 'апреля',
+            '05' => 'мая',
+            '06' => 'июня',
+            '07' => 'июля',
+            '08' => 'августа',
+            '09' => 'сентября',
+            '10' => 'октября',
+            '11' => 'ноября',
+            '12' => 'декабря'
+        ];
+        $dateNow = $months[Date::now()->format('m')];
+        $selectedPrint = Selected::get();
+        return view('ready.printt', compact('selectedPrint', 'dateNow'));
     }
 
     public function search(Request $request, $search = null)

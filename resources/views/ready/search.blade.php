@@ -4,14 +4,19 @@
 	<div class="table-box-search table-box-pag">
 		<table>
 
+
 			<tr>
-				<th>Фамилия</th>
-				<th>Имя</th>
-				<th>Отчество</th>
+				<form action="/еуые" method="GET">
+					<div style="display: none" name="page" value="test"></div>
+					<th class="search_surname"><button name="sort" value="1" type="submit">Фамилия</button></th>
+				</form>
+				<th class="search_name">Имя</th>
+				<th class="search_lastname">Отчество</th>
 				<th>Группа</th>
 				<th>Должность</th>
 				<th></th>
 			</tr>
+			
 			@foreach ($fake_search as $item)
 			<tr>
 				<td>{{ $item->surname }}</td>

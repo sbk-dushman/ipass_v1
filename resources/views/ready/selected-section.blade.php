@@ -2,7 +2,6 @@
 @section('content')
     <div class="table-box-selecteds">
         <table class="table_selecteds">
-			<form action="" method="POST">
 				@csrf
             <tr>
                 <th>#</th>
@@ -105,7 +104,7 @@
                         @endif
                     </td>
                     <td>
-                        <img style="height: 100px; width: 100px;" src="/storage/images/{{$item->photo}}" alt="">
+                        <img style="width: 20px; height: 20px;" src="/storage/images/{{$item->photo}}" alt="">
                     </td>
                     <td>{{ $item->group }}</td>
                     <td class="td_position">
@@ -228,7 +227,6 @@
 
             @endforeach
         </table>
-		</form>
 		<div class="pag">
 			<ul class="pagination">
 				<li class="pagination__item">

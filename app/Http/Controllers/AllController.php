@@ -157,7 +157,8 @@ class AllController extends Controller
                         'surname' => $StudSurname,
                         'lastname' => $StudLastname,
                         'position' => $StudPosition,
-                        'photo' => $StudPhoto
+                        'photo' => $StudPhoto,
+                        'shablon' => 1
                     ]);
                     // return redirect()->back();
                 }
@@ -186,24 +187,24 @@ class AllController extends Controller
         return view('ready.printt', compact('selectedPrint', 'dateNow'));
     }
 
-    public function search(Request $request, $search = null)
+    public function search(Request $request, $page = 'page=1', $search = '1')
     {
-        // dump($request->search);
+        // dump($request->ajax());
         $data = $request->search;
-        // $arr = null;
+        $sort = $request->sort;
         FakeSearch::where('id', '>', '0')->delete();
+
         $resultsStud = Student::where('name', 'LIKE', '%' . $data . '%')
-                                ->orWhere('surname', 'LIKE', '%' . $data . '%')
-                                ->orWhere('lastname', 'LIKE', '%' . $data . '%')
-                                ->orWhere('group', 'LIKE', '%' . $data . '%')
-                                ->orderBy('surname', 'ASC')
-                                ->get();
+                            ->orWhere('surname', 'LIKE', '%' . $data . '%')
+                            ->orWhere('lastname', 'LIKE', '%' . $data . '%')
+                            ->orWhere('group', 'LIKE', '%' . $data . '%')
+                            ->get();
         $resultsWork = Worker::where('name', 'LIKE', '%' . $data . '%')
-                                ->orWhere('surname', 'LIKE', '%' . $data . '%')
-                                ->orWhere('lastname', 'LIKE', '%' . $data . '%')
-                                ->orWhere('position', 'LIKE', '%' . $data . '%')
-                                ->orderBy('surname', 'ASC')
-                                ->get();
+                            ->orWhere('surname', 'LIKE', '%' . $data . '%')
+                            ->orWhere('lastname', 'LIKE', '%' . $data . '%')
+                            ->orWhere('position', 'LIKE', '%' . $data . '%')
+                            ->get();
+
         foreach( $resultsStud as $item ) {
             FakeSearch::insert([
                 'name' => $item->name,
@@ -230,22 +231,10 @@ class AllController extends Controller
 
     public function searchPost(Request $request)
     {
-        // dd($request->all());
-        return $request->search_val;
-        $data = trim($request->search_val);
-            $resultsStud = Student::where('name', 'LIKE', '%' . $data . '%')
-                                ->orWhere('surname', 'LIKE', '%' . $data . '%')
-                                ->orWhere('lastname', 'LIKE', '%' . $data . '%')
-                                ->orWhere('group', 'LIKE', '%' . $data . '%')
-                                ->orderBy('surname', 'ASC')
-                                ->get();
-            $resultsWork = Worker::where('name', 'LIKE', '%' . $data . '%')
-                                ->orWhere('surname', 'LIKE', '%' . $data . '%')
-                                ->orWhere('lastname', 'LIKE', '%' . $data . '%')
-                                ->orWhere('position', 'LIKE', '%' . $data . '%')
-                                ->orderBy('surname', 'ASC')
-                                ->get();
-        return redirect()->back();
+        dump($request->all());
+        if( $request->sort == 1 ) {
+            dump(1);
+        }
     }
 
     public function Cardorder()
@@ -265,5 +254,19 @@ class AllController extends Controller
         ]);
 
         $request->file('photo')->storeAs('public/images', date("YmdHis").'.'.$request->file('photo')->getClientOriginalExtension());
+    }
+
+    public function searchSort($sort = null)
+    {
+        if( $sort == 1 ) {
+            $Sort = FakeSearch::orderBy('surname', 'ASC')->get();
+            return view('ready.search' ,compact('Sort'));
+        }elseif( $sort == 2 ) {
+            $Sort = FakeSearch::orderBy('name', 'ASC')->get();
+            return view('ready.search' ,compact('Sort'));
+        }elseif ( $sort == 3 ) {
+            $Sort = FakeSearch::orderBy('lastname', 'ASC')->get(); 
+            return view('ready.search' ,compact('Sort'));     
+        }
     }
 }

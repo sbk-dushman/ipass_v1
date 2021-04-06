@@ -46,7 +46,7 @@
             {{$item->lastname}}
           @endif			
         </td>
-        <td></td>
+        <td>{{$item->photo}}</td>
         <td>{{$item->group}}</td>
         <td class="td_position">
           @if ( !$item->group )
@@ -56,7 +56,7 @@
           @endif
           
         </td>
-        <td>
+        <td class="td" data-td="td">
           @if ($item->group)
                               <select disabled class="select" name="{{ $item->id }}">
                                   <option selected value="2">Студент</option>

@@ -1,3 +1,5 @@
+const { data } = require('jquery');
+
 require('./bootstrap');
 window.$ = window.jQuery = require('jquery');
 function declOfNum(number, titles) {
@@ -246,7 +248,13 @@ $(document).ready(function() {
           method: 'POST',
         });
     });
-	// console.log(1)
+	
+	$('.btn_ptint').on("click", function(e) {
+		e.preventDefault()
+		console.log($('.td').children("select").val())
+
+	})
+
     $('.select_section__btn-remove').on("click", function(e) {
       	console.log(1)
         e.preventDefault();

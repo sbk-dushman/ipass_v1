@@ -72,6 +72,36 @@ class AllController extends Controller
                     'lastname' => trim($lastname),
                     'position' => trim($position)
                 ]);
+                $name_s = Selected::where('id', $workerid)->value('name');                
+                $surname_s = Selected::where('id', $workerid)->value('surname');               
+                $lastname_s = Selected::where('id', $workerid)->value('lastname');              
+                $position_s = Selected::where('id', $workerid)->value('position');
+                
+                $surname_w = Worker::where('surname', $surname_s);
+                $name_w = Worker::where('name', $name_s);
+                $lastname_w = Worker::where('lastname', $lastname_s);
+                $position_w = Worker::where('position', $position_s);
+                
+                $id_w = Worker::where([
+                    'name' => trim($name_w),
+                    'surname' => trim($surname_w),
+                    'lastname' => trim($lastname_w),
+                    'position' => trim($position_w)
+                ])->value('id');
+                // dd($id_w);
+                DB::table('workers')->where('id', $id_w)->update([
+                    'surname' => trim($surname),
+                    'name' => trim($name),
+                    'lastname' => trim($lastname),
+                    'position' => trim($position)
+                ]);
+
+                DB::table('selecteds')->where('id', $workerid)->update([
+                    'surname' => trim($surname),
+                    'name' => trim($name),
+                    'lastname' => trim($lastname),
+                    'position' => trim($position)
+                ]);
             }
         }
     }
@@ -96,11 +126,13 @@ class AllController extends Controller
                 $StudSurname = Worker::where('id', $data)->value('surname');
                 $StudLastname = Worker::where('id', $data)->value('lastname');
                 $StudPosition = Worker::where('id', $data)->value('position');
+                $StudPhoto = Worker::where('id', $data)->value('photo');
                 $issetName = Selected::where([
                     'name' => $StudName,
                     'surname' => $StudSurname,
                     'lastname' => $StudLastname,
-                    'position' => $StudPosition
+                    'position' => $StudPosition,
+                    'photo' => $StudPhoto
                 ])->value('id');
                 // dd(1);
                 if( $issetName ) {
@@ -110,11 +142,17 @@ class AllController extends Controller
                         'name' => $StudName,
                         'surname' => $StudSurname,
                         'lastname' => $StudLastname,
-                        'position' => $StudPosition
+                        'position' => $StudPosition,
+                        'photo' => $StudPhoto
                     ]);
                     // return redirect()->back();
                 }
             }
         }
+    }
+
+    public function getPrint()
+    {
+        return view('print');
     }
 }

@@ -18,8 +18,7 @@ Route::get('/', function() {
     return view('ready.index');
 });
 
-Route::get('/selected', 'AllController@selected')->name('selected');
-Route::post('/selected', 'AllController@selectedPost');
+
 
 Route::get('/group{group_id?}', 'AllController@group')->name('group');
 Route::post('/group{group_id?}', 'AllController@groupAdd');
@@ -27,7 +26,7 @@ Route::post('/group{group_id?}', 'AllController@groupAdd');
 Route::get('/workers', 'AllController@workers')->name('workers');
 Route::post('/workers', 'AllController@workersAdd');
 
-
+Route::get('/print', 'AllController@getPrint')->name('print');
 
 Auth::routes([
     'reset' => false,
@@ -54,6 +53,8 @@ Route::post('/workeredit', 'MainController@workerEditPost');
 Route::get('/personal', 'MainController@getPersonal')->name('personal');
 
     Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
+    Route::get('/selected', 'AllController@selected')->name('selected');
+Route::post('/selected', 'AllController@selectedPost');
 // }); //и эту строчку
 
 

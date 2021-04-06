@@ -44,6 +44,11 @@
                         </div>
                     </div>
                 </div>
+                @if ($loop->index%3)
+                    <div class="breaker"></div>
+
+
+                @endif
             @elseif($data->shablon == 1)
                 <div class="studcard card-wrap">
                     <div class="card-wrap-figure top"></div>
@@ -85,6 +90,11 @@
                     </div>
                 </div>
                 </div>
+                 @if ($loop->index % 3)
+                    <div class="breaker"></div>
+
+
+                @endif
             @endif
             {{-- <div class="breaker"></div> --}}
         @endforeach
@@ -270,7 +280,7 @@
         display: flex;
         flex-wrap: wrap;
         width: 867px;
-        justify-content: space-evenly;
+        /* justify-content: space-evenly; */
         /* width: 850px; */
     }
 
@@ -329,9 +339,7 @@
         font-size: 11px;
         margin-left: 10px;
     }
-    .breaker {
-            page-break-after: always;
-        }
+
     @font-face {
         font-family: 'Times New Roman';
         src: url('11874.ttf');
@@ -351,13 +359,16 @@
         }
         .teach-card,.card-wrap-figure2,.card-wrap-figure  {
         -webkit-print-color-adjust: exact;
+        page-break-inside: avoid;
         }
-   .teach-card,.studcard{
-        page-break-before: always;
-    }
 
 
 
+       .breaker {
+                   page-break-after: always;
+        page-break-inside: avoid;
+       }
+                    }
 
 </style>
 

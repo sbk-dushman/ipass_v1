@@ -84,7 +84,7 @@ $(document).ready(function() {
 	$(".add_from_workers").on("click", function(e) {
 		e.preventDefault()
 		let workerid = $(this).attr("data-workerid");
-		
+
 		$.ajax({
 			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
 			url: '/workers',
@@ -95,7 +95,7 @@ $(document).ready(function() {
 			}
 		  });
 	})
-	
+
 	$('.update_worker').on("click", function(e) {
 		e.preventDefault()
 		let workerid = $(this).attr("data-studID");
@@ -176,9 +176,9 @@ $(document).ready(function() {
 		$.ajax({
 			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
 			url: '/selected',
-			data: { 
+			data: {
 				data,
-				workerireset	
+				workerireset
 			},
 			method: 'POST',
 			success: function (data) {
@@ -248,7 +248,7 @@ $(document).ready(function() {
           method: 'POST',
         });
     });
-	
+
 	$('.btn_ptint').on("click", function(e) {
 		e.preventDefault()
 		console.log($('.td').children("select").val())
@@ -266,7 +266,7 @@ $(document).ready(function() {
 			url: '/selected',
 			data: { studid },
 			method: 'POST',
-	
+
 			success: function (data) {
 			  console.log(data);
 			}
@@ -281,12 +281,15 @@ $(document).ready(function() {
         url: '/workeredit',
         data: { workerid },
         method: 'POST',
-    
+
         success: function (data) {
           console.log(1);
         }
       });
     })
+    $("#search-req").on('change', function() {
+        console.log("");
+    });
 })
     // поисковой запрос
 

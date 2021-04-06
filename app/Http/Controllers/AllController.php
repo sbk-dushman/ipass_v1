@@ -49,7 +49,7 @@ class AllController extends Controller
 
     public function selected()
     {
-        $selecteds = Selected::get();
+        $selecteds = Selected::paginate(16);
         return view('ready.selected-section', compact('selecteds'));
     }
 
@@ -154,5 +154,29 @@ class AllController extends Controller
     public function getPrint()
     {
         return view('print');
+    }
+
+    public function search()
+    {
+        return view('ready.search');
+    }
+
+    public function searchPost(Request $request)
+    {
+        // dd($request->all());
+        $data = trim($request->search);
+            $resultsStud = Student::where('name', 'LIKE', '%' . $data . '%')
+                                ->orWhere('surname', 'LIKE', '%' . $data . '%')
+                                ->orWhere('lastname', 'LIKE', '%' . $data . '%')
+                                ->orWhere('group', 'LIKE', '%' . $data . '%')
+                                ->orderBy('surname', 'ASC')
+                                ->get();
+            $resultsWork = Worker::where('name', 'LIKE', '%' . $data . '%')
+                                ->orWhere('surname', 'LIKE', '%' . $data . '%')
+                                ->orWhere('lastname', 'LIKE', '%' . $data . '%')
+                                ->orWhere('position', 'LIKE', '%' . $data . '%')
+                                ->orderBy('surname', 'ASC')
+                                ->get();
+        return redirect()->route('search')->with(['resultsStud' => $resultsStud, 'resultsWork' => $resultsWork]);
     }
 }

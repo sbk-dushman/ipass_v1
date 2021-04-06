@@ -86,7 +86,7 @@
                 </div>
                 </div>
             @endif
-            <div class="breaker"></div>
+            {{-- <div class="breaker"></div> --}}
         @endforeach
     </div>
 </div>

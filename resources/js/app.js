@@ -120,9 +120,25 @@ $(document).ready(function() {
 	// 	})
 	// })
 
-	$('.prepod').on("click", function() {
-		console.log(1)
+	$('.select').change( function(e) {
+		console.log($(this).val())
+		$.ajax({
+			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+			url: '/selected',
+			data: {
+				select_val: $(this).val(),
+				workid: $(this).attr('data-workid')
+			},
+			method: "POST",
+			success: function(data) {
+				console.log(data)
+			}
+
+		})
+		alert('Изменено')
+		$(this).attr("selected", "selected");
 	})
+
 	console.log($('.select').val())
 	$('.update_worker').on("click", function(e) {
 		e.preventDefault()
@@ -276,12 +292,6 @@ $(document).ready(function() {
           method: 'POST',
         });
     });
-
-	$('.btn_ptint').on("click", function(e) {
-		e.preventDefault()
-		console.log($('.td').children("select").val())
-
-	})
 
     $('.select_section__btn-remove').on("click", function(e) {
       	console.log(1)

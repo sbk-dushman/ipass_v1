@@ -16,8 +16,8 @@
     {{--dump($datas)--}}
 <div class="cards">
     <div class="card-block">
-        @foreach ($datas as $data)
-            @if ($select[$data->id] == 1)
+        @foreach ($selectedPrint as $data)
+            @if ($data->shablon == 2)
                 <div class="teach-card">
                     <div class="teach-card__logo">
                         <img src="/storage/images/logo.png">
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-            @elseif($select[$data->id] == 2)
+            @elseif($data->shablon == 1)
                 <div class="studcard card-wrap">
                     <div class="card-wrap-figure top"></div>
                     <div class="card-wrap-figure bottom"></div>
@@ -75,7 +75,7 @@
                             <div class="stud-form">Форма обучения <span class="form">{{ $data->form_of_education }}</span></div>
                             <div class="stud-order">Зачислен приказом от <span class="order-date">{{ $data->date_of_enrollment }}</span> №<span
                                         class="stud-order-number">101</span></div>
-                            <div class="stud-time">Дата выдачи <span class="time">{{-- Date::now()->format('d') }} {{ $dateNow }} {{ Date::now()->format('Y') --}}г.</span></div>
+                            <div class="stud-time">Дата выдачи <span class="time"><?php echo date('d'); ?> {{ $dateNow }} <?php echo date('Y'); ?>г.</span></div>
                             <div class="sign">_____________________</div>
                             <div class="sign-description">(подпись студента)</div>
                         </div>

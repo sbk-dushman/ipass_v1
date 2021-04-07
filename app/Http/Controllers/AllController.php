@@ -247,4 +247,23 @@ class AllController extends Controller
                                 ->get();
         return redirect()->back();
     }
+
+    public function Cardorder()
+    {
+        return view('ready.cardOrder');
+    }
+
+    public function CardorderPost(Request $request)
+    {
+        // dd($request->all());
+        Worker::insert([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'lastname' => $request->lastname,
+            'position' => $request->position,
+            'photo' => date("YmdHis").'.'.$request->file('photo')->getClientOriginalExtension(),
+        ]);
+
+        $request->file('photo')->storeAs('public/images', date("YmdHis").'.'.$request->file('photo')->getClientOriginalExtension());
+    }
 }

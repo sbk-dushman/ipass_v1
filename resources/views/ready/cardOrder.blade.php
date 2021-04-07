@@ -15,22 +15,22 @@
     <div class="card order-card align-items-center">
         <h2>Заявка на выпуск карты</h2>
   <div class="card-body">
-          <form method="POST" action="{{ route('cardOrder-URL') }}">
+          <form method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group row">
-            <label for="email" class="col-md-4 col-form-label text-md-right">Фамилия:</label>
+            <label for="surname" class="col-md-4 col-form-label text-md-right">Фамилия:</label>
 
             <div class="col-md-12">
-                <input id="email" type="email" class="form-control"
-                       name="email" value="" required>
+                <input id="surname" type="text" class="form-control"
+                       name="surname" value="" required>
 
             </div>
         </div>
         <div class="form-group row">
-            <label for="order-name" class="col-md-4 col-form-label text-md-right">Имя:</label>
+            <label for="name" class="col-md-4 col-form-label text-md-right">Имя:</label>
 
             <div class="col-md-12">
-                <input id="order-name" type="text" class="form-control" name="name"
+                <input id="name" type="text" class="form-control" name="name"
                        value="" required autofocus>
 
             </div>
@@ -38,10 +38,10 @@
 
 
   <div class="form-group row">
-            <label for="order-surname " class="col-md-4 col-form-label text-md-right">Отчество:</label>
+            <label for="lastname" class="col-md-4 col-form-label text-md-right">Отчество:</label>
 
             <div class="col-md-12">
-                <input id="order-surname" type="text" class="form-control" name="name"
+                <input id="lastname" type="text" class="form-control" name="lastname"
                        value="" required autofocus>
 
             </div>

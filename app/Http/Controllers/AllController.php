@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\FakeSearch;
+use App\FakeWorker;
 use App\Group;
 use App\Selected;
 use App\Student;
 use App\Worker;
+use Illuminate\Bus\Dispatcher;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -50,7 +54,8 @@ class AllController extends Controller
     public function selected()
     {
         $selecteds = Selected::paginate(16);
-        return view('ready.selected-section', compact('selecteds'));
+        $count = 1;
+        return view('ready.selected-section', compact('selecteds', 'count'));
     }
 
     public function selectedPost(Request $request)
@@ -104,6 +109,7 @@ class AllController extends Controller
                 ]);
             }
         }
+        dd($request->all());
     }
 
     public function workers()
@@ -156,15 +162,53 @@ class AllController extends Controller
         return view('print');
     }
 
-    public function search()
+    public function search(Request $request, $search = null)
     {
-        return view('ready.search');
+        // dump($request->search);
+        $data = $request->search;
+        // $arr = null;
+        FakeSearch::where('id', '>', '0')->delete();
+        $resultsStud = Student::where('name', 'LIKE', '%' . $data . '%')
+                                ->orWhere('surname', 'LIKE', '%' . $data . '%')
+                                ->orWhere('lastname', 'LIKE', '%' . $data . '%')
+                                ->orWhere('group', 'LIKE', '%' . $data . '%')
+                                ->orderBy('surname', 'ASC')
+                                ->get();
+        $resultsWork = Worker::where('name', 'LIKE', '%' . $data . '%')
+                                ->orWhere('surname', 'LIKE', '%' . $data . '%')
+                                ->orWhere('lastname', 'LIKE', '%' . $data . '%')
+                                ->orWhere('position', 'LIKE', '%' . $data . '%')
+                                ->orderBy('surname', 'ASC')
+                                ->get();
+        foreach( $resultsStud as $item ) {
+            FakeSearch::insert([
+                'name' => $item->name,
+                'surname' => $item->surname,
+                'lastname' => $item->lastname,
+                'group' => $item->group
+            ]);
+        }
+        foreach( $resultsWork as $item ) {
+            FakeSearch::insert([
+                'name' => $item->name,
+                'surname' => $item->surname,
+                'lastname' => $item->lastname,
+                'position' => $item->position
+            ]);
+        }
+        $fake_search = FakeSearch::paginate(5);
+        // $arr1 = new Collection;
+
+        // $arr1 = $arr1->merge($resultsStud)->merge($resultsWork);
+        // $arr1 = paginate(1);
+        return view('ready.search', compact('fake_search'));
     }
 
     public function searchPost(Request $request)
     {
         // dd($request->all());
-        $data = trim($request->search);
+        return $request->search_val;
+        $data = trim($request->search_val);
             $resultsStud = Student::where('name', 'LIKE', '%' . $data . '%')
                                 ->orWhere('surname', 'LIKE', '%' . $data . '%')
                                 ->orWhere('lastname', 'LIKE', '%' . $data . '%')
@@ -177,6 +221,6 @@ class AllController extends Controller
                                 ->orWhere('position', 'LIKE', '%' . $data . '%')
                                 ->orderBy('surname', 'ASC')
                                 ->get();
-        return redirect()->route('search')->with(['resultsStud' => $resultsStud, 'resultsWork' => $resultsWork]);
+        return redirect()->back();
     }
 }

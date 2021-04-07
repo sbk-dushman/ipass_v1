@@ -96,6 +96,26 @@ $(document).ready(function() {
 		  });
 	})
 
+	// $('.link_search').on("click", function(e) {
+	// 	// console.log(1);
+	// 	e.preventDefault()
+	// 	search_val = $('.input_search').val()
+	// 	console.log(search_val);
+	// 	$.ajax({
+	// 		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+	// 		url: '/search',
+	// 		data: { search_val },
+	// 		method: 'GET',
+	// 		success: function (data) {
+	// 			console.log(1);
+	// 		}
+	// 	})
+	// })
+
+	$('.prepod').on("click", function() {
+		console.log(1)
+	})
+	console.log($('.select').val())
 	$('.update_worker').on("click", function(e) {
 		e.preventDefault()
 		let workerid = $(this).attr("data-studID");

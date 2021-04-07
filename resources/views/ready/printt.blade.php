@@ -16,164 +16,87 @@
     {{--dump($datas)--}}
 <div class="cards">
 
-        @foreach ($selectedPrint as $data)
-            @if ($data->shablon == 2)
+    @for ( $i = 1; $i <= count($selectedPrint); $i++ )
+        @for ($i = 1; $i <= 4; $i++)
             <div class="card-block">
-                <div class="teach-card">
-                    <div class="teach-card__logo">
-                        <img src="/storage/images/logo.png">
-                    </div>
-                    <div class="teach-photo">
-                        <img src="/storage/images/{{$data->photo}}">
-                    </div>
-                    <div class="params">
-                        <div class="lastname">
-                            <pre>Фамилия</pre>
-                            {{ $data->lastname }}
+            @foreach ($selectedPrint as $data)
+                @if ($data->shablon == 2)
+                    <div class="teach-card">
+                        <div class="teach-card__logo">
+                            <img src="/storage/images/logo.png">
                         </div>
-                        <div class="firstname">
-                            <pre>Имя</pre>
-                            {{ $data->name }}
+                        <div class="teach-photo">
+                            <img src="/storage/images/{{$data->photo}}">
                         </div>
-                        <div class="patronymic">
-                            <pre>Отчество</pre>
-                            {{ $data->surname }}
-                        </div>
-                        <div class="position">
-                            <pre>Должность</pre>
-                            преподаватель
-                        </div>
-                    </div>
-                </div>
-                <div class="teach-card">
-                    <div class="teach-card__logo">
-                        <img src="/storage/images/logo.png">
-                    </div>
-                    <div class="teach-photo">
-                        <img src="/storage/images/{{$data->photo}}">
-                    </div>
-                    <div class="params">
-                        <div class="lastname">
-                            <pre>Фамилия</pre>
-                            {{ $data->lastname }}
-                        </div>
-                        <div class="firstname">
-                            <pre>Имя</pre>
-                            {{ $data->name }}
-                        </div>
-                        <div class="patronymic">
-                            <pre>Отчество</pre>
-                            {{ $data->surname }}
-                        </div>
-                        <div class="position">
-                            <pre>Должность</pre>
-                            преподаватель
+                        <div class="params">
+                            <div class="lastname">
+                                <pre>Фамилия</pre>
+                                {{ $data->lastname }}
+                            </div>
+                            <div class="firstname">
+                                <pre>Имя</pre>
+                                {{ $data->name }}
+                            </div>
+                            <div class="patronymic">
+                                <pre>Отчество</pre>
+                                {{ $data->surname }}
+                            </div>
+                            <div class="position">
+                                <pre>Должность</pre>
+                                преподаватель
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            {{-- @dump($loop->index)
-           "Резултат{{$loop->index%2}} --}}
-                @if ($loop->index%2)
-                    <div class="breaker"></div>
-
-
+                @elseif($data->shablon == 1)
+                    <div class="studcard card-wrap">
+                        <div class="card-wrap-figure top"></div>
+                        <div class="card-wrap-figure bottom"></div>
+                        <div class="card-wrap-figure2 left"></div>
+                        <div class="card-wrap-figure2 right"></div>
+                        <div class="card">
+                        <div class="header">
+                            <p>МИНИСТЕРСТВО ОБРАЗОВАНИЯ РЕСПУБЛИКИ БАШКОРТОСТАН</p>
+                            <p>Государственное бюджетное образовательное учреждение</p>
+                            <p>«Уфимский колледж статистики, информатики и вычислительной техники»</p>
+                        </div>
+                        <div class="data">
+                            <div class="img">
+                                <img src="/storage/images/{{$data->photo}}"
+                                    alt="">
+                            </div>
+                            <div class="info">
+                                <div class="stud">СТУДЕНЧЕСКИЙ БИЛЕТ №<span class="stud-number">777-777</span></div>
+                                <div class="stud-surname">Фамилия <span class="surname">{{ $data->lastname }}</span></div>
+                                <div class="stud-name">
+                                    Имя
+                                    <span class="name">{{ $data->name }}</span>
+                                </div>
+                                <div class="stud-name">
+                                    отчество
+                                    <span class="name"> {{ $data->surname }} </span>
+                                </div>
+                                <div class="stud-form">Форма обучения <span class="form">{{ $data->form_of_education }}</span></div>
+                                <div class="stud-order">Зачислен приказом от <span class="order-date">{{ $data->date_of_enrollment }}</span> №<span
+                                            class="stud-order-number">101</span></div>
+                                <div class="stud-time">Дата выдачи <span class="time"><?php echo date('d'); ?> {{ $dateNow }} <?php echo date('Y'); ?>г.</span></div>
+                                <div class="sign">_____________________</div>
+                                <div class="sign-description">(подпись студента)</div>
+                            </div>
+                        </div>
+                        <div class="director">
+                            Директор колледжа ________________________ Кунсбаев С. З.
+                        </div>
+                        </div>
+                    </div>
                 @endif
-            @elseif($data->shablon == 1)
-            <div class="card-block">
-                 <div class="studcard card-wrap">
-                    <div class="card-wrap-figure top"></div>
-                    <div class="card-wrap-figure bottom"></div>
-                    <div class="card-wrap-figure2 left"></div>
-                    <div class="card-wrap-figure2 right"></div>
-                    <div class="card">
-                    <div class="header">
-                        <p>МИНИСТЕРСТВО ОБРАЗОВАНИЯ РЕСПУБЛИКИ БАШКОРТОСТАН</p>
-                        <p>Государственное бюджетное образовательное учреждение</p>
-                        <p>«Уфимский колледж статистики, информатики и вычислительной техники»</p>
-                    </div>
-                    <div class="data">
-                        <div class="img">
-                            <img src="/storage/images/{{$data->photo}}"
-                                alt="">
-                        </div>
-                        <div class="info">
-                            <div class="stud">СТУДЕНЧЕСКИЙ БИЛЕТ №<span class="stud-number">777-777</span></div>
-                            <div class="stud-surname">Фамилия <span class="surname">{{ $data->lastname }}</span></div>
-                            <div class="stud-name">
-                                Имя
-                                <span class="name">{{ $data->name }}</span>
-                            </div>
-                            <div class="stud-name">
-                                отчество
-                                <span class="name"> {{ $data->surname }} </span>
-                            </div>
-                            <div class="stud-form">Форма обучения <span class="form">{{ $data->form_of_education }}</span></div>
-                            <div class="stud-order">Зачислен приказом от <span class="order-date">{{ $data->date_of_enrollment }}</span> №<span
-                                        class="stud-order-number">101</span></div>
-                            <div class="stud-time">Дата выдачи <span class="time"><?php echo date('d'); ?> {{ $dateNow }} <?php echo date('Y'); ?>г.</span></div>
-                            <div class="sign">_____________________</div>
-                            <div class="sign-description">(подпись студента)</div>
-                        </div>
-                    </div>
-                    <div class="director">
-                        Директор колледжа ________________________ Кунсбаев С. З.
-                    </div>
-                    </div>
-                </div>
-                <div class="studcard card-wrap">
-                    <div class="card-wrap-figure top"></div>
-                    <div class="card-wrap-figure bottom"></div>
-                    <div class="card-wrap-figure2 left"></div>
-                    <div class="card-wrap-figure2 right"></div>
-                    <div class="card">
-                    <div class="header">
-                        <p>МИНИСТЕРСТВО ОБРАЗОВАНИЯ РЕСПУБЛИКИ БАШКОРТОСТАН</p>
-                        <p>Государственное бюджетное образовательное учреждение</p>
-                        <p>«Уфимский колледж статистики, информатики и вычислительной техники»</p>
-                    </div>
-                    <div class="data">
-                        <div class="img">
-                            <img src="/storage/images/{{$data->photo}}"
-                                alt="">
-                        </div>
-                        <div class="info">
-                            <div class="stud">СТУДЕНЧЕСКИЙ БИЛЕТ №<span class="stud-number">777-777</span></div>
-                            <div class="stud-surname">Фамилия <span class="surname">{{ $data->lastname }}</span></div>
-                            <div class="stud-name">
-                                Имя
-                                <span class="name">{{ $data->name }}</span>
-                            </div>
-                            <div class="stud-name">
-                                отчество
-                                <span class="name"> {{ $data->surname }} </span>
-                            </div>
-                            <div class="stud-form">Форма обучения <span class="form">{{ $data->form_of_education }}</span></div>
-                            <div class="stud-order">Зачислен приказом от <span class="order-date">{{ $data->date_of_enrollment }}</span> №<span
-                                        class="stud-order-number">101</span></div>
-                            <div class="stud-time">Дата выдачи <span class="time"><?php echo date('d'); ?> {{ $dateNow }} <?php echo date('Y'); ?>г.</span></div>
-                            <div class="sign">_____________________</div>
-                            <div class="sign-description">(подпись студента)</div>
-                        </div>
-                    </div>
-                    <div class="director">
-                        Директор колледжа ________________________ Кунсбаев С. З.
-                    </div>
-                    </div>
-                </div>
+            @endforeach
             </div>
-            {{-- @dump($loop->index)
-            результат"{{$loop->index%2}} --}}
-                 @if ($loop->index%2)
-                    <div class="breaker"></div>
-
-
-                @endif
-            @endif
-            {{-- <div class="breaker"></div> --}}
-        @endforeach
-
+        @endfor
+        <div class="breaker"></div>          
+    @endfor
 </div>
+
+
 
 {{-- <div class="cards">
     <div class="card-block">

@@ -11,6 +11,7 @@ use App\Worker;
 use Illuminate\Bus\Dispatcher;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -122,15 +123,16 @@ class AllController extends Controller
         dd($request->all());
     }
 
-    public function workers()
+    public function workers(Worker $addStatus)
     {
         $workers = Worker::get();
-        return view('ready.workers', compact('workers'));
+        return view('ready.workers', compact('workers', 'addStatus'));
     }
 
     public function workersAdd(Request $request)
     {
         if( $request->ajax() ) {
+
             if( $request->workeriddelete ) {
                 $workeriddelete = $request->workeriddelete;
                 Worker::where('id', $workeriddelete)->delete();
@@ -144,12 +146,26 @@ class AllController extends Controller
                 DB::table('selecteds')->where('id', $request->workerrid)->update(['shablon' => $request->select]);
             }
             elseif ( $request->arr ) {
-                DB::table('workers')->where('id', $request->worker_idd)->update([
+                foreach( Worker::where('id', $request->worker_idd)->get() as $item ) {
+                    DB::table('selecteds')->where([
+                        'name' => $item->name,
+                        'surname' => $item->surname,
+                        'lastname' => $item->lastname,
+                        'position' => $item->position,
+                    ])->update([
+                        'name' => $request->arr[0]['name'],
+                        'surname' => $request->arr[1]['surname'],
+                        'lastname' => $request->arr[2]['lastname'],
+                        'position' => $request->arr[3]['position']
+                    ]);
+                }
+                
+                DB::table('workers')->where('id', $request->worker_idd)->update([ 
                     'name' => $request->arr[0]['name'],
                     'surname' => $request->arr[1]['surname'],
                     'lastname' => $request->arr[2]['lastname'],
                     'position' => $request->arr[3]['position']
-                ]);
+                ]);                
             }
             elseif( $request->workerid ){
                 // $data = $request->workerid;
@@ -317,45 +333,35 @@ class AllController extends Controller
             curl_close($ch);
         
             $data = json_decode($data);
-            dd($data);
+            // dd($data);
             return $data;
         }
+
         $groups = json_decode(file_get_contents('./groups.json'), true);
-        // dd($groups);
+        
+
         $perRequest = 3;
-
-        $count = 0;
-        $loaded = 0;
-
-        // foreach($groups as $group) {
-        //     $count += count($group['students']);
-        // }
 
         function save () {
             global $groups;
             file_put_contents('./groups.json', json_encode($groups, JSON_UNESCAPED_UNICODE));
         }
-        dd($groups);
+
+        $count = count($groups);
+        $loaded = 0;
         $counter = 0;
-        $url = 'http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Document_%D0%90%D0%BD%D0%BA%D0%B5%D1%82%D0%B0%D0%90%D0%B1%D0%B8%D1%82%D1%83%D1%80%D0%B8%D0%B5%D0%BD%D1%82%D0%B0?$format=json&$filter=';
-        $studentUrl = 'http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Catalog_%D0%A1%D1%82%D1%83%D0%B4%D0%B5%D0%BD%D1%82%D1%8B?$format=json&$filter=';
-        foreach($groups as &$group) {
-            foreach($group['students'] as &$student) {
-                if (isset($student['_sg'])) continue;
-                $counter++;
-                if ($counter === $perRequest + 1) {
-                    break;
-                }
-                $student['_sg'] = true;
-                $url .= 'Ref_Key%20eq%20guid%27'.$student['Profile_Key'].'%27%20or%20';
-                $studentUrl .= 'Ref_Key%20eq%20guid%27'.$student['Student_Key'].'%27%20or%20';
-                
-            }
+
+        $url = 'http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Catalog_%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D1%8B%D0%B5%D0%93%D1%80%D1%83%D0%BF%D0%BF%D1%8B?$format=json&$filter=';
+        foreach ($groups as &$group) {
+            if (isset($group['_gg'])) continue;
+            $counter++;
             if ($counter === $perRequest + 1) {
                 break;
             }
+            $url .= 'Ref_Key%20eq%20guid%27' . $group['Ref_Key'] . '%27%20or%20';
+            $group['_gg'] = true;
         }
-        // dd($studentData = doRequest($studentUrl)->value);
+
         if ($counter === 0) {
             echo json_encode([
                 'loaded' => $count,
@@ -366,39 +372,26 @@ class AllController extends Controller
         }
 
         $url = substr($url, 0, strlen($url) - 8);
-        $studentUrl = substr($studentUrl, 0, strlen($studentUrl) - 8);
 
         $data = doRequest($url)->value;
-        $studentData = doRequest($studentUrl)->value;
 
         foreach ($data as $value) {
             $ref = $value->Ref_Key;
-            foreach($groups as &$group) {
-                if (!isset($group['students'][$ref])) continue;
-                $group['students'][$ref]['name'] = $value->{'Имя'};
-                $group['students'][$ref]['surname'] = $value->{'Фамилия'};
-                $group['students'][$ref]['patronymic'] = $value->{'Отчество'};
-                $group['students'][$ref]['imageKey'] = $value->{'ФайлКартинки_Key'};
-                foreach ($studentData as $studentValue) {
-                    if ($studentValue->Ref_Key !== $group['students'][$ref]['Student_Key']) continue;
-                    $group['students'][$ref]['code'] = $studentValue->{'Code'};
-                }
-            }
+            $groups[$ref]['name'] = $value->Description;
+            $groups[$ref]['form'] = mb_strtolower($value->{'ФормаОбучения'});
         }
 
-        foreach($groups as &$group) {
-            foreach($group['students'] as &$student) {
-                if (!isset($student['_sg'])){
-                    save();
-                    echo json_encode([
-                        'loaded' => $loaded,
-                        'count' => $count,
-                        'percent' => floor($loaded * 100 / $count * 100) / 100,
-                    ]);
-                    return;
-                }
-                $loaded++;
+        foreach ($groups as &$group) {
+            if (!isset($group['_gg'])) {
+                echo json_encode([
+                    'loaded' => $loaded,
+                    'count' => $count,
+                    'percent' => floor($loaded * 100 / $count * 100) / 100,
+                ]);
+                save();
+                return;
             }
+            $loaded++;
         }
 
         save();

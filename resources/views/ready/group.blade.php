@@ -9,14 +9,17 @@
                   </div>
                 @else
                 	<table class="table_sort">
-					<tr>
-						<th>#</th>
-						<th>Фамилия</th>
-						<th>Имя</th>
-						<th>Отчество</th>
-						<th>Группа</th>
-						<th></th>
-					</tr>
+                        <thead>
+                        <tr>
+						    <th>#</th>
+						    <th class="sortON">Фамилия</th>
+						    <th class="sortON">Имя</th>
+						    <th class="sortON">Отчество</th>
+						    <th class="sortON">Группа</th>
+						    <th class="sortON"></th>
+					    </tr>
+                        </thead>
+
 
 					@foreach ($students as $item)
 					<form action="" method="POST">

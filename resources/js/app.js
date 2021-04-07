@@ -84,7 +84,7 @@ $(document).ready(function() {
 	$.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		} 
+		}
 	});
     // Добавить из  поиска
 
@@ -281,7 +281,7 @@ $(document).ready(function() {
 					console.log(arr)
 				}else {
 					arr.push({surname: surname})
-				} 
+				}
 				if( lastname == null || lastname.trim() == "" ) {
 					arr.push({lastname: default_lastname})
 					console.log(arr)
@@ -296,7 +296,7 @@ $(document).ready(function() {
 				}
 				$.ajax({
 					url: '/workers',
-					data: { 
+					data: {
 						arr,
 						worker_idd
 						
@@ -331,7 +331,7 @@ $(document).ready(function() {
 			})
 		})
 	})
-	
+
 	$('.update_worker').on("click", function(e) {
 		$(this).addClass('hidden')
 		$(this).siblings('.save_worker').removeClass('hidden')
@@ -539,7 +539,7 @@ const getSort = ({ target }) => {
         cell.classList.toggle('sorted', cell === target);
 };
 
-document.querySelectorAll('.table_sort thead').forEach(tableTH => tableTH.addEventListener('click', () => getSort(event)));
+document.querySelectorAll('.table_sort .sortON').forEach(tableTH => tableTH.addEventListener('click', () => getSort(event)));
     // поисковой запрос
 
     // $('#search-btn').on("click", function (e) {

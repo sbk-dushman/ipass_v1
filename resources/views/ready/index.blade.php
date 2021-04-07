@@ -61,7 +61,7 @@
 									{{-- </a> --}}
 							</button>
 
-							<input class="input_search" type="text" placeholder="Поиск..." name="search">
+							<input required class="input_search" type="text" placeholder="Поиск..." name="search">
 						</form>
 					</div>
 

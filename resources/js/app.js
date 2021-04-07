@@ -73,6 +73,13 @@ $fileInput.on('change', function() {
 
 // список выбора
 $(document).ready(function() {
+    $(".btn_search").on("click", function() {
+         let input = document.querySelector('.input_search');
+        if (input.value=="") {
+            alert("Заполните поле!")
+        }
+
+    })
 
 	$.ajaxSetup({
 		headers: {
@@ -95,6 +102,7 @@ $(document).ready(function() {
 			}
 		  });
 	})
+
 
 	// $('.link_search').on("click", function(e) {
 	// 	// console.log(1);

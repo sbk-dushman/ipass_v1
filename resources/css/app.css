@@ -92,7 +92,7 @@ header nav ul {
 	top: 33px;
 	left: 561px;
 	border: none;
-	background-color: #fff;
+	background-color:transparent;
     z-index: 1;
 }
 .search-box button:focus {
@@ -456,9 +456,8 @@ header nav ul li:hover:last-child {
 	width: 25px;
 	height: 25px;
 }
-.table-box-selecteds svg:hover {
-	fill: #60C4F2;
-}
+/* тут */
+
 
 /* .selected_list:nth-child(4) {
 	background-color: rgb(189, 189, 189);
@@ -628,7 +627,7 @@ header .select-box .dropdown {
 
 }
 
-.dropbtn {
+.dropbtn,.print-box_btn {
 	width: 200px;
 	border-radius: 5px;
 	height: 44px;
@@ -739,9 +738,16 @@ width: 70%;
      bottom: 0;
 
 }
-.nav-link:hover svg,.btn_add:hover svg{
+ .select_section__btn-remove,.remove_from_worker,.update_worker,.add_from_workers{
+cursor: pointer;
+}
+
+.nav-link:hover svg,.btn_add:hover svg, .select_section__btn-remove:hover svg,.ptint-link:hover,.remove_from_worker:hover svg, .update_worker:hover svg,.add_from_workers:hover svg,.btn_search:hover svg{
     fill:#0d47a1;
     /* fill: #6f60f2; */
+}
+.btn_search svg{
+    background: transparent;
 }
 header nav ul li {
 	display: flex;
@@ -841,9 +847,7 @@ header nav ul li {
 	width: 25px;
 	height: 25px;
 }
-.table-box-workers svg:hover {
-	fill: #60C4F2;
-}
+
 
 .table-box-workers table .selected_list_disabled td:nth-child(5) {
 	padding-right: 0px;
@@ -1008,9 +1012,7 @@ header nav ul li {
 	position: relative;
 }
 .print-box_btn{
-    border-radius: 5px;
-    margin: 0;
-    height: 100%;
-    background-color: #fff;
-    box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
+    width: 93px;
+    text-align: center;
+
 }

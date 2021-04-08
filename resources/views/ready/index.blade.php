@@ -155,13 +155,16 @@
 								</button>		
 							</li>
 							<li>
-								<button onclick="getGroupsInfo()">
-									1
-								</button>
+								{{-- <form action="/ajax" method="POST"> --}}
+									{{--  --}}
+									<button onclick="getGroupsInfo()" type="submit">
+										1
+									</button>
+								{{-- </form> --}}
 							</li>
 						</ul>
 				  	</nav>
-					<div class="progress">
+					<div style="display: flex;" class=" progress">
 						<div class="mt-2 simpleLoader">
 							<div class="label">
 								<div class="label-1">
@@ -170,20 +173,18 @@
 								</div>
 							</div>
 						</div>
-						<div>
-							<div class="mt-2 photoLoader">
-								<div class="loadedPhotoWrap">
-									<div class="loadedPhoto"></div>
+						<div style="display: flex;" class="mt-2 photoLoader">
+							<div class="loadedPhotoWrap">
+								<div class="loadedPhoto"></div>
+							</div>
+							<div style="display: flex; flex-direction: row;" class="label">
+								<div class="label-1">
+									<img src="loading.gif" alt="">
+									<span class="photoLoaderLabel">Выгружаю фотографии с 1с...</span>
 								</div>
-								<div class="label">
-									<div class="label-1">
-										<img src="loading.gif" alt="">
-										<span class="photoLoaderLabel">Выгружаю фотографии с 1с...</span>
-									</div>
-									<div class="label-2">
-										<div class="files">...</div>
-										<div class="percent">(100%)</div>
-									</div>
+								<div style="display: flex;" class="label-2">
+									<div class="files">...</div>
+									<div class="percent">(100%)</div>
 								</div>
 							</div>
 						</div>
@@ -211,16 +212,17 @@
 
 	const getGroupsInfo = (refresh = true) => {
 		$(".photoLoaderLabel").text('Выгружаю информацию о группах...');
-        // if (refresh) {
-        //     $(".photoLoader").slideDown();
-        //     $('.loadedPhoto').css('width', '0%');
-        // }
+        if (refresh) {
+            $(".photoLoader").slideDown();
+            $('.loadedPhoto').css('width', '0%');
+        }
 		fetch('./1c/get-group-info.php')
-			// $('.loadedPhoto').css('width', `${res.percent}%`);
-			// $(".files").text(`${res.loaded}/${res.count}`);
-			// $(".percent").text(`${res.percent}%`);
+			
 			.then(res => res.json())
 			.then(res => {
+				$('.loadedPhoto').css('width', `${res.percent}%`);
+			$(".files").text(`${res.loaded}/${res.count}`);
+			$(".percent").text(`${res.percent}%`);
 				if (res.percent !== 100) {
 					getGroupsInfo(false);
 				} else {
@@ -230,7 +232,17 @@
 			}).catch(() => getGroupsInfo())
 	}
 
-
+	const ajax = () => {
+		fetch('/ajax', {
+			method: 'POST',
+			body: test = 1
+		})
+		.then(response => response.json())
+		.then(res => {
+			console.log(res)
+		})
+		
+	}
 	const getStudentInfo = (refresh = true) => {
 	$(".photoLoaderLabel").text('Выгружаю информацию о студентах...');
 	if (refresh) {
@@ -245,37 +257,41 @@
 			$(".percent").text(`${res.percent}%`);
 			if (res.percent !== 100) {
 				getStudentInfo(false);
+				// console.log(1)
 			} else {
 				$(".photoLoader").slideUp();
+				if( res.loaded == res.count ) {
+					// console.log(1)
+					ajax()
+				}
 				loadPhotos();
-				getGroups();
 			}
 		}).catch(() => getStudentInfo())
-}
 
+	}
 
 
 	
 
 	const loadPhotos = (refresh = true) => {
-		$(".photoLoaderLabel").text('Выгружаю фотографии из 1с...');
+        $(".photoLoaderLabel").text('Выгружаю фотографии из 1с...');
         if (refresh) {
             $(".photoLoader").slideDown();
             $('.loadedPhoto').css('width', '0%');
         }
-		fetch('./1c/get-images.php')
-			.then(res => res.json())
-			.then(res => {
-				$('.loadedPhoto').css('width', `${res.percent}%`);
+        fetch('/1c/get-images.php')
+            .then(res => res.json())
+            .then(res => {
+                $('.loadedPhoto').css('width', `${res.percent}%`);
                 $(".files").text(`${res.loaded}/${res.count}`);
-                $(".percent").text(`${res.percent}%`);
-				if (res.percent !== 100) {
-					loadPhotos(false);
-				} else {
+                $(".percent").text(`--`+`${res.percent}%`);
+                if (res.percent !== 100) {
+                    loadPhotos(false);
+                } else {
                     $(".photoLoader").slideUp();
                 }
-			}).catch(() => loadPhotos())
-	};
+            }).catch(() => loadPhotos())
+    };
 
 	const removePhotos = () => {
 
@@ -295,3 +311,4 @@
   src="https://code.jquery.com/jquery-3.6.0.slim.js"
   integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY="
   crossorigin="anonymous"></script>
+  

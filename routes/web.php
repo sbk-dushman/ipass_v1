@@ -25,7 +25,7 @@ Route::get('/card-order', 'AllController@Cardorder')->name('cardOrder-URL');
 
 // Route::group(['middleware'=>'auth'],function () { 
     // Route::post('/')
-
+    Route::post('/ajax', 'AllController@ajax');
     Route::get('/workeredit{workerid?}', 'MainController@workerEdit');
     Route::post('/workeredit', 'MainController@workerEditPost');
     Route::get('/', function() {return view('ready.index');});

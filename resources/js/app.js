@@ -120,6 +120,19 @@ $(document).ready(function() {
 	// 	})
 	// })
 
+	// $('_1s').on("click", function() {
+	// 	let q = 1
+	// 	$.ajax({
+	// 		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+	// 		url: '/getGroupInfo',
+	// 		data: {  },
+	// 		method: 'POST',
+	// 		success: function (data) {
+	// 			console.log(1);
+	// 		}
+	// 	})
+	// })
+
 	$('.select').change( function(e) {
 		console.log($(this).val())
 		$.ajax({
@@ -172,7 +185,8 @@ $(document).ready(function() {
 		td_position.children('.input_position_val').attr('placeholder', arr[0].position)
 	})
 
-	$('.save_worker').on("click", function() {
+	$('.save_worker').on("click", function(e) {
+		e.preventDefault()
 		let workerireset = $(this).attr("data-workerid");
 
 		let td = $(this).closest('tr').children('td')
@@ -292,6 +306,22 @@ $(document).ready(function() {
           method: 'POST',
         });
     });
+
+	$('.search_surname').on("click", function() {
+		$.ajax({
+			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+			url: '/search',
+			data: {
+				sort_by_fam: 1,
+				sort_by_nam: 2,
+				sort_by_las: 2,
+			},
+			method: 'GET',
+			success: function (data) {
+				console.log(1);
+			}
+		})
+	})
 
     $('.select_section__btn-remove').on("click", function(e) {
       	console.log(1)

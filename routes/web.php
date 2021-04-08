@@ -29,7 +29,12 @@ Route::post('/workers', 'AllController@workersAdd');
 Route::get('/print', 'AllController@getPrint')->name('print-get');
 
 Route::get('/search{search?}', 'AllController@search')->name('search');
-Route::post('/search', 'AllController@searchPost')->name('search-post');
+Route::post('/search{search?}', 'AllController@searchPost')->name('search');
+// Route::get('/search{search?}/{sort}', 'AllController@searchSort');
+// Route::get('/search{search?}/{sort?}', 'AllController@search')->name('search');
+// Route::post('/search', 'AllController@searchPost')->name('search-post');
+
+Route::post('/getGroupInfo', 'AllController@getGroupInfo');
 
 Route::get('/card-order', 'AllController@Cardorder')->name('cardOrder-URL');
 Route::post('/card-order', 'AllController@CardorderPost');

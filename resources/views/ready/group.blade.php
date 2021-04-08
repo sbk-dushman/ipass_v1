@@ -8,7 +8,7 @@
                         выберите группу
                   </div>
                 @else
-                	<table>
+                	<table class="table_sort">
 					<tr>
 						<th>#</th>
 						<th>Фамилия</th>

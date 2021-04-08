@@ -73,6 +73,13 @@ $fileInput.on('change', function() {
 
 // список выбора
 $(document).ready(function() {
+    $(".btn_search").on("click", function() {
+         let input = document.querySelector('.input_search');
+        if (input.value=="") {
+            alert("Заполните поле!")
+        }
+
+    })
 
 	$.ajaxSetup({
 		headers: {
@@ -84,7 +91,7 @@ $(document).ready(function() {
 	$(".add_from_workers").on("click", function(e) {
 		e.preventDefault()
 		let workerid = $(this).attr("data-workerid");
-		
+
 		$.ajax({
 			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
 			url: '/workers',
@@ -95,6 +102,7 @@ $(document).ready(function() {
 			}
 		  });
 	})
+
 
 	// $('.link_search').on("click", function(e) {
 	// 	// console.log(1);
@@ -124,7 +132,7 @@ $(document).ready(function() {
 	// 		}
 	// 	})
 	// })
-	
+
 	$('.select').change( function(e) {
 		console.log($(this).val())
 		$.ajax({
@@ -138,7 +146,7 @@ $(document).ready(function() {
 			success: function(data) {
 				console.log(data)
 			}
-			
+
 		})
 		alert('Изменено')
 		$(this).attr("selected", "selected");
@@ -226,9 +234,9 @@ $(document).ready(function() {
 		$.ajax({
 			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
 			url: '/selected',
-			data: { 
+			data: {
 				data,
-				workerireset	
+				workerireset
 			},
 			method: 'POST',
 			success: function (data) {
@@ -303,10 +311,10 @@ $(document).ready(function() {
 		$.ajax({
 			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
 			url: '/search',
-			data: { 
-				sort_by_fam: 1,	
+			data: {
+				sort_by_fam: 1,
 				sort_by_nam: 2,
-				sort_by_las: 2,		
+				sort_by_las: 2,
 			},
 			method: 'GET',
 			success: function (data) {
@@ -326,7 +334,7 @@ $(document).ready(function() {
 			url: '/selected',
 			data: { studid },
 			method: 'POST',
-	
+
 			success: function (data) {
 			  console.log(data);
 			}
@@ -341,12 +349,15 @@ $(document).ready(function() {
         url: '/workeredit',
         data: { workerid },
         method: 'POST',
-    
+
         success: function (data) {
           console.log(1);
         }
       });
     })
+    $("#search-req").on('change', function() {
+        console.log("");
+    });
 })
     // поисковой запрос
 

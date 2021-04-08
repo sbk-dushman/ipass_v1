@@ -1,6 +1,6 @@
 @extends('ready.index')
 @section('content')
-    
+
 	<div class="table-box-search table-box-pag">
 		<table>
 
@@ -18,7 +18,7 @@
 				@foreach ($fake_search as $item)
 				<tr>
 					<td>{{ $item->surname }}</td>
-					<td>{{ $item->name }}</td>	
+					<td>{{ $item->name }}</td>
 					<td>{{ $item->lastname }}</td>
 					<td>{{ $item->group }}</td>
 					<td>{{ $item->position }}</td>
@@ -75,7 +75,7 @@
 							@endif
 					</td>
 				</tr>
-				@endforeach	
+				@endforeach
 			</form>
 		</table>
 		<div class="pag">

@@ -26,7 +26,7 @@ Route::post('/group{group_id?}', 'AllController@groupAdd');
 Route::get('/workers', 'AllController@workers')->name('workers');
 Route::post('/workers', 'AllController@workersAdd');
 
-Route::get('/print', 'AllController@getPrint')->name('print');
+Route::get('/print', 'AllController@getPrint')->name('print-get');
 
 Route::get('/search{search?}', 'AllController@search')->name('search');
 Route::post('/search{search?}', 'AllController@searchPost')->name('search');
@@ -56,7 +56,7 @@ Route::get('/workeredit{workerid?}', 'MainController@workerEdit');
 Route::post('/workeredit', 'MainController@workerEditPost');
 // Route::group(['middleware'=>'auth'],function () { //если забыл пароль админа коментируй эту строчку
 // // Route::get('/', 'MainController@index');
-    Route::get('/print', 'AllController@getPrint')->name('print-get');
+    // Route::get('/print', 'AllController@getPrint')->name('print-get');
 
     // Route::post('/search', 'MainController@searchPost')->name('search-post');
 

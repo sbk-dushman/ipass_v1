@@ -133,34 +133,35 @@ class AllController extends Controller
                 $workeriddelete = $request->workeriddelete;
                 Worker::where('id', $workeriddelete)->delete();
             }
+            elseif( $request->worker_id ) {
+                $data = Worker::where('id', $request->worker_id)->get();
+                return $data;
+            }
+            elseif ( $request->workerrid && $request->select ) {
+                // return Selected::where('id', $request->workerrid)->get();
+                DB::table('selecteds')->where('id', $request->workerrid)->update(['shablon' => $request->select]);
+            }
+            elseif ( $request->arr ) {
+                DB::table('workers')->where('id', $request->worker_idd)->update([
+                    'name' => $request->arr[0]['name'],
+                    'surname' => $request->arr[1]['surname'],
+                    'lastname' => $request->arr[2]['lastname'],
+                    'position' => $request->arr[3]['position']
+                ]);
+            }
             elseif( $request->workerid ){
-                $data = $request->workerid;
-                
-                $StudName = Worker::where('id', $data)->value('name');
-                $StudSurname = Worker::where('id', $data)->value('surname');
-                $StudLastname = Worker::where('id', $data)->value('lastname');
-                $StudPosition = Worker::where('id', $data)->value('position');
-                $StudPhoto = Worker::where('id', $data)->value('photo');
-                $issetName = Selected::where([
-                    'name' => $StudName,
-                    'surname' => $StudSurname,
-                    'lastname' => $StudLastname,
-                    'position' => $StudPosition,
-                    'photo' => $StudPhoto
-                ])->value('id');
-                // dd(1);
-                if( $issetName ) {
-                    return 1;
-                }else {
-                    DB::table('selecteds')->insert([
-                        'name' => $StudName,
-                        'surname' => $StudSurname,
-                        'lastname' => $StudLastname,
-                        'position' => $StudPosition,
-                        'photo' => $StudPhoto,
-                        'shablon' => 1
-                    ]);
-                    // return redirect()->back();
+                // $data = $request->workerid;
+                foreach ( Worker::where('id', $request->workerid)->get() as $item ) {
+                    if( count( Selected::where(['name' => $item->name, 'surname' => $item->surname, 'lastname' => $item->lastname, 'position' => $item->position, 'photo' => $item->photo])->get()) != 1 ) {
+                        DB::table('selecteds')->insert([
+                            'name' => $item->name,
+                            'surname' => $item->surname,
+                            'lastname' => $item->lastname,
+                            'position' => $item->position,
+                            'photo' => $item->photo,
+                            'shablon' => 1
+                        ]);
+                    }
                 }
             }
         }
@@ -314,16 +315,18 @@ class AllController extends Controller
             curl_close($ch);
         
             $data = json_decode($data);
+            dd($data);
             return $data;
         }
-    dd();
+        doRequest('http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Catalog_%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D1%8B%D0%B5%D0%93%D1%80%D1%83%D0%BF%D0%BF%D1%8B?$format=json&$filter=');
+        // dd($url);
         // $perRequest = 3;
 
-        // // function save () {
-        // //     global $groups;
-        // //     file_put_contents(__DIR__ . '/../db/groups.json', json_encode($groups, JSON_UNESCAPED_UNICODE));
-        // // }
-
+        // function save () {
+        //     global $groups;
+        //     file_put_contents(__DIR__ . '/../db/groups.json', json_encode($groups, JSON_UNESCAPED_UNICODE));
+        // }
+        // save();
         // $count = count($groups);
         // $loaded = 0;
         // $counter = 0;

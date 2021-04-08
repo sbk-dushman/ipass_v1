@@ -84,7 +84,7 @@ $(document).ready(function() {
 	$.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
+		} 
 	});
     // Добавить из  поиска
 
@@ -100,7 +100,7 @@ $(document).ready(function() {
 			success: function (data) {
 				console.log(data);
 			}
-		  });
+		});
 	})
 
 
@@ -137,53 +137,124 @@ $(document).ready(function() {
 		console.log($(this).val())
 		$.ajax({
 			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-			url: '/selected',
-			data: {
-				select_val: $(this).val(),
-				workid: $(this).attr('data-workid')
-			},
-			method: "POST",
-			success: function(data) {
-				console.log(data)
+			url: '/workers',
+			data: { workerrid: $(this).attr('data-workid'), select: $(this).val() },
+			method: 'POST',
+			success: function (data) {
+				console.log(data);
 			}
-
-		})
+		});
 		alert('Изменено')
 		$(this).attr("selected", "selected");
 	})
 
-	console.log($('.select').val())
+
+	$('.update_worker_w').on("click", function(e) {
+		$(this).addClass('hidden')
+		$(this).siblings('.save_worker_w').removeClass('hidden')
+		$(this).closest('tr').children('td').children('.input_worker').removeAttr("disabled")
+		$(this).closest('tr').children('td').children('.input_worker').css({
+			"border": "1px solid black",
+			"border-radius": "5px",
+			"background-color": "#fff"
+		})
+		// $(this).closest('tr').children('td').css({
+		// 	"background": "#FFEBCD"
+		// })
+	})
+
+	$('.save_worker_w').on("click", function() {
+		let surname = $(this).closest('tr').children('td').children('.input_surname_val').val().trim()
+		let name = $(this).closest('tr').children('td').children('.input_name_val').val().trim()
+		let lastname = $(this).closest('tr').children('td').children('.input_lastname_val').val().trim()
+		let position = $(this).closest('tr').children('td').children('.input_position_val').val().trim()
+		let worker_idd = $(this).attr('data-workerid')
+		$.ajax({
+			url: '/workers',
+			data: { 
+				worker_id: $(this).attr('data-workerid')
+			},
+			method: 'POST',
+			success: function (data) {
+				let default_name = data[0]['name']
+				let default_surname = data[0]['surname']
+				let default_lastname = data[0]['lastname']
+				let default_position = data[0]['position']
+
+				arr = []
+				if( name == null || name.trim() == "" ) {
+					arr.push({name: default_name})
+					console.log(arr)
+				}else {
+					arr.push({name: name})
+				}
+				if( surname == null || surname.trim() == "" ) {
+					arr.push({surname: default_surname})
+					console.log(arr)
+				}else {
+					arr.push({surname: surname})
+				} 
+				if( lastname == null || lastname.trim() == "" ) {
+					arr.push({lastname: default_lastname})
+					console.log(arr)
+				}else {
+					arr.push({lastname: lastname})
+				}
+				if( position == null || position.trim() == "" ) {
+					arr.push({position: default_position})
+					console.log(arr)
+				} else {
+					arr.push({position: position})
+				}
+				$.ajax({
+					url: '/workers',
+					data: { 
+						arr,
+						worker_idd
+					},
+					method: 'POST',
+				})
+			}
+		})
+		$(this).addClass('hidden')
+		$(this).closest('tr').children('td').children('.input_worker').attr("disabled", "true")
+		$(this).siblings('.update_worker_w').removeClass('hidden')
+		$(this).closest('tr').children('td').children('.input_worker').css({
+			"border": "none",
+			"border-radius": "5px",
+			"background": "transparent"
+		})
+		$(this).closest('tr').children('td').css({
+			"background": "#fff",
+			"transition": "0.2s ease-in-out"
+		})
+		$(this).closest('tr').hover(function() {
+			$(this).children('td').css({
+				"background": " rgb(243, 242, 242)"
+			})
+		})
+		$(this).closest('tr').mouseleave(function() {
+			$(this).children('td').css({
+				"background": "#fff"
+			})
+		})
+	})
+	
 	$('.update_worker').on("click", function(e) {
-		e.preventDefault()
-		let workerid = $(this).attr("data-studID");
-		console.log(workerid)
-		$(this).closest('tr').removeClass('selected_list_disabled')
-		$(this).closest('tr').addClass('selected_list_active')
-		$('.input').removeAttr('disabled');
 		$(this).addClass('hidden')
 		$(this).siblings('.save_worker').removeClass('hidden')
-		let surname = $(this).closest('tr').children('td').children('.input_surname_val').val()
-		let name = $(this).closest('tr').children('td').children('.input_name_val').val()
-		let lastname = $(this).closest('tr').children('td').children('.input_lastname_val').val()
-		let position = $(this).closest('tr').children('td').children('.input_position_val').val()
-		let arr = [{surname: surname, name: name, lastname: lastname, position: position}]
-		let td_surname = $(this).closest('tr').children('.td_surname')
-		td_surname.children('.input_surname_val').remove()
-		td_surname.append('<input style="background-color: #fff" class="input_surname_val" type="text">')
-		td_surname.children('.input_surname_val').attr('placeholder', arr[0].surname)
-		let td_name = $(this).closest('tr').children('.td_name')
-		td_name.children('.input_name_val').remove()
-		td_name.append('<input style="background-color: #fff" class="input_name_val" type="text">')
-		td_name.children('.input_name_val').attr('placeholder', arr[0].name)
-		let td_lastname = $(this).closest('tr').children('.td_lastname')
-		td_lastname.children('.input_lastname_val').remove()
-		td_lastname.append('<input style="background-color: #fff" class="input_lastname_val" type="text">')
-		td_lastname.children('.input_lastname_val').attr('placeholder', arr[0].lastname)
-		let td_position = $(this).closest('tr').children('.td_position')
-		td_position.children('.input_position_val').remove()
-		td_position.append('<input style="background-color: #fff" class="input_position_val" type="text">')
-		td_position.children('.input_position_val').attr('placeholder', arr[0].position)
+		$(this).closest('tr').children('td').children('.input').removeAttr("disabled")
+		$(this).closest('tr').children('td').children('.input').css({
+			"border": "1px solid black",
+			"border-radius": "5px",
+			"background-color": "#fff"
+		})
+		// $(this).closest('tr').children('td').css({
+		// 	"background-color": "#FFEBCD"
+		// })
 	})
+
+
 
 	$('.save_worker').on("click", function(e) {
 		e.preventDefault()

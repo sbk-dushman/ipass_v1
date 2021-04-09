@@ -1,12 +1,12 @@
 @extends('ready.index')
 @section('content')
 
-	<div class="table-box-search table-box-pag">
+	<div class=" table-box table-box-search table-box-pag">
 		<table>
 
 
 			<tr>
-					<th class="search_surname"><button name="sort" value="1" type="submit">Фамилия</button></th>
+					<th class="search_surname">Фамилия</th>
 				<th class="search_name">Имя</th>
 				<th class="search_lastname">Отчество</th>
 				<th>Группа</th>
@@ -70,7 +70,7 @@
 							name="add_to_cart"
 							value="{{ $item->id }}"
 						>
-							<svg height="30px" viewBox="0 0 512 512" width="50px" xmlns="http://www.w3.org/2000/svg"><path d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm112 277.332031h-90.667969v90.667969c0 11.777344-9.554687 21.332031-21.332031 21.332031s-21.332031-9.554687-21.332031-21.332031v-90.667969h-90.667969c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h90.667969v-90.667969c0-11.777344 9.554687-21.332031 21.332031-21.332031s21.332031 9.554687 21.332031 21.332031v90.667969h90.667969c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0"/></svg>
+							<svg viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><path d="m272 184c-4.417969 0-8-3.582031-8-8v-176h-80v176c0 4.417969-3.582031 8-8 8h-176v80h176c4.417969 0 8 3.582031 8 8v176h80v-176c0-4.417969 3.582031-8 8-8h176v-80zm0 0"></path></svg>
 						</button>
 							@endif
 					</td>
@@ -78,13 +78,13 @@
 				@endforeach
 			</form>
 		</table>
-		<div class="pag">
+		{{-- <div class="pag">
 			<ul class="pagination">
 				<li class="pagination__item">
 					{{$fake_search->links()}}
 				</li>
 			</ul>
-		</div>
+		</div> --}}
 	</div>
 
 @endsection

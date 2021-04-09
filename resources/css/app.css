@@ -48,6 +48,7 @@ header .search-box input {
 .ptint-link svg{
     height: 39px;
 }
+
 .btn_search,.update_worker_w,.save_worker_w {
     cursor: pointer;
 }
@@ -715,10 +716,9 @@ header .select-box .dropdown {
     object-fit: cover;
 }  */
 
-
-/* .order-card input{
-width: 70%;
-} */
+.card{
+     border: none;
+}
 .send-order{
     margin-top: 20px;
 }

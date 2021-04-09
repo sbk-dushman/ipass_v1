@@ -11,13 +11,16 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <body>
-	<div class="text-center">
+      <div class="card align-items-center">
+
+
+
 			{{-- <div class="col-lg-4"></div> --}}
 			{{-- <div class="col-lg-6"> --}}
 				@yield('content')
 			{{-- </div> --}}
 			{{-- <div class="col-lg-4"></div> --}}
-		</div>
-	</div>
+
+  </div>
 </body>
 </html>

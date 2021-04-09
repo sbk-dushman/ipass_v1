@@ -48,7 +48,7 @@ header .search-box input {
 .ptint-link svg{
     height: 39px;
 }
-.btn_search{
+.btn_search,.update_worker_w,.save_worker_w {
     cursor: pointer;
 }
 .ptint-link{
@@ -742,7 +742,8 @@ width: 70%;
 cursor: pointer;
 }
 
-.nav-link:hover svg,.btn_add:hover svg, .select_section__btn-remove:hover svg,.ptint-link:hover,.remove_from_worker:hover svg, .update_worker:hover svg,.add_from_workers:hover svg,.btn_search:hover svg{
+.nav-link:hover svg,.btn_add:hover svg, .select_section__btn-remove:hover svg,.ptint-link:hover,.remove_from_worker:hover svg, .update_worker:hover svg,.add_from_workers:hover svg,.btn_search:hover svg,
+.update_worker_w:hover svg,.save_worker_w svg{
     fill:#0d47a1;
     /* fill: #6f60f2; */
 }

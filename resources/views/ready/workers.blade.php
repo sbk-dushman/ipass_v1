@@ -29,7 +29,7 @@
 						<input disabled class="input_position_val input input_worker" type="text" value="{{$item->position}}">
 					</td>
 					<td>
-						<img style="width: 20px; height: 20px;" src="/storage/images/{{$item->photo}}" alt="">
+						<img style="width: 20px; height: 20px;" src="/storage/{{$item->photo}}" alt="">
 					</td>
 					<td>
 						<button class="remove_from_worker" data-workerid="{{ $item->id }}">

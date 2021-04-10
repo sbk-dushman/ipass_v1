@@ -231,8 +231,8 @@
 			.then(res => res.json())
 			.then(res => {
 				$('.loadedPhoto').css('width', `${res.percent}%`);
-			$(".files").text(`${res.loaded}/${res.count}`);
-			$(".percent").text(`${res.percent}%`);
+				$(".files").text(`${res.loaded}/${res.count}`);
+				$(".percent").text(`${res.percent}%`);
 				if (res.percent !== 100) {
 					getGroupsInfo(false);
 				} else {
@@ -264,16 +264,13 @@
 		.then(res => {
 			$('.loadedPhoto').css('width', `${res.percent}%`);
 			$(".files").text(`${res.loaded}/${res.count}`);
-			$(".percent").text(`${res.percent}%`);
+			$(".percent").text(`--`+`${res.percent}%`);
 			if (res.percent !== 100) {
 				getStudentInfo(false);
 				// console.log(1)
 			} else {
 				$(".photoLoader").slideUp();
-				if( res.loaded == res.count ) {
-					// console.log(1)
-					ajax()
-				}
+				
 				loadPhotos();
 			}
 		}).catch(() => getStudentInfo())
@@ -292,30 +289,22 @@
         fetch('/1c/get-images.php')
             .then(res => res.json())
             .then(res => {
+				res.count === 3563-1797
                 $('.loadedPhoto').css('width', `${res.percent}%`);
                 $(".files").text(`${res.loaded}/${res.count}`);
                 $(".percent").text(`--`+`${res.percent}%`);
-                if (res.percent !== 100) {
+                if (res.loaded !== res.count-1) {
                     loadPhotos(false);
                 } else {
                     $(".photoLoader").slideUp();
+					if( res.loaded == res.count-1 ) {
+						// console.log(1)
+						ajax()
+					}
                 }
             }).catch(() => loadPhotos())
     };
 
-	const removePhotos = () => {
-
-		fetch('./1c/drop-images.php').then(() => {
-
-		})
-	};
-
-	const hardReset = () => {
-
-		fetch('./1c/drop-groups.php').then(() => {
-
-		})
-	}
 </script>
 <script
   src="https://code.jquery.com/jquery-3.6.0.slim.js"

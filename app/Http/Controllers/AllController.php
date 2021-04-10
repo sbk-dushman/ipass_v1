@@ -36,14 +36,20 @@ class AllController extends Controller
         $StudName = Student::where('id', $data)->value('name');
         $StudSurname = Student::where('id', $data)->value('surname');
         $StudLastname = Student::where('id', $data)->value('lastname');
-        $StudGroup = Student::where('id', $data)->value('group');
-        $StudStudId = Student::where('id', $data)->value('id');
+        $StudGroup = Student::where('id', $data)->value('group_id');
+        $StudStudForm = Student::where('id', $data)->value('form_of_education');
+        $StudStudCode = Student::where('id', $data)->value('code');
+        $StudStudPhoto = Student::where('id', $data)->value('photo');
+
+        // dd($StudStudPhoto);
         $issetName = Selected::where([
             'name' => $StudName,
             'surname' => $StudSurname,
             'lastname' => $StudLastname,
             'group' => $StudGroup,
-            'stud_id' => $StudStudId
+            'form_of_education' => $StudStudForm,
+            'code' => $StudStudCode,
+            'photo' => $StudStudPhoto
         ])->value('id');
         if( $issetName == true ) {
             return redirect()->back();
@@ -53,8 +59,10 @@ class AllController extends Controller
                 'surname' => $StudSurname,
                 'lastname' => $StudLastname,
                 'group' => $StudGroup,
-                'stud_id' => $StudStudId,
-                'shablon' => 1
+                'form_of_education' => $StudStudForm,
+                'shablon' => 1,
+                'code' => $StudStudCode,
+                'photo' => $StudStudPhoto
             ]);
             return redirect()->back();
         }
@@ -62,7 +70,7 @@ class AllController extends Controller
 
     public function selected()
     {
-        $selecteds = Selected::paginate(16);
+        $selecteds = Selected::paginate(15);
         $count = 1;
         return view('ready.selected-section', compact('selecteds', 'count'));
     }
@@ -182,7 +190,7 @@ class AllController extends Controller
                             'lastname' => $item->lastname,
                             'position' => $item->position,
                             'photo' => $item->photo,
-                            'shablon' => 1
+                            'shablon' => 2
                         ]);
                     }
                 }
@@ -300,7 +308,7 @@ class AllController extends Controller
             'surname' => $request->surname,
             'lastname' => $request->lastname,
             'position' => $request->position,
-            'photo' => date("YmdHis").'.'.$request->file('photo')->getClientOriginalExtension(),
+            'photo' => '/images/' . date("YmdHis").'.'.$request->file('photo')->getClientOriginalExtension(),
         ]);
 
         $request->file('photo')->storeAs('public/images', date("YmdHis").'.'.$request->file('photo')->getClientOriginalExtension());
@@ -324,24 +332,24 @@ class AllController extends Controller
     {
 
         // return 1;
-        function doRequest($url) {
-            $ch = curl_init();
-            $token = base64_encode('АгарковОВ:qzwxec123');
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Basic $token"]);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_URL, $url);
+        // function doRequest($url) {
+        //     $ch = curl_init();
+        //     $token = base64_encode('АгарковОВ:qzwxec123');
+        //     curl_setopt($ch, CURLOPT_HEADER, 0);
+        //     curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Basic $token"]);
+        //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        //     curl_setopt($ch, CURLOPT_URL, $url);
         
-            $data = curl_exec($ch);
-            curl_close($ch);
+        //     $data = curl_exec($ch);
+        //     curl_close($ch);
         
-            $data = json_decode($data);
-            return $data;
-        }
+        //     $data = json_decode($data);
+        //     return $data;
+        // }
         $groups = json_decode(file_get_contents('./1c/groups.json'), true);
-        $url = 'http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Document_%D0%90%D0%BD%D0%BA%D0%B5%D1%82%D0%B0%D0%90%D0%B1%D0%B8%D1%82%D1%83%D1%80%D0%B8%D0%B5%D0%BD%D1%82%D0%B0?$format=json&$filter=Ref_Key%20eq%20guid%27dc220144-6aa4-11e7-f798-40167e72fa59%27';
-        $url2 = 'http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Catalog_%D0%A1%D0%BF%D0%B5%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8?$format=json&$filter=Ref_Key%20eq%20guid%27f281b54e-6a86-11e6-a63f-005056c00008%27';
-        dd(doRequest($url)->value);
+        // $url = 'http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Document_%D0%90%D0%BD%D0%BA%D0%B5%D1%82%D0%B0%D0%90%D0%B1%D0%B8%D1%82%D1%83%D1%80%D0%B8%D0%B5%D0%BD%D1%82%D0%B0?$format=json&$filter=Ref_Key%20eq%20guid%27dc220144-6aa4-11e7-f798-40167e72fa59%27';
+        // $url2 = 'http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Catalog_%D0%A1%D0%BF%D0%B5%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8?$format=json&$filter=Ref_Key%20eq%20guid%27f281b54e-6a86-11e6-a63f-005056c00008%27';
+        // dd(doRequest($url)->value);
         // $data = 'PFN0cmluZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEi\r\nIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5z\r\ndGFuY2UiLz4=';
         // echo base64_decode($data);
         // foreach( $groups as $group ) {
@@ -349,37 +357,39 @@ class AllController extends Controller
         // }
         // $arr = [];
         // DB::table('students')->where("id", ">", "0")->delete();
-        // foreach ($groups as $group) {
-        //     dump($group); 
-        //     DB::table('groups')->insert([
-        //         'group' => trim($group['name'])
-        //     ]);
-        //     foreach ( $group['students'] as $item ) {
-        //         // dump(substr("121221", 1));
+        foreach ($groups as $group) {
+            dump($group); 
+            DB::table('groups')->insert([
+                'group' => trim($group['name'])
+            ]);
+            foreach ( $group['students'] as $item ) {
+                // dump(substr("121221", 1));
                 
-        //         if( isset($item['imageFile']) ) {
-        //             DB::table('students')->insert([
-        //                 'name' => trim($item['name']),
-        //                 'surname' => trim($item['surname']),
-        //                 'lastname' => trim($item['patronymic']),
-        //                 'group_id' => trim($group['name']),
-        //                 'date_of_enrollment' => trim($group['orderDate']),
-        //                 'form_of_education' => trim($group['form']),
-        //                 'photo' => substr($item['imageFile'], 1)
-        //             ]);
-        //         } else {
-        //             DB::table('students')->insert([
-        //                 'name' => trim($item['name']),
-        //                 'surname' => trim($item['surname']),
-        //                 'lastname' => trim($item['patronymic']),
-        //                 'date_of_enrollment' => trim($group['orderDate']),
-        //                 'group_id' => trim($group['name']),
-        //                 'form_of_education' => trim($group['form']),
-        //                 'photo' => ''
-        //             ]);
-        //         }
-        //     }
-        // }
+                if( isset($item['imageFile']) ) {
+                    DB::table('students')->insert([
+                        'name' => trim($item['name']),
+                        'surname' => trim($item['surname']),
+                        'lastname' => trim($item['patronymic']),
+                        'group_id' => trim($group['name']),
+                        'date_of_enrollment' => trim($group['orderDate']),
+                        'form_of_education' => trim($group['form']),
+                        'photo' => substr($item['imageFile'], 1),
+                        'code' => substr($item['code'], 1)
+                    ]);
+                } else {
+                    DB::table('students')->insert([
+                        'name' => trim($item['name']),
+                        'surname' => trim($item['surname']),
+                        'lastname' => trim($item['patronymic']),
+                        'date_of_enrollment' => trim($group['orderDate']),
+                        'group_id' => trim($group['name']),
+                        'form_of_education' => trim($group['form']),
+                        'photo' => '',
+                        'code' => substr($item['code'], 1)
+                    ]);
+                }
+            }
+        }
         // // return $arr;
     }
 }

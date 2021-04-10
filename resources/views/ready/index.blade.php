@@ -289,7 +289,6 @@
         fetch('/1c/get-images.php')
             .then(res => res.json())
             .then(res => {
-				res.count === 3563-1797
                 $('.loadedPhoto').css('width', `${res.percent}%`);
                 $(".files").text(`${res.loaded}/${res.count}`);
                 $(".percent").text(`--`+`${res.percent}%`);

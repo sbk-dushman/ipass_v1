@@ -90,6 +90,14 @@ $(document).ready(function() {
 
 	$(".add_from_workers").on("click", function(e) {
 		e.preventDefault()
+		$(this).children('svg').remove('svg')
+		$(this).append('<svg  fill="#5fc321"viewBox="0 -46 417.81333 417" width="417pt" xmlns="http://www.w3.org/2000/svg"><path d="m159.988281 318.582031c-3.988281 4.011719-9.429687 6.25-15.082031 6.25s-11.09375-2.238281-15.082031-6.25l-120.449219-120.46875c-12.5-12.5-12.5-32.769531 0-45.246093l15.082031-15.085938c12.503907-12.5 32.75-12.5 45.25 0l75.199219 75.203125 203.199219-203.203125c12.503906-12.5 32.769531-12.5 45.25 0l15.082031 15.085938c12.5 12.5 12.5 32.765624 0 45.246093zm0 0"/></svg>')
+		$(this).children('svg').hover(function() {
+			$(this).css({
+				"fill": "#5fc321"
+			})
+			
+		})
 		let workerid = $(this).attr("data-workerid");
 
 		$.ajax({
@@ -149,7 +157,7 @@ $(document).ready(function() {
 	})
 
 
-	$('.update_worker_w').on("click", function(e) {
+	$('.update_worker_w').on("click", function() {
 		$(this).addClass('hidden')
 		$(this).siblings('.save_worker_w').removeClass('hidden')
 		$(this).closest('tr').children('td').children('.input_worker').removeAttr("disabled")
@@ -158,10 +166,89 @@ $(document).ready(function() {
             "background-color": "#61e1f2",
             "padding":"0 6px"
 		})
-		// $(this).closest('tr').children('td').css({
-		// 	"background": "#FFEBCD"
-		// })
+		// let surname_w = $(this).closest('tr').children('td').children('.input_surname_val').val().trim()
+		// let name_w = $(this).closest('tr').children('td').children('.input_name_val').val().trim()
+		// let lastname_w = $(this).closest('tr').children('td').children('.input_lastname_val').val().trim()
+		// let position_w = $(this).closest('tr').children('td').children('.input_position_val').val().trim()	
 	})
+
+
+
+ 	$('#updateGroup').on("click", function() {
+			const updateGroups = () => {
+
+				fetch('./1c/update-groups.php').then(() => {
+					// getGroups();
+					// $(".simpleLoader").slideUp();
+					getGroupsInfo();
+				}).catch(() => updateGroups())	
+		}
+	 })
+	const getGroupsInfo = () => {
+		fetch('./1c/get-group-info.php')
+			.then(res => res.json())
+			.then(res => {
+				if (res.percent !== 100) {
+					getGroupsInfo(false);
+				} else {
+					getStudentInfo();
+				}
+			}).catch(() => getGroupsInfo())
+	}
+
+
+	const getStudentInfo = (refresh = true) => {
+	
+	fetch('./1c/get-students-info.php')
+		.then(res => res.json())
+		.then(res => {
+
+			if (res.percent !== 100) {
+				getStudentInfo(false);
+			} else {
+				loadPhotos();
+				getGroups();
+			}
+		}).catch(() => getStudentInfo())
+}
+
+
+
+	
+
+	const loadPhotos = (refresh = true) => {
+
+		fetch('./1c/get-images.php')
+			.then(res => res.json())
+			.then(res => {
+
+				if (res.percent !== 100) {
+					loadPhotos(false);
+				} 
+			}).catch(() => loadPhotos())
+	};
+
+	const removePhotos = () => {
+
+		fetch('./1c/drop-images.php').then(() => {
+
+		})
+	};
+
+	const hardReset = () => {
+
+		fetch('./1c/drop-groups.php').then(() => {
+
+		})
+	}
+    // const updateGroups = () => {
+    //     $(".simpleLoader").slideDown();
+    //     fetch('./update-groups.php').then(() => {
+    //         // getGroups();
+    //         $(".simpleLoader").slideUp();
+    //         getGroupsInfo();
+    //     }).catch(() => updateGroups())
+    // };
 
 	$('.save_worker_w').on("click", function() {
 		let surname = $(this).closest('tr').children('td').children('.input_surname_val').val().trim()
@@ -171,11 +258,12 @@ $(document).ready(function() {
 		let worker_idd = $(this).attr('data-workerid')
 		$.ajax({
 			url: '/workers',
-			data: {
-				worker_id: $(this).attr('data-workerid')
+			data: { 
+				worker_id: $(this).attr('data-workerid'),
 			},
 			method: 'POST',
 			success: function (data) {
+				console.log(data)
 				let default_name = data[0]['name']
 				let default_surname = data[0]['surname']
 				let default_lastname = data[0]['lastname']
@@ -211,8 +299,12 @@ $(document).ready(function() {
 					data: {
 						arr,
 						worker_idd
+						
 					},
 					method: 'POST',
+					success: (data) => {
+						console.log(data)
+					}
 				})
 			}
 		})

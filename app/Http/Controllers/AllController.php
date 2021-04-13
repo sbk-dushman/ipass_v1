@@ -11,8 +11,10 @@ use App\Worker;
 use Illuminate\Bus\Dispatcher;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AllController extends Controller
 {
@@ -46,7 +48,8 @@ class AllController extends Controller
                 'surname' => $StudSurname,
                 'lastname' => $StudLastname,
                 'group' => $StudGroup,
-                'stud_id' => $StudStudId
+                'stud_id' => $StudStudId,
+                'shablon' => 1
             ]);
             return redirect()->back();
         }
@@ -120,15 +123,16 @@ class AllController extends Controller
         dd($request->all());
     }
 
-    public function workers()
+    public function workers(Worker $addStatus)
     {
         $workers = Worker::get();
-        return view('ready.workers', compact('workers'));
+        return view('ready.workers', compact('workers', 'addStatus'));
     }
 
     public function workersAdd(Request $request)
     {
         if( $request->ajax() ) {
+
             if( $request->workeriddelete ) {
                 $workeriddelete = $request->workeriddelete;
                 Worker::where('id', $workeriddelete)->delete();
@@ -142,12 +146,26 @@ class AllController extends Controller
                 DB::table('selecteds')->where('id', $request->workerrid)->update(['shablon' => $request->select]);
             }
             elseif ( $request->arr ) {
-                DB::table('workers')->where('id', $request->worker_idd)->update([
+                foreach( Worker::where('id', $request->worker_idd)->get() as $item ) {
+                    DB::table('selecteds')->where([
+                        'name' => $item->name,
+                        'surname' => $item->surname,
+                        'lastname' => $item->lastname,
+                        'position' => $item->position,
+                    ])->update([
+                        'name' => $request->arr[0]['name'],
+                        'surname' => $request->arr[1]['surname'],
+                        'lastname' => $request->arr[2]['lastname'],
+                        'position' => $request->arr[3]['position']
+                    ]);
+                }
+                
+                DB::table('workers')->where('id', $request->worker_idd)->update([ 
                     'name' => $request->arr[0]['name'],
                     'surname' => $request->arr[1]['surname'],
                     'lastname' => $request->arr[2]['lastname'],
                     'position' => $request->arr[3]['position']
-                ]);
+                ]);                
             }
             elseif( $request->workerid ){
                 // $data = $request->workerid;
@@ -315,71 +333,73 @@ class AllController extends Controller
             curl_close($ch);
         
             $data = json_decode($data);
-            dd($data);
+            // dd($data);
             return $data;
         }
-        doRequest('http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Catalog_%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D1%8B%D0%B5%D0%93%D1%80%D1%83%D0%BF%D0%BF%D1%8B?$format=json&$filter=');
-        // dd($url);
-        // $perRequest = 3;
 
-        // function save () {
-        //     global $groups;
-        //     file_put_contents(__DIR__ . '/../db/groups.json', json_encode($groups, JSON_UNESCAPED_UNICODE));
-        // }
-        // save();
-        // $count = count($groups);
-        // $loaded = 0;
-        // $counter = 0;
+        $groups = json_decode(file_get_contents('./groups.json'), true);
+        
 
-        // $url = 'http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Catalog_%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D1%8B%D0%B5%D0%93%D1%80%D1%83%D0%BF%D0%BF%D1%8B?$format=json&$filter=';
-        // foreach ($groups as &$group) {
-        //     if (isset($group['_gg'])) continue;
-        //     $counter++;
-        //     if ($counter === $perRequest + 1) {
-        //         break;
-        //     }
-        //     $url .= 'Ref_Key%20eq%20guid%27' . $group['Ref_Key'] . '%27%20or%20';
-        //     $group['_gg'] = true;
-        // }
+        $perRequest = 3;
 
-        // if ($counter === 0) {
-        //     echo json_encode([
-        //         'loaded' => $count,
-        //         'count' => $count,
-        //         'percent' => 100,
-        //     ]);
-        //     return;
-        // }
+        function save () {
+            global $groups;
+            file_put_contents('./groups.json', json_encode($groups, JSON_UNESCAPED_UNICODE));
+        }
 
-        // $url = substr($url, 0, strlen($url) - 8);
+        $count = count($groups);
+        $loaded = 0;
+        $counter = 0;
 
-        // $data = doRequest($url)->value;
+        $url = 'http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Catalog_%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D1%8B%D0%B5%D0%93%D1%80%D1%83%D0%BF%D0%BF%D1%8B?$format=json&$filter=';
+        foreach ($groups as &$group) {
+            if (isset($group['_gg'])) continue;
+            $counter++;
+            if ($counter === $perRequest + 1) {
+                break;
+            }
+            $url .= 'Ref_Key%20eq%20guid%27' . $group['Ref_Key'] . '%27%20or%20';
+            $group['_gg'] = true;
+        }
 
-        // foreach ($data as $value) {
-        //     $ref = $value->Ref_Key;
-        //     $groups[$ref]['name'] = $value->Description;
-        //     $groups[$ref]['form'] = mb_strtolower($value->{'ФормаОбучения'});
-        // }
+        if ($counter === 0) {
+            echo json_encode([
+                'loaded' => $count,
+                'count' => $count,
+                'percent' => 100,
+            ]);
+            return;
+        }
 
-        // foreach ($groups as &$group) {
-        //     if (!isset($group['_gg'])) {
-        //         echo json_encode([
-        //             'loaded' => $loaded,
-        //             'count' => $count,
-        //             'percent' => floor($loaded * 100 / $count * 100) / 100,
-        //         ]);
-        //         save();
-        //         return;
-        //     }
-        //     $loaded++;
-        // }
+        $url = substr($url, 0, strlen($url) - 8);
 
-        // save();
+        $data = doRequest($url)->value;
 
-        // echo json_encode([
-        //     'loaded' => $loaded,
-        //     'count' => $count,
-        //     'percent' => floor($loaded * 100 / $count * 100) / 100,
-        // ]);
+        foreach ($data as $value) {
+            $ref = $value->Ref_Key;
+            $groups[$ref]['name'] = $value->Description;
+            $groups[$ref]['form'] = mb_strtolower($value->{'ФормаОбучения'});
+        }
+
+        foreach ($groups as &$group) {
+            if (!isset($group['_gg'])) {
+                echo json_encode([
+                    'loaded' => $loaded,
+                    'count' => $count,
+                    'percent' => floor($loaded * 100 / $count * 100) / 100,
+                ]);
+                save();
+                return;
+            }
+            $loaded++;
+        }
+
+        save();
+
+        echo json_encode([
+            'loaded' => $loaded,
+            'count' => $count,
+            'percent' => floor($loaded * 100 / $count * 100) / 100,
+        ]);
     }
 }

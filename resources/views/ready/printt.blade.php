@@ -104,7 +104,6 @@
                 @endif
         @endforeach
 
-</div>
 
 <style>
        html, body {

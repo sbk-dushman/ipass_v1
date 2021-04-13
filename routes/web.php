@@ -28,7 +28,7 @@ Route::post('/workers', 'AllController@workersAdd');
 
 Route::get('/print', 'AllController@getPrint')->name('print-get');
 
-Route::get('/search{search?}', 'AllController@search')->name('search');
+Route::get('/search{search?}{page?}', 'AllController@search')->name('search');
 Route::post('/search{search?}', 'AllController@searchPost')->name('search');
 // Route::get('/search{search?}/{sort}', 'AllController@searchSort');
 // Route::get('/search{search?}/{sort?}', 'AllController@search')->name('search');

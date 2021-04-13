@@ -409,7 +409,7 @@ header nav ul li:hover:last-child {
 	transition: 0.2s ease-in-out;
 }
 
-.table-box-selecteds table tr:first-child {
+.table-box-selecteds thead   tr:first-child {
 	/* transition: 0.2s ease-in-out; */
 	height: 40px;
 	background-color: rgb(243, 242, 242);
@@ -600,11 +600,12 @@ header nav ul li:hover:last-child {
 	transition: 0.1s ease-in-out;
 }
 
-.table-box table tr:first-child {
+.table-box thead tr:first-child {
 	/* transition: 0.2s ease-in-out; */
 	height: 40px;
 	background-color: rgb(243, 242, 242);
 }
+
 
 .table-box table tr:hover {
 	background-color: rgb(243, 242, 242);
@@ -614,9 +615,9 @@ header nav ul li:hover:last-child {
 	font-size: 24px;
 }
 
-.table-box .fa:hover {
+/* .table-box .fa:hover {
 	color: #60C4F2;
-}
+} */
 
 /* --------------------------------- */
 
@@ -741,12 +742,27 @@ header .select-box .dropdown {
  .select_section__btn-remove,.remove_from_worker,.update_worker,.add_from_workers{
 cursor: pointer;
 }
-
-.nav-link:hover svg,.btn_add:hover svg, .select_section__btn-remove:hover svg,.ptint-link:hover,.remove_from_worker:hover svg, .update_worker:hover svg,.add_from_workers:hover svg,.btn_search:hover svg,
+/* .nav-link:hover svg */
+.btn_add:hover svg,.sortON:hover, .select_section__btn-remove:hover svg,.ptint-link:hover,.remove_from_worker:hover svg, .update_worker:hover svg,.add_from_workers:hover svg,.btn_search:hover svg,
 .update_worker_w:hover svg,.save_worker_w svg{
-    fill:#0d47a1;
+    opacity: 0.5;
     /* fill: #6f60f2; */
 }
+.nav-link:hover svg,.btn_search:hover svg .ptint-link:hover svg{
+ fill: #036f99;
+}
+.sortON{
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.edit-btn{
+    fill:#5fc321;
+}
+.select_section__btn-remove,.remove_from_worker{
+    fill: rgb(228, 43, 43);
+}
+
 .btn_search svg{
     background: transparent;
 }
@@ -815,7 +831,7 @@ header nav ul li {
 .table-box-workers table tr {
 	transition: 0.2s ease-in-out;
 }
-.table-box-workers table tr:first-child {
+.table-box-workers thead tr:first-child {
 	/* transition: 0.2s ease-in-out; */
 	height: 40px;
 	background-color: rgb(243, 242, 242);
@@ -1034,9 +1050,9 @@ header nav ul li {
 }
 /* сортеровка таблиц */
 
-/* .table_sort tbody tr:nth-child(even) {
+/* /* .table_sort tbody tr:nth-child(even) {
     background: #e3e3e3;
-}
+} */
 
 th.sorted[data-order="1"],
 th.sorted[data-order="-1"] {
@@ -1048,11 +1064,13 @@ th.sorted[data-order="-1"]::after {
     right: 8px;
     position: absolute;
 }
-
+th.sortON::after {
+	content: "▼"
+}
 th.sorted[data-order="-1"]::after {
 	content: "▼"
 }
 
 th.sorted[data-order="1"]::after {
 	content: "▲"
-} */
+}

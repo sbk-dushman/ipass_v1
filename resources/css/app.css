@@ -22,14 +22,29 @@ body, html {
 	height: 100%;
 	background-color: #60C4F2;
 	display: grid;
-	grid-template-rows: 100px 1fr 40px;
+	grid-template-rows: 200px 1fr 40px;
 	grid-gap: 5px;
 }
 header {
 	display: grid;
 	grid-template-columns: 700px 1fr 200px;
-	/* border: 1px solid black; */
+	grid-template-rows: 100px 1fr;
 	/* align-items: center; */
+	grid-template-areas: 
+	"search util nav"
+	"prog prog prog";
+}
+header .progress {
+	grid-area: prog;
+}
+header .header-nav {
+	grid-area: nav;
+}
+header .search-box {
+	grid-area: search;
+}
+header .utilits {
+	grid-area: util;
 }
 header .search-box input {
 	border-radius: 5px;
@@ -44,18 +59,6 @@ header .search-box input {
 	padding-left: 20px;
     padding-right:20px;
     position: relative;
-}
-.ptint-link svg{
-    height: 39px;
-}
-
-.btn_search,.update_worker_w,.save_worker_w {
-    cursor: pointer;
-}
-.ptint-link{
-    background-color: #fff;
-       width: 40px;
-    height: 40px;
 }
 header input:active{
 	border:none;
@@ -93,7 +96,7 @@ header nav ul {
 	top: 33px;
 	left: 561px;
 	border: none;
-	background-color:transparent;
+	background-color: #fff;
     z-index: 1;
 }
 .search-box button:focus {
@@ -457,8 +460,9 @@ header nav ul li:hover:last-child {
 	width: 25px;
 	height: 25px;
 }
-/* тут */
-
+.table-box-selecteds svg:hover {
+	fill: #60C4F2;
+}
 
 /* .selected_list:nth-child(4) {
 	background-color: rgb(189, 189, 189);
@@ -471,13 +475,6 @@ header nav ul li:hover:last-child {
 
 .print-box {
 	padding-top: 25px;
-        padding-top: 25px;
-    /* max-width: 77%; */
-    height: 68px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    /* padding: 14px;*/
 }
 .print-box button {
 	width: 200px;
@@ -569,17 +566,14 @@ header nav ul li:hover:last-child {
 	align-items: center;
 	padding-right: 10px;
 	padding-left: 10px;
-    width: 50px;
+    width: 90px;
 }
 
-
-.btn_add{
+.table-box table tr td:nth-child(6) button {
 	outline: none;
 	border: none;
 	background: transparent;
 	/* margin-right: 10px; */
-    width: 40px;
-    cursor: pointer;
 }
 
 .table-box table tr td:nth-child(6) button:focus {
@@ -629,7 +623,7 @@ header .select-box .dropdown {
 
 }
 
-.dropbtn,.print-box_btn {
+.dropbtn {
 	width: 200px;
 	border-radius: 5px;
 	height: 44px;
@@ -712,16 +706,20 @@ header .select-box .dropdown {
     justify-content: center;
 }
 /* svg{
-    width: 100%;
+    width: 100%; 
     height: 100%;
     object-fit: cover;
 }  */
 
-.card{
-     border: none;
-}
+
+/* .order-card input{
+width: 70%;
+} */
 .send-order{
     margin-top: 20px;
+}
+.btn_add{
+    max-width: 20px;
 }
 .order-card{
     padding: 20px 0;
@@ -798,9 +796,7 @@ header nav ul li {
 .table-box-workers table tr td:nth-child(7) {
 	/* width: 40px; */
 }
-.table-box-workers table tr td:nth-child(8) {
-	width: 40px;
-}
+
 .table-box-workers table tr th:last-child {
 	height: 20px;
 	padding-left: 0px;
@@ -813,10 +809,7 @@ header nav ul li {
 	text-align: center;
 	padding: 0;
 }
-.table-box-workers table tr td:nth-child(8) {
-	text-align: center;
-	padding: 0;
-}
+
 .table-box-workers table tr td:first-child {
 	width: 25px;
 }
@@ -864,7 +857,9 @@ header nav ul li {
 	width: 25px;
 	height: 25px;
 }
-
+.table-box-workers svg:hover {
+	fill: #60C4F2;
+}
 
 .table-box-workers table .selected_list_disabled td:nth-child(5) {
 	padding-right: 0px;
@@ -996,7 +991,7 @@ header nav ul li {
 }
 
 .pagination {
-
+	
 	list-style-type: none;
 	display: flex;
 	justify-content: center;
@@ -1017,7 +1012,7 @@ header nav ul li {
 
 .page-item {
     padding: 15px;
-
+	
     /* border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray; */
     position: relative;

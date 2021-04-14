@@ -32,10 +32,10 @@ button{
 }
 header {
 	display: grid;
-	grid-template-columns: 700px 1fr 200px;
+	grid-template-columns: 700px 1fr 260px;
 	grid-template-rows: 100px 1fr;
 	/* align-items: center; */
-	grid-template-areas: 
+	grid-template-areas:
 	"search util nav"
 	"prog prog prog";
 }
@@ -89,7 +89,7 @@ header nav ul {
 	list-style-type: none;
 	display: grid;
 	padding: 0;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 	box-shadow: 0 5px 10px rgb(0, 0, 0, 0.2);
 }
 
@@ -711,7 +711,7 @@ header .select-box .dropdown {
     justify-content: center;
 }
 /* svg{
-    width: 100%; 
+    width: 100%;
     height: 100%;
     object-fit: cover;
 }  */
@@ -996,7 +996,7 @@ header nav ul li {
 }
 
 .pagination {
-	
+
 	list-style-type: none;
 	display: flex;
 	justify-content: center;
@@ -1017,7 +1017,7 @@ header nav ul li {
 
 .page-item {
     padding: 15px;
-	
+
     /* border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray; */
     position: relative;
@@ -1255,3 +1255,7 @@ th.sorted[data-order="1"]::after {
         page-break-inside: avoid;
        }
                     }
+.login-card{
+    border: none!important;
+    min-height: 49vw;
+}

@@ -22,8 +22,9 @@ Auth::routes([
     'verify' => false,
 ]);
 Route::get('/card-order', 'AllController@Cardorder')->name('cardOrder-URL');
+Route::post('/card-order', 'AllController@CardorderPost');
 
-// Route::group(['middleware'=>'auth'],function () {
+Route::group(['middleware'=>'auth'],function () {
     // Route::post('/')
 
     Route::get('/workeredit{workerid?}', 'MainController@workerEdit');
@@ -37,13 +38,12 @@ Route::get('/card-order', 'AllController@Cardorder')->name('cardOrder-URL');
     Route::get('/search{search?}', 'AllController@search')->name('search');
     Route::post('/search{search?}', 'AllController@searchPost')->name('search');
     Route::get('/getGroupInfo', 'AllController@getGroupInfo');
-    Route::get('/card-order', 'AllController@Cardorder')->name('cardOrder-URL');
-    Route::post('/card-order', 'AllController@CardorderPost');
+
     Route::get('/print', 'AllController@getPrint')->name('print-get');
     Route::get('/personal', 'MainController@getPersonal')->name('personal');
     Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
     Route::get('/selected', 'AllController@selected')->name('selected');
     Route::post('/selected', 'AllController@selectedPost');
-// });
+});
 
 

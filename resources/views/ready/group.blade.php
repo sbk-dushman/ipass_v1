@@ -3,7 +3,7 @@
 			<div class="table-box">
                 @if ($students->count()<=0)
                   <div class="empty-title">
-                        выберите группу
+                        Выберите группу
                   </div>
                 @else
                 	<table class="table_sort">

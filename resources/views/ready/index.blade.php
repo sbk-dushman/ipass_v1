@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -150,9 +150,15 @@
 								</a>
 					  		</li>
 							<li>
-								<button  onclick="updateGroups()" class="nav-link">
+								<form action="/getGroupInfo" method="POST">
+									@csrf
+									{{-- <button class="nav-link"title="Cинхранизация с 1С">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3.38 8A9.502 9.502 0 0112 2.5a9.502 9.502 0 019.215 7.182.75.75 0 101.456-.364C21.473 4.539 17.15 1 12 1a10.995 10.995 0 00-9.5 5.452V4.75a.75.75 0 00-1.5 0V8.5a1 1 0 001 1h3.75a.75.75 0 000-1.5H3.38zm-.595 6.318a.75.75 0 00-1.455.364C2.527 19.461 6.85 23 12 23c4.052 0 7.592-2.191 9.5-5.451v1.701a.75.75 0 001.5 0V15.5a1 1 0 00-1-1h-3.75a.75.75 0 000 1.5h2.37A9.502 9.502 0 0112 21.5c-4.446 0-8.181-3.055-9.215-7.182z"/></svg>
+									</button> --}}
+								</form>
+								<button  title="Cинхранизация с 1С" onclick="updateGroups()" class="nav-link">
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3.38 8A9.502 9.502 0 0112 2.5a9.502 9.502 0 019.215 7.182.75.75 0 101.456-.364C21.473 4.539 17.15 1 12 1a10.995 10.995 0 00-9.5 5.452V4.75a.75.75 0 00-1.5 0V8.5a1 1 0 001 1h3.75a.75.75 0 000-1.5H3.38zm-.595 6.318a.75.75 0 00-1.455.364C2.527 19.461 6.85 23 12 23c4.052 0 7.592-2.191 9.5-5.451v1.701a.75.75 0 001.5 0V15.5a1 1 0 00-1-1h-3.75a.75.75 0 000 1.5h2.37A9.502 9.502 0 0112 21.5c-4.446 0-8.181-3.055-9.215-7.182z"/></svg>
-								</button>		
+								</button>
 							</li>
 							<li>
 								{{-- <form action="/ajax" method="POST"> --}}
@@ -162,6 +168,10 @@
 									</button>
 								{{-- </form> --}}
 							</li>
+                            @auth
+                            <li > <a class="main-link" href="{{Route('logout')}}">Выход</a> </li>
+                            @endauth
+
 						</ul>
 				  	</nav>
 					<div style="display: flex;" class=" progress">
@@ -190,7 +200,7 @@
 						</div>
 					</div>
 				</header>
-				
+
 			@show
 
 
@@ -207,7 +217,7 @@
 	fetch('./1c/update-groups.php').then(() => {
 		getGroupsInfo();
 		$(".simpleLoader").slideUp();
-	}).catch(() => updateGroups())	
+	}).catch(() => updateGroups())
 	}
 
 	const getGroupsInfo = (refresh = true) => {
@@ -217,7 +227,7 @@
             $('.loadedPhoto').css('width', '0%');
         }
 		fetch('./1c/get-group-info.php')
-			
+
 			.then(res => res.json())
 			.then(res => {
 				$('.loadedPhoto').css('width', `${res.percent}%`);
@@ -241,7 +251,7 @@
 		.then(res => {
 			console.log(res)
 		})
-		
+
 	}
 	const getStudentInfo = (refresh = true) => {
 	$(".photoLoaderLabel").text('Выгружаю информацию о студентах...');
@@ -271,7 +281,7 @@
 	}
 
 
-	
+
 
 	const loadPhotos = (refresh = true) => {
         $(".photoLoaderLabel").text('Выгружаю фотографии из 1с...');
@@ -311,4 +321,4 @@
   src="https://code.jquery.com/jquery-3.6.0.slim.js"
   integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY="
   crossorigin="anonymous"></script>
-  
+

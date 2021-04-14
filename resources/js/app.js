@@ -162,9 +162,9 @@ $(document).ready(function() {
 		$(this).siblings('.save_worker_w').removeClass('hidden')
 		$(this).closest('tr').children('td').children('.input_worker').removeAttr("disabled")
 		$(this).closest('tr').children('td').children('.input_worker').css({
-			"border": "1px solid black",
 			"border-radius": "5px",
-			"background-color": "#fff"
+            "background-color": "#61e1f2",
+            "padding":"0 6px"
 		})
 		// let surname_w = $(this).closest('tr').children('td').children('.input_surname_val').val().trim()
 		// let name_w = $(this).closest('tr').children('td').children('.input_name_val').val().trim()
@@ -324,9 +324,9 @@ $(document).ready(function() {
 		$(this).siblings('.save_worker').removeClass('hidden')
 		$(this).closest('tr').children('td').children('.input').removeAttr("disabled")
 		$(this).closest('tr').children('td').children('.input').css({
-			"border": "1px solid black",
-			"border-radius": "5px",
-			"background-color": "#fff"
+            "border-radius": "5px",
+            "background-color": "#61e1f2",
+            "padding": "0 6px"
 		})
 		// $(this).closest('tr').children('td').css({
 		// 	"background-color": "#FFEBCD"

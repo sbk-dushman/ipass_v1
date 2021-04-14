@@ -27,7 +27,7 @@ button{
 	height: 100%;
 	background-color: #60C4F2;
 	display: grid;
-	grid-template-rows: 200px 1fr 40px;
+	grid-template-rows: 140px 1fr 40px;
 	grid-gap: 5px;
 }
 header {
@@ -89,7 +89,7 @@ header nav ul {
 	list-style-type: none;
 	display: grid;
 	padding: 0;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	box-shadow: 0 5px 10px rgb(0, 0, 0, 0.2);
 }
 
@@ -473,7 +473,9 @@ header nav ul li:hover:last-child {
 	background-color: rgb(189, 189, 189);
 
 } */
-
+.table-box {
+	position: relative;
+}
 .hidden {
 	visibility: hidden;
 }
@@ -512,6 +514,8 @@ header nav ul li:hover:last-child {
 
 
 .table-box {
+	height: 100%;
+	/* position: relative; */
 	border-radius: 5px;
 	/* border: 1px solid black; */
 	box-shadow: 0 50px 40px rgb(0, 0, 0, 0.2);
@@ -724,7 +728,7 @@ width: 70%;
     margin-top: 20px;
 }
 .btn_add{
-    max-width: 20px;
+    /* max-width: 20px; */
 }
 .order-card{
     padding: 20px 0;

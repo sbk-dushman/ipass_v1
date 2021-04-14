@@ -20,12 +20,17 @@ class AllController extends Controller
 {
     public function group($group_id = null, Selected $addStatus)
     {
-        $students = Student::where('group_id', $group_id)->get();
+        // dump($group_id);
+        $students = Student::where('group_id', $group_id)->paginate(14);
+        // dd($students);
         $groups = Group::get();
-        return view('ready.group', compact('students', 'groups', 'addStatus'));
+
+        // dd(1);
+        // dd(DB::select('SELECT name FROM students WHERE group = "3Э-2 2015"'));
+        return view('ready.group', [ 'students' => $students ], compact('groups', 'addStatus'));
     }
 
-    public function groupAdd($group_id = null, Request $request)
+    public function groupAdd(Request $request)
     {
         $data = $request->add_to_cart;
         $StudName = Student::where('id', $data)->value('name');
@@ -216,7 +221,7 @@ class AllController extends Controller
         $resultsStud = Student::where('name', 'LIKE', '%' . $data . '%')
                             ->orWhere('surname', 'LIKE', '%' . $data . '%')
                             ->orWhere('lastname', 'LIKE', '%' . $data . '%')
-                            ->orWhere('group', 'LIKE', '%' . $data . '%')
+                            ->orWhere('group_id', 'LIKE', '%' . $data . '%')
                             ->get();
         $resultsWork = Worker::where('name', 'LIKE', '%' . $data . '%')
                             ->orWhere('surname', 'LIKE', '%' . $data . '%')
@@ -229,7 +234,7 @@ class AllController extends Controller
                 'name' => $item->name,
                 'surname' => $item->surname,
                 'lastname' => $item->lastname,
-                'group' => $item->group
+                'group' => $item->group_id
             ]);
         }
         foreach( $resultsWork as $item ) {
@@ -240,7 +245,7 @@ class AllController extends Controller
                 'position' => $item->position
             ]);
         }
-        $fake_search = FakeSearch::paginate(5);
+        $fake_search = FakeSearch::get();
         // $arr1 = new Collection;
 
         // $arr1 = $arr1->merge($resultsStud)->merge($resultsWork);
@@ -315,12 +320,10 @@ class AllController extends Controller
         }
     }
 
-    public function getGroupInfo()
+    public function ajax()
     {
-        function isNull($e) {
-            return $e === '00000000-0000-0000-0000-000000000000';
-        }
-        
+
+        // return 1;
         function doRequest($url) {
             $ch = curl_init();
             $token = base64_encode('АгарковОВ:qzwxec123');
@@ -333,73 +336,50 @@ class AllController extends Controller
             curl_close($ch);
         
             $data = json_decode($data);
-            // dd($data);
             return $data;
         }
-
-        $groups = json_decode(file_get_contents('./groups.json'), true);
-        
-
-        $perRequest = 3;
-
-        function save () {
-            global $groups;
-            file_put_contents('./groups.json', json_encode($groups, JSON_UNESCAPED_UNICODE));
-        }
-
-        $count = count($groups);
-        $loaded = 0;
-        $counter = 0;
-
-        $url = 'http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Catalog_%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D1%8B%D0%B5%D0%93%D1%80%D1%83%D0%BF%D0%BF%D1%8B?$format=json&$filter=';
-        foreach ($groups as &$group) {
-            if (isset($group['_gg'])) continue;
-            $counter++;
-            if ($counter === $perRequest + 1) {
-                break;
-            }
-            $url .= 'Ref_Key%20eq%20guid%27' . $group['Ref_Key'] . '%27%20or%20';
-            $group['_gg'] = true;
-        }
-
-        if ($counter === 0) {
-            echo json_encode([
-                'loaded' => $count,
-                'count' => $count,
-                'percent' => 100,
-            ]);
-            return;
-        }
-
-        $url = substr($url, 0, strlen($url) - 8);
-
-        $data = doRequest($url)->value;
-
-        foreach ($data as $value) {
-            $ref = $value->Ref_Key;
-            $groups[$ref]['name'] = $value->Description;
-            $groups[$ref]['form'] = mb_strtolower($value->{'ФормаОбучения'});
-        }
-
-        foreach ($groups as &$group) {
-            if (!isset($group['_gg'])) {
-                echo json_encode([
-                    'loaded' => $loaded,
-                    'count' => $count,
-                    'percent' => floor($loaded * 100 / $count * 100) / 100,
-                ]);
-                save();
-                return;
-            }
-            $loaded++;
-        }
-
-        save();
-
-        echo json_encode([
-            'loaded' => $loaded,
-            'count' => $count,
-            'percent' => floor($loaded * 100 / $count * 100) / 100,
-        ]);
+        $groups = json_decode(file_get_contents('./1c/groups.json'), true);
+        $url = 'http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Document_%D0%90%D0%BD%D0%BA%D0%B5%D1%82%D0%B0%D0%90%D0%B1%D0%B8%D1%82%D1%83%D1%80%D0%B8%D0%B5%D0%BD%D1%82%D0%B0?$format=json&$filter=Ref_Key%20eq%20guid%27dc220144-6aa4-11e7-f798-40167e72fa59%27';
+        $url2 = 'http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Catalog_%D0%A1%D0%BF%D0%B5%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8?$format=json&$filter=Ref_Key%20eq%20guid%27f281b54e-6a86-11e6-a63f-005056c00008%27';
+        dd(doRequest($url)->value);
+        // $data = 'PFN0cmluZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEi\r\nIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5z\r\ndGFuY2UiLz4=';
+        // echo base64_decode($data);
+        // foreach( $groups as $group ) {
+        //     dd($group);
+        // }
+        // $arr = [];
+        // DB::table('students')->where("id", ">", "0")->delete();
+        // foreach ($groups as $group) {
+        //     dump($group); 
+        //     DB::table('groups')->insert([
+        //         'group' => trim($group['name'])
+        //     ]);
+        //     foreach ( $group['students'] as $item ) {
+        //         // dump(substr("121221", 1));
+                
+        //         if( isset($item['imageFile']) ) {
+        //             DB::table('students')->insert([
+        //                 'name' => trim($item['name']),
+        //                 'surname' => trim($item['surname']),
+        //                 'lastname' => trim($item['patronymic']),
+        //                 'group_id' => trim($group['name']),
+        //                 'date_of_enrollment' => trim($group['orderDate']),
+        //                 'form_of_education' => trim($group['form']),
+        //                 'photo' => substr($item['imageFile'], 1)
+        //             ]);
+        //         } else {
+        //             DB::table('students')->insert([
+        //                 'name' => trim($item['name']),
+        //                 'surname' => trim($item['surname']),
+        //                 'lastname' => trim($item['patronymic']),
+        //                 'date_of_enrollment' => trim($group['orderDate']),
+        //                 'group_id' => trim($group['name']),
+        //                 'form_of_education' => trim($group['form']),
+        //                 'photo' => ''
+        //             ]);
+        //         }
+        //     }
+        // }
+        // // return $arr;
     }
 }

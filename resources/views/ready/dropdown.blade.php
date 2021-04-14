@@ -9,10 +9,10 @@
 
 
     </button>
-    <div id="my Dropdown" class="dropdown-content">
+    <div style="overflow-y: scroll; max-height: 500px;" id="my Dropdown" class="dropdown-content">
       <input type="text" placeholder="Поиск.." id="myInput" onkeyup="filterFunction()">
       @foreach ($groups as $item)
-        <a href="/group{{$item->group_id}}">{{ $item->group }}</a>
+        <a href="/group{{trim($item->group)}}">{{ $item->group }}</a>
       @endforeach
     </div>
   </div>

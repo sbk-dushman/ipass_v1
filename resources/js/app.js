@@ -228,19 +228,6 @@ $(document).ready(function() {
 			}).catch(() => loadPhotos())
 	};
 
-	const removePhotos = () => {
-
-		fetch('./1c/drop-images.php').then(() => {
-
-		})
-	};
-
-	const hardReset = () => {
-
-		fetch('./1c/drop-groups.php').then(() => {
-
-		})
-	}
     // const updateGroups = () => {
     //     $(".simpleLoader").slideDown();
     //     fetch('./update-groups.php').then(() => {

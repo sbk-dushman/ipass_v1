@@ -27,7 +27,7 @@
 					<td>{{ $item->surname }}</td>
 					<td>{{ $item->name }}</td>
 					<td>{{ $item->lastname }}</td>
-					<td>{{ $item->group }}</td>
+					<td>{{ $item->group}}</td>
 					<td>{{ $item->position }}</td>
 					<td>
 						@if ($addStatus->Oba($id = $item->id))
@@ -51,13 +51,13 @@
         @endif
 
 
-		<div class="pag">
+		{{-- <div class="pag">
 			<ul class="pagination">
 				<li class="pagination__item">
 					{{$fake_search->links()}}
 				</li>
 			</ul>
-		</div>
+		</div> --}}
 	</div>
 
 @endsection

@@ -35,7 +35,8 @@
                         <div class="params">
                             <div class="lastname">
                                 <pre>Фамилия</pre>
-                                {{ $datas->lastname }}
+                                {{ $datas->surname }}
+
                             </div>
                             <div class="firstname">
                                 <pre>Имя</pre>
@@ -43,11 +44,13 @@
                             </div>
                             <div class="patronymic">
                                 <pre>Отчество</pre>
-                                {{ $datas->surname }}
+                                {{ $datas->lastname }}
+
                             </div>
                             <div class="position">
                                 <pre>Должность</pre>
-                                преподаватель
+                                {{-- преподаватель --}}
+                                {{$datas->position}}
                             </div>
                         </div>
                     </div>

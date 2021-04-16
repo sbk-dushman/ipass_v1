@@ -30,7 +30,7 @@
                         <img src="/storage/images/logo.png">
                         </div>
                         <div class="teach-photo">
-                            <img src="/storage/images/{{$datas->photo}}">
+                            <img src="/storage{{$datas->photo}}">
                         </div>
                         <div class="params">
                             <div class="lastname">
@@ -65,11 +65,11 @@
                     </div>
                     <div class="data">
                         <div class="img">
-                            <img src="/storage/images/{{$datas->photo}}"
+                            <img src="./1c{{$datas->photo}}"
                                 alt="">
                         </div>
                         <div class="info">
-                            <div class="stud">СТУДЕНЧЕСКИЙ БИЛЕТ №<span class="stud-number">777-777</span></div>
+                            <div class="stud">СТУДЕНЧЕСКИЙ БИЛЕТ №<span class="stud-number">{{ $datas->code }}</span></div>
                             <div class="stud-surname">Фамилия <span class="surname">{{ $datas->lastname }}</span></div>
                             <div class="stud-name">
                                 Имя

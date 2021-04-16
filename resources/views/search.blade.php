@@ -1,84 +1,63 @@
-@extends('master')
+@extends('ready.index')
 @section('content')
-		<table>
-					<tr>
-						<th>#</th>
-						<th>Фамилия</th>
-						<th>Имя</th>
-						<th>Отчество</th>
-						<th>Группа</th>
-						{{-- <th></th> --}}
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>Иванов</td>
-						<td>Иван</td>
-						<td>Иванович</td>
-						<td>17Ис-2</td>
-						<td><i class="fa fa-plus" aria-hidden="true"></i></td>
-                        {{-- <td></td> --}}
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>Иванов</td>
-						<td>Иван</td>
-						<td>Иванович</td>
-						<td>17Ис-2</td>
-						<td><i class="fa fa-plus" aria-hidden="true"></i></td>
-					</tr>
-				</table>
-{{-- <div class="grid-container-search">
-    <div class="tabel_students">
-        <h2 class="main-title">Поиск</h2>
-        @if  ($results==NULL)
-        <div class="alert alert-success alert-block">
-          Пока нет резултвтов
-            </div>
 
-        @elseif ($results->count()<=0)
-                            <div class="alert alert-success alert-block">
-                                Ничего не нашлось
-                             </div>
+	<div class=" table-box table-box-search table-box-pag">
+        @if ($fake_search->count()<=0)
+            <div class="empty-title">
+                     Ой  ничего не нашлось :(
+                  </div>
         @else
-        <table class="main-content select-list">
+             <table class="table_sort">
+            <thead>
+                <tr>
+				<th class="sortON search_surname">Фамилия</th>
+				<th class="sortON search_name">Имя</th>
+				<th class="sortON search_lastname">Отчество</th>
+				<th class="sortON">Группа</th>
+				<th class="sortON">Должность</th>
+				<th></th>
+			</tr>
+            </thead>
 
-            <tr>
-                <th>Фамилия</th>
-                <th>Имя</th>
-                <th>Отчество</th>
-                <th>Группа</th>
-                <th>Дествия</th>
-            </tr>
-            <tbody>
-                 @foreach ($results as $item)
-                    <tr style="height: 50px;" class="select-list__item ">
-                        <td>{{$item->lastname}}</td>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->surname}}</td>
 
-                        <td>
-                            <a href="/group{{ $item->group }}">{{$item->group_id}}</a>
-                        </td>
-                        <td>
-                            <button data-studID="{{$item->id}}" id="btn_add_from_search" class="btn_add_from_search">
-                                <i class="fas fa-plus-circle"></i>
-                            </button>
-                        </td>
+			<form action="" method="POST">
+				@csrf
+				@foreach ($fake_search as $item)
+				<tr>
+					<td>{{ $item->surname }}</td>
+					<td>{{ $item->name }}</td>
+					<td>{{ $item->lastname }}</td>
+					<td>{{ $item->group }}</td>
+					<td>{{ $item->position }}</td>
+					<td>
+						@if ($addStatus->Oba($id = $item->id))
+		    				<svg  fill="#5fc321"viewBox="0 -46 417.81333 417" width="417pt" xmlns="http://www.w3.org/2000/svg"><path d="m159.988281 318.582031c-3.988281 4.011719-9.429687 6.25-15.082031 6.25s-11.09375-2.238281-15.082031-6.25l-120.449219-120.46875c-12.5-12.5-12.5-32.769531 0-45.246093l15.082031-15.085938c12.503907-12.5 32.75-12.5 45.25 0l75.199219 75.203125 203.199219-203.203125c12.503906-12.5 32.769531-12.5 45.25 0l15.082031 15.085938c12.5 12.5 12.5 32.765624 0 45.246093zm0 0"/></svg>
+						@else
 
-                    </tr>
-                @endforeach
-        </tbody>
-    </table>
-
+						<button
+							class="btn_add"
+							type="submit"
+							name="add_to_cart"
+							value="{{ $item->id }}"
+						>
+							<svg width="25px" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><path d="m272 184c-4.417969 0-8-3.582031-8-8v-176h-80v176c0 4.417969-3.582031 8-8 8h-176v80h176c4.417969 0 8 3.582031 8 8v176h80v-176c0-4.417969 3.582031-8 8-8h176v-80zm0 0"></path></svg>
+						</button>
+							@endif
+					</td>
+				</tr>
+				@endforeach
+			</form>
+		</table>
         @endif
-    </div>
-    <div class="search_box">
-           <form action="{{ route('search-get') }}" method="POST">
-                    @csrf
-                    <input required id="search__inpput" placeholder="Введите запрос"  class="search-input" name="search_req" type="text">
-                    <button type="submit" id="search-btn" сlass="main-btn">Найти</button>
 
-                </form>
-            </div>
-</div> --}}
+
+		{{-- <div class="pag">
+			<ul class="pagination">
+				<li class="pagination__item">
+					{{$fake_search->links()}}
+				</li>
+			</ul>
+		</div> --}}
+	</div>
+
 @endsection

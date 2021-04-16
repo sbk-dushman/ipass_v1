@@ -11,21 +11,30 @@ function myFunction() {
     document.getElementById("my Dropdown").classList.toggle("show");
 }
 
-function filterFunction() {
-    var input, filter, ul, li, a, i;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    div = document.getElementById("my Dropdown");
-    a = div.getElementsByTagName("a");
-    for (i = 0; i < a.length; i++) {
-        txtZnac = a[i].textSod || a[i].innerText;
-        if (txtZnac.toUpperCase().indexOf(filter) > -1) {
-            a[i].style.display = "";
-        } else {
-            a[i].style.display = "none";
-        }
-    }
-}
+// function filterFunction() {
+//     $.ajax({
+// 			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+// 			url: '/group',
+// 			data: { workerrid: $(this).val() },
+// 			method: 'POST',
+// 			success: function (data) {
+// 				console.log("w");
+// 			}
+// 		});
+//     // var input, filter, ul, li, a, i;
+//     // input = document.getElementById("myInput");
+//     // filter = input.value.toUpperCase();
+//     // div = document.getElementById("my Dropdown");
+//     // a = div.getElementsByTagName("a");
+//     // for (i = 0; i < a.length; i++) {
+//     //     txtZnac = a[i].textSod || a[i].innerText;
+//     //     if (txtZnac.toUpperCase().indexOf(filter) > -1) {
+//     //         a[i].style.display = "";
+//     //     } else {
+//     //         a[i].style.display = "none";
+//     //     }
+//     // }
+// }
 
 function getStudId(contex,url) {
     let studID = $(contex).attr("data-studID");
@@ -96,7 +105,7 @@ $(document).ready(function() {
 			$(this).css({
 				"fill": "#5fc321"
 			})
-			
+
 		})
 		let workerid = $(this).attr("data-workerid");
 
@@ -156,7 +165,6 @@ $(document).ready(function() {
 		$(this).attr("selected", "selected");
 	})
 
-
 	$('.update_worker_w').on("click", function() {
 		$(this).addClass('hidden')
 		$(this).siblings('.save_worker_w').removeClass('hidden')
@@ -169,7 +177,7 @@ $(document).ready(function() {
 		// let surname_w = $(this).closest('tr').children('td').children('.input_surname_val').val().trim()
 		// let name_w = $(this).closest('tr').children('td').children('.input_name_val').val().trim()
 		// let lastname_w = $(this).closest('tr').children('td').children('.input_lastname_val').val().trim()
-		// let position_w = $(this).closest('tr').children('td').children('.input_position_val').val().trim()	
+		// let position_w = $(this).closest('tr').children('td').children('.input_position_val').val().trim()
 	})
 
 
@@ -181,7 +189,7 @@ $(document).ready(function() {
 					// getGroups();
 					// $(".simpleLoader").slideUp();
 					getGroupsInfo();
-				}).catch(() => updateGroups())	
+				}).catch(() => updateGroups())
 		}
 	 })
 	const getGroupsInfo = () => {
@@ -198,7 +206,7 @@ $(document).ready(function() {
 
 
 	const getStudentInfo = (refresh = true) => {
-	
+
 	fetch('./1c/get-students-info.php')
 		.then(res => res.json())
 		.then(res => {
@@ -214,7 +222,7 @@ $(document).ready(function() {
 
 
 
-	
+
 
 	const loadPhotos = (refresh = true) => {
 
@@ -224,7 +232,7 @@ $(document).ready(function() {
 
 				if (res.percent !== 100) {
 					loadPhotos(false);
-				} 
+				}
 			}).catch(() => loadPhotos())
 	};
 
@@ -245,7 +253,7 @@ $(document).ready(function() {
 		let worker_idd = $(this).attr('data-workerid')
 		$.ajax({
 			url: '/workers',
-			data: { 
+			data: {
 				worker_id: $(this).attr('data-workerid'),
 			},
 			method: 'POST',
@@ -286,7 +294,7 @@ $(document).ready(function() {
 					data: {
 						arr,
 						worker_idd
-						
+
 					},
 					method: 'POST',
 					success: (data) => {

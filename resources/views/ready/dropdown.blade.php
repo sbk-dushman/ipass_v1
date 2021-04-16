@@ -1,3 +1,4 @@
+<script> window.$ = window.jQuery = require('jquery');</script>
 <div class="select-box">
   <div class="dropdown">
     <button onclick="myFunction()" class="dropbtn">
@@ -23,18 +24,30 @@
   }
 
   function filterFunction() {
-    var input, filter, ul, li, a, i;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    div = document.getElementById("my Dropdown");
-    a = div.getElementsByTagName("a");
-    for (i = 0; i < a.length; i++) {
-      txtZnac = a[i].textSod || a[i].innerText;
-      if (txtZnac.toUpperCase().indexOf(filter) > -1) {
-        a[i].style.display = "";
-      } else {
-        a[i].style.display = "none";
-      }
-    }
+      let d
+      	$.ajax({
+			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+			url: '/group',
+			data: { workerrid: $(this).val() },
+			method: 'POST',
+			success: function (data) {
+				console.log("w");
+			}
+		});
+    // console.log("w")
+
+    // var input, filter, ul, li, a, i;
+    // input = document.getElementById("myInput");
+    // filter = input.value.toUpperCase();
+    // div = document.getElementById("my Dropdown");
+    // a = div.getElementsByTagName("a");
+    // for (i = 0; i < a.length; i++) {
+    //   txtZnac = a[i].textSod || a[i].innerText;
+    //   if (txtZnac.toUpperCase().indexOf(filter) > -1) {
+    //     a[i].style.display = "";
+    //   } else {
+    //     a[i].style.display = "none";
+    //   }
+    // }
   }
 </script>

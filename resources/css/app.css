@@ -89,10 +89,13 @@ header nav ul {
 	list-style-type: none;
 	display: grid;
 	padding: 0;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 	box-shadow: 0 5px 10px rgb(0, 0, 0, 0.2);
 }
+.login-card{
+     height: 33vh;
 
+}
 .search-box {
 	position: relative;
 }
@@ -686,6 +689,7 @@ header .select-box .dropdown {
 	border: 1px solid #ddd;
 	z-index: 1;
     top: 0;
+    right: 0;
 }
 
 
@@ -971,6 +975,7 @@ header nav ul li {
 	/* border: 1px solid black; */
 	box-shadow: 0 50px 40px rgb(0, 0, 0, 0.2);
 	background-color: #fff;
+    overflow-y: scroll;
 }
 
 .table-box-search table {
@@ -1261,5 +1266,30 @@ th.sorted[data-order="1"]::after {
                     }
 .login-card{
     border: none!important;
-    min-height: 49vw;
+    min-height: 40vw;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
+.send-order{
+margin-top: 20px;
+}
+.order-card{
+    border: none!important;
+}
+ .progress{
+     background-color: #fff;
+     visibility: hidden;
+ }
+.login-btn{
+    transform: translateX(-90%);
+}
+.print-box_btn{
+    padding-top: 5px;
+border-radius: 5px;
+    margin: 0;
+    /* height: 100%; */
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
+}
+

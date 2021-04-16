@@ -21,15 +21,15 @@ Auth::routes([
     'confirm' => false,
     'verify' => false,
 ]);
-Route::get('/card-order', 'AllController@Cardorder')->name('cardOrder-URL');
-Route::post('/card-order', 'AllController@CardorderPost');
+Route::get('/', 'AllController@Cardorder')->name('cardOrder-URL');
+Route::post('/', 'AllController@CardorderPost');
 
 Route::group(['middleware'=>'auth'],function () {
     // Route::post('/')
     Route::post('/ajax', 'AllController@ajax');
     Route::get('/workeredit{workerid?}', 'MainController@workerEdit');
     Route::post('/workeredit', 'MainController@workerEditPost');
-    Route::get('/', function() {return view('ready.index');});
+    // Route::get('/', function() {return view('ready.index');});
     Route::get('/group{group_id?}', 'AllController@group')->name('group');
     Route::post('/group{group_id?}', 'AllController@groupAdd');
     Route::get('/workers', 'AllController@workers')->name('workers');

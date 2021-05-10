@@ -11,30 +11,6 @@ function myFunction() {
     document.getElementById("my Dropdown").classList.toggle("show");
 }
 
-// function filterFunction() {
-//     $.ajax({
-// 			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-// 			url: '/group',
-// 			data: { workerrid: $(this).val() },
-// 			method: 'POST',
-// 			success: function (data) {
-// 				console.log("w");
-// 			}
-// 		});
-//     // var input, filter, ul, li, a, i;
-//     // input = document.getElementById("myInput");
-//     // filter = input.value.toUpperCase();
-//     // div = document.getElementById("my Dropdown");
-//     // a = div.getElementsByTagName("a");
-//     // for (i = 0; i < a.length; i++) {
-//     //     txtZnac = a[i].textSod || a[i].innerText;
-//     //     if (txtZnac.toUpperCase().indexOf(filter) > -1) {
-//     //         a[i].style.display = "";
-//     //     } else {
-//     //         a[i].style.display = "none";
-//     //     }
-//     // }
-// }
 
 function getStudId(contex,url) {
     let studID = $(contex).attr("data-studID");
@@ -121,34 +97,6 @@ $(document).ready(function() {
 	})
 
 
-	// $('.link_search').on("click", function(e) {
-	// 	// console.log(1);
-	// 	e.preventDefault()
-	// 	search_val = $('.input_search').val()
-	// 	console.log(search_val);
-	// 	$.ajax({
-	// 		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-	// 		url: '/search',
-	// 		data: { search_val },
-	// 		method: 'GET',
-	// 		success: function (data) {
-	// 			console.log(1);
-	// 		}
-	// 	})
-	// })
-
-	// $('_1s').on("click", function() {
-	// 	let q = 1
-	// 	$.ajax({
-	// 		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-	// 		url: '/getGroupInfo',
-	// 		data: {  },
-	// 		method: 'POST',
-	// 		success: function (data) {
-	// 			console.log(1);
-	// 		}
-	// 	})
-	// })
 
 	$('.select').change( function(e) {
 		console.log($(this).val())
@@ -236,14 +184,7 @@ $(document).ready(function() {
 			}).catch(() => loadPhotos())
 	};
 
-    // const updateGroups = () => {
-    //     $(".simpleLoader").slideDown();
-    //     fetch('./update-groups.php').then(() => {
-    //         // getGroups();
-    //         $(".simpleLoader").slideUp();
-    //         getGroupsInfo();
-    //     }).catch(() => updateGroups())
-    // };
+
 
 	$('.save_worker_w').on("click", function() {
 		let surname = $(this).closest('tr').children('td').children('.input_surname_val').val().trim()
@@ -535,7 +476,19 @@ const getSort = ({ target }) => {
 };
 
 document.querySelectorAll('.table_sort .sortON').forEach(tableTH => tableTH.addEventListener('click', () => getSort(event)));
-    // поисковой запрос
+
+
+// старый код на удаление
+
+    // const updateGroups = () => {
+    //     $(".simpleLoader").slideDown();
+    //     fetch('./update-groups.php').then(() => {
+    //         // getGroups();
+    //         $(".simpleLoader").slideUp();
+    //         getGroupsInfo();
+    //     }).catch(() => updateGroups())
+    // };
+// поисковой запрос
 
     // $('#search-btn').on("click", function (e) {
     //     let req = $('#search__inpput');
@@ -727,3 +680,57 @@ document.querySelectorAll('.table_sort .sortON').forEach(tableTH => tableTH.addE
 // } else{
 //     console.log('Слайдер скрыт');
 // }
+// $('.link_search').on("click", function(e) {
+	// 	// console.log(1);
+	// 	e.preventDefault()
+	// 	search_val = $('.input_search').val()
+	// 	console.log(search_val);
+	// 	$.ajax({
+	// 		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+	// 		url: '/search',
+	// 		data: { search_val },
+	// 		method: 'GET',
+	// 		success: function (data) {
+	// 			console.log(1);
+	// 		}
+	// 	})
+	// })
+
+	// $('_1s').on("click", function() {
+	// 	let q = 1
+	// 	$.ajax({
+	// 		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+	// 		url: '/getGroupInfo',
+	// 		data: {  },
+	// 		method: 'POST',
+	// 		success: function (data) {
+	// 			console.log(1);
+	// 		}
+	// 	})
+	// })
+
+// function filterFunction() {
+//     $.ajax({
+// 			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+// 			url: '/group',
+// 			data: { workerrid: $(this).val() },
+// 			method: 'POST',
+// 			success: function (data) {
+// 				console.log("w");
+// 			}
+// 		});
+//     // var input, filter, ul, li, a, i;
+//     // input = document.getElementById("myInput");
+//     // filter = input.value.toUpperCase();
+//     // div = document.getElementById("my Dropdown");
+//     // a = div.getElementsByTagName("a");
+//     // for (i = 0; i < a.length; i++) {
+//     //     txtZnac = a[i].textSod || a[i].innerText;
+//     //     if (txtZnac.toUpperCase().indexOf(filter) > -1) {
+//     //         a[i].style.display = "";
+//     //     } else {
+//     //         a[i].style.display = "none";
+//     //     }
+//     // }
+// }
+

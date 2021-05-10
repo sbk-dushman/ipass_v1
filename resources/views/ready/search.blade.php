@@ -52,13 +52,13 @@
         @endif
 
 
-		{{-- <div class="pag">
+		<div class="pag">
 			<ul class="pagination">
 				<li class="pagination__item">
 					{{$fake_search->links()}}
 				</li>
 			</ul>
-		</div> --}}
+		</div>
 	</div>
 
 @endsection

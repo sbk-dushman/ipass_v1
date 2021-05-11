@@ -18,8 +18,13 @@ class CreateSelectedsTable extends Migration
             $table->string('name')->nullable(true);
             $table->string('surname')->nullable(true);
             $table->string('lastname')->nullable(true);
-            $table->string('group');
-            $table->string('position');
+            $table->string('code')->nullable(true);
+            $table->string('group')->nullable(true);
+            $table->string('position')->nullable(true);
+            $table->string('shablon')->nullable(true);
+            $table->string('form_of_education')->nullable(true);
+            $table->string('date_of_enrollment')->nullable(true);
+            $table->string('photo')->nullable(true);
         });
     }
 

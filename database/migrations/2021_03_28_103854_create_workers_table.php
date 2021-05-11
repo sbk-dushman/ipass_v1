@@ -18,7 +18,8 @@ class CreateWorkersTable extends Migration
             $table->string('name')->nullable(true);
             $table->string('surname')->nullable(true);
             $table->string('lastname')->nullable(true);
-            $table->string('position_id')->nullable(true);
+            $table->string('position')->nullable(true);
+            $table->string('photo')->nullable(true);
         });
     }
 

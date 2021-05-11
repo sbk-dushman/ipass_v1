@@ -15,57 +15,48 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\Util\Getopt;
 
 class AllController extends Controller
 {
     public function group($group_id = null, Selected $addStatus)
     {
-        // dump($group_id);
-        $students = Student::where('group_id', $group_id)->paginate(14);
-        // dd($students);
+        $students = Student::where('group_id', $group_id)->paginate(13);
         $groups = Group::get();
-
-        // dd(1);
-        // dd(DB::select('SELECT name FROM students WHERE group = "3Э-2 2015"'));
         return view('ready.group', [ 'students' => $students ], compact('groups', 'addStatus'));
     }
 
     public function groupAdd(Request $request)
     {
         $data = $request->add_to_cart;
-        $StudName = Student::where('id', $data)->value('name');
-        $StudSurname = Student::where('id', $data)->value('surname');
-        $StudLastname = Student::where('id', $data)->value('lastname');
-        $StudGroup = Student::where('id', $data)->value('group_id');
-        $StudStudForm = Student::where('id', $data)->value('form_of_education');
-        $StudStudCode = Student::where('id', $data)->value('code');
-        $StudStudPhoto = Student::where('id', $data)->value('photo');
-
-        // dd($StudStudPhoto);
-        $issetName = Selected::where([
-            'name' => $StudName,
-            'surname' => $StudSurname,
-            'lastname' => $StudLastname,
-            'group' => $StudGroup,
-            'form_of_education' => $StudStudForm,
-            'code' => $StudStudCode,
-            'photo' => $StudStudPhoto
-        ])->value('id');
-        if( $issetName == true ) {
-            return redirect()->back();
-        }else {
-            DB::table('selecteds')->insert([
-                'name' => $StudName,
-                'surname' => $StudSurname,
-                'lastname' => $StudLastname,
-                'group' => $StudGroup,
-                'form_of_education' => $StudStudForm,
-                'shablon' => 1,
-                'code' => $StudStudCode,
-                'photo' => $StudStudPhoto
-            ]);
-            return redirect()->back();
-        }
+        $selected_student = Student::where('id', $data)->get();
+        foreach( $selected_student as $student ) {
+            if( Selected::where([
+                'name' => $student->name,
+                'surname' => $student->surname,
+                'lastname' => $student->lastname,
+                'group' => $student->group_id,
+                'form_of_education' => $student->form_of_education,
+                'code' => $student->code,
+                'photo' => $student->photo,
+                'date_of_enrollment' => $student->date_of_enrollment
+            ])->value('id') ) {
+                return redirect()->back();
+            } else {
+                DB::table('selecteds')->insert([
+                    'name' => $student->name,
+                    'surname' => $student->surname,
+                    'lastname' => $student->lastname,
+                    'group' => $student->group_id,
+                    'form_of_education' => $student->form_of_education,
+                    'code' => $student->code,
+                    'photo' => $student->photo,
+                    'date_of_enrollment' => $student->date_of_enrollment,
+                    'shablon' => 1,
+                ]);
+                return redirect()->back();
+            }
+        } 
     }
 
     public function selected()
@@ -242,7 +233,11 @@ class AllController extends Controller
                 'name' => $item->name,
                 'surname' => $item->surname,
                 'lastname' => $item->lastname,
-                'group' => $item->group_id
+                'group' => $item->group_id,
+                'form_of_education' => $item->form_of_education,
+                'photo' => $item->photo,
+                'code' => $item->code,
+                'date_of_enrollment' => $item->date_of_enrollment
             ]);
         }
         foreach( $resultsWork as $item ) {
@@ -250,14 +245,11 @@ class AllController extends Controller
                 'name' => $item->name,
                 'surname' => $item->surname,
                 'lastname' => $item->lastname,
-                'position' => $item->position
+                'position' => $item->position,
+                'photo' => $item->photo,
             ]);
         }
         $fake_search = FakeSearch::get();
-        // $arr1 = new Collection;
-
-        // $arr1 = $arr1->merge($resultsStud)->merge($resultsWork);
-        // $arr1 = paginate(1);
         return view('ready.search', compact('fake_search', 'addStatus'));
     }
 
@@ -266,7 +258,13 @@ class AllController extends Controller
         $addFromSearch = FakeSearch::where('id', $request->add_to_cart)->get();
         foreach( $addFromSearch as $item ) {
             if( trim($item->group) == '' ) {
-                if( Selected::where(['name' => $item->name,  'surname' => $item->surname,  'lastname' => $item->lastname, 'position' => $item->position ])->get() == 1) {
+                if( Selected::where([
+                        'name' => $item->name,
+                        'surname' => $item->surname,
+                        'lastname' => $item->lastname,
+                        'position' => $item->position,
+                        'photo' => $item->photo,
+                    ])->get() == 1) {
                     return redirect()->back();
                 } else {
                     Selected::insert([
@@ -274,12 +272,22 @@ class AllController extends Controller
                         'surname' => trim($item->surname), 
                         'lastname' => trim($item->lastname), 
                         'position' => trim($item->position),
-                        'shablon' => 1
+                        'shablon' => 1,
+                        'form_of_education' => trim($item->form_of_education),
+                        'photo' => trim($item->photo),
+                        'code' => trim($item->code),
+                        'date_of_enrollment' => trim($item->date_of_enrollment)
                     ]);
                     return redirect()->back();
                 }
             }elseif( trim($item->position) == '' ) {
-                if( count(Selected::where(['name' => $item->name, 'surname' => $item->surname, 'lastname' => $item->lastname, 'group' => $item->group,])->get()) == 1 ) {
+                if( count(Selected::where([
+                        'name' => $item->name,
+                        'surname' => $item->surname,
+                        'lastname' => $item->lastname,
+                        'group' => $item->group,
+                        'photo' => $item->photo,
+                    ])->get()) == 1 ) {
                     return redirect()->back();
                 } else {
                     Selected::insert([
@@ -287,7 +295,11 @@ class AllController extends Controller
                         'surname' => trim($item->surname), 
                         'lastname' => trim($item->lastname), 
                         'group' => trim($item->group),
-                        'shablon' => 1
+                        'shablon' => 1,
+                        'form_of_education' => trim($item->form_of_education),
+                        'photo' => trim($item->photo),
+                        'code' => trim($item->code),
+                        'date_of_enrollment' => trim($item->date_of_enrollment)
                     ]);
                     return redirect()->back();
                 }
@@ -391,5 +403,16 @@ class AllController extends Controller
             }
         }
         // // return $arr;
+    }
+    
+    public function getGroups(Request $request) {
+        $data = $request->data;
+        // return $data;
+        if( $request->data == '' ) {
+            return Group::get();
+        } else {
+            return Group::where('group', 'LIKE', '%' . $data . '%')->get();
+        }
+        
     }
 }

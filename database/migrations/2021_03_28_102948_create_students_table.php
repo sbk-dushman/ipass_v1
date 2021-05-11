@@ -18,7 +18,11 @@ class CreateStudentsTable extends Migration
             $table->string('name')->nullable(true);
             $table->string('surname')->nullable(true);
             $table->string('lastname')->nullable(true);
+            $table->string('code')->nullable(true);
             $table->string('group_id')->nullable(true);
+            $table->string('photo')->nullable(true);
+            $table->string('form_of_education')->nullable(true);
+            $table->string('date_of_enrollment')->nullable(true);
         });
     }
 

@@ -19,6 +19,10 @@ class CreateFakeSearchesTable extends Migration
             $table->string('surname')->nullable(false);
             $table->string('lastname')->nullable(false);
             $table->string('group')->nullable(true);
+            $table->string('code')->nullable(true);
+            $table->string('form_of_education')->nullable(true);
+            $table->string('photo')->nullable(true);
+            $table->string('date_of_enrollment')->nullable(true);
             $table->string('position')->nullable(true);
         });
     }

@@ -109,6 +109,7 @@
        html, body {
         margin: 0;
         font-family: 'Times New Roman';
+        height: auto;
     }
     body{
 			width: 725px;

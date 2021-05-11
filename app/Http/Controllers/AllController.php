@@ -56,7 +56,7 @@ class AllController extends Controller
                 ]);
                 return redirect()->back();
             }
-        } 
+        }
     }
 
     public function selected()
@@ -85,16 +85,16 @@ class AllController extends Controller
                     'lastname' => trim($lastname),
                     'position' => trim($position)
                 ]);
-                $name_s = Selected::where('id', $workerid)->value('name');                
-                $surname_s = Selected::where('id', $workerid)->value('surname');               
-                $lastname_s = Selected::where('id', $workerid)->value('lastname');              
+                $name_s = Selected::where('id', $workerid)->value('name');
+                $surname_s = Selected::where('id', $workerid)->value('surname');
+                $lastname_s = Selected::where('id', $workerid)->value('lastname');
                 $position_s = Selected::where('id', $workerid)->value('position');
-                
+
                 $surname_w = Worker::where('surname', $surname_s);
                 $name_w = Worker::where('name', $name_s);
                 $lastname_w = Worker::where('lastname', $lastname_s);
                 $position_w = Worker::where('position', $position_s);
-                
+
                 $id_w = Worker::where([
                     'name' => trim($name_w),
                     'surname' => trim($surname_w),
@@ -163,13 +163,13 @@ class AllController extends Controller
                         'position' => $request->arr[3]['position']
                     ]);
                 }
-                
-                DB::table('workers')->where('id', $request->worker_idd)->update([ 
+
+                DB::table('workers')->where('id', $request->worker_idd)->update([
                     'name' => $request->arr[0]['name'],
                     'surname' => $request->arr[1]['surname'],
                     'lastname' => $request->arr[2]['lastname'],
                     'position' => $request->arr[3]['position']
-                ]);                
+                ]);
             }
             elseif( $request->workerid ){
                 // $data = $request->workerid;
@@ -213,6 +213,7 @@ class AllController extends Controller
     public function search(Request $request, $page = 'page=1', $search = '1', FakeSearch $addStatus)
     {
         // dump($request->ajax());
+        // dump(1);
         $data = $request->search;
         $sort = $request->sort;
         FakeSearch::where('id', '>', '0')->delete();
@@ -249,7 +250,13 @@ class AllController extends Controller
                 'photo' => $item->photo,
             ]);
         }
-        $fake_search = FakeSearch::get();
+        // dd($request->getRequestUri());
+        // $fake_search = FakeSearch::get();
+        $fake_search = FakeSearch::paginate(14)->withPath($request->getRequestUri());
+        // $arr1 = new Collection;
+
+        // $arr1 = $arr1->merge($resultsStud)->merge($resultsWork);
+        // $arr1 = paginate(1);
         return view('ready.search', compact('fake_search', 'addStatus'));
     }
 
@@ -268,9 +275,9 @@ class AllController extends Controller
                     return redirect()->back();
                 } else {
                     Selected::insert([
-                        'name' => trim($item->name), 
-                        'surname' => trim($item->surname), 
-                        'lastname' => trim($item->lastname), 
+                        'name' => trim($item->name),
+                        'surname' => trim($item->surname),
+                        'lastname' => trim($item->lastname),
                         'position' => trim($item->position),
                         'shablon' => 1,
                         'form_of_education' => trim($item->form_of_education),
@@ -291,9 +298,9 @@ class AllController extends Controller
                     return redirect()->back();
                 } else {
                     Selected::insert([
-                        'name' => trim($item->name), 
-                        'surname' => trim($item->surname), 
-                        'lastname' => trim($item->lastname), 
+                        'name' => trim($item->name),
+                        'surname' => trim($item->surname),
+                        'lastname' => trim($item->lastname),
                         'group' => trim($item->group),
                         'shablon' => 1,
                         'form_of_education' => trim($item->form_of_education),
@@ -335,8 +342,8 @@ class AllController extends Controller
             $Sort = FakeSearch::orderBy('name', 'ASC')->get();
             return view('ready.search' ,compact('Sort'));
         }elseif ( $sort == 3 ) {
-            $Sort = FakeSearch::orderBy('lastname', 'ASC')->get(); 
-            return view('ready.search' ,compact('Sort'));     
+            $Sort = FakeSearch::orderBy('lastname', 'ASC')->get();
+            return view('ready.search' ,compact('Sort'));
         }
     }
 
@@ -351,10 +358,10 @@ class AllController extends Controller
         //     curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Basic $token"]);
         //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         //     curl_setopt($ch, CURLOPT_URL, $url);
-        
+
         //     $data = curl_exec($ch);
         //     curl_close($ch);
-        
+
         //     $data = json_decode($data);
         //     return $data;
         // }
@@ -370,13 +377,13 @@ class AllController extends Controller
         // $arr = [];
         // DB::table('students')->where("id", ">", "0")->delete();
         foreach ($groups as $group) {
-            dump($group); 
+            dump($group);
             DB::table('groups')->insert([
                 'group' => trim($group['name'])
             ]);
             foreach ( $group['students'] as $item ) {
                 // dump(substr("121221", 1));
-                
+
                 if( isset($item['imageFile']) ) {
                     DB::table('students')->insert([
                         'name' => trim($item['name']),
@@ -404,7 +411,7 @@ class AllController extends Controller
         }
         // // return $arr;
     }
-    
+
     public function getGroups(Request $request) {
         $data = $request->data;
         // return $data;
@@ -413,6 +420,6 @@ class AllController extends Controller
         } else {
             return Group::where('group', 'LIKE', '%' . $data . '%')->get();
         }
-        
+
     }
 }

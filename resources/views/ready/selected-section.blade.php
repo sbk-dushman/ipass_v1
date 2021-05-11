@@ -1,6 +1,11 @@
 @extends('ready.index')
 @section('content')
     <div class="table-box-selecteds">
+         @if ($selecteds->count()<=0)
+            <div class="empty-title">
+                     Список для печати пуст
+                  </div>
+                  @else
         <table class="table_selecteds table_sort">
 				@csrf
           <thead>
@@ -106,7 +111,9 @@
                         @endif
                     </td>
                     <td>
-                        <img style="width: 20px; height: 20px;" src="/storage/images/{{$item->photo}}" alt="">
+                        <div class="photo-wraper">
+                        <img style="width: 20px; height: 20px;" src="/storage{{$item->photo}}" alt="">
+                        </div>
                     </td>
                     <td>{{ $item->group }}</td>
                     <td class="td_position">
@@ -255,12 +262,26 @@
 
             @endforeach
         </table>
-		<div class="pag">
+
+ @if ($selecteds->total() > $selecteds->count())
+				<div class="pag">
+					<ul class="pagination">
+						<li class="pagination__item">
+							{{$selecteds->onEachSide(1)->links()}}
+						</li>
+					</ul>
+				</div>
+                @endif
+                @endif
+
+
+
+		{{-- <div class="pag">
 			<ul class="pagination">
 				<li class="pagination__item">
 					{{$selecteds->links()}}
 				</li>
 			</ul>
-		</div>
+		</div> --}}
     </div>
 @endsection

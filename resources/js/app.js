@@ -477,6 +477,9 @@ const getSort = ({ target }) => {
 
 document.querySelectorAll('.table_sort .sortON').forEach(tableTH => tableTH.addEventListener('click', () => getSort(event)));
 
+$('.photo-wraper').click(function () {
+    $(this).toggleClass("active");
+});
 
 // старый код на удаление
 

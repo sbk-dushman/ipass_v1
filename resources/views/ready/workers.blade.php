@@ -28,8 +28,11 @@
 					<td class="td_position_w">
 						<input disabled class="input_position_val input input_worker" type="text" value="{{$item->position}}">
 					</td>
-					<td>
-						<img style="width: 20px; height: 20px;" src="/storage/{{$item->photo}}" alt="">
+					<td >
+                        <div class="photo-wraper">
+                            <img style="width: 20px; height: 20px;" src="/storage{{$item->photo}}" alt="">
+                        </div>
+
 					</td>
 					<td>
 						<button class="remove_from_worker" data-workerid="{{ $item->id }}">

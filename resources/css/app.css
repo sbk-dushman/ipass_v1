@@ -789,6 +789,7 @@ header nav ul li {
 	/* border: 1px solid black; */
 	box-shadow: 0 50px 40px rgb(0, 0, 0, 0.2);
 	background-color: #fff;
+    position: relative;
 }
 .table-box-workers table {
 	width: 100%;
@@ -1055,7 +1056,16 @@ header nav ul li {
 .print-box_btn{
     width: 93px;
     text-align: center;
+    position: relative;
 
+}
+.ptint-link::before{
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
 }
 /* сортеровка таблиц */
 
@@ -1264,6 +1274,8 @@ th.sorted[data-order="1"]::after {
         page-break-inside: avoid;
        }
                     }
+
+
 .login-card{
     border: none!important;
     min-height: 40vw;
@@ -1292,4 +1304,31 @@ border-radius: 5px;
     background-color: #fff;
     box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
 }
+.photo-wraper{
+    cursor: pointer;
+    z-index: 2;
+}
+.photo-wraper.active{
+    position: absolute;
+    background-color: #1b1b1b54;
+    width: 100%;
+    left: 0;
+    height: 100%;
+    top: 0;
+    display: flex;
 
+    justify-content: center;
+}
+.photo-wraper.active img{
+    transform: scale(20);
+    align-self: center;
+}
+.photo-wraper::before{
+    content: "";
+    position: relative;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    cursor: pointer;
+}

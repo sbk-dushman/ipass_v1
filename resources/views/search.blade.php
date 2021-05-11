@@ -48,16 +48,25 @@
 				@endforeach
 			</form>
 		</table>
+         @if ($fake_search->total() > $fake_search->count())
+				{{-- <div class="pag">
+					<ul class="pagination">
+						<li class="pagination__item">
+							{{$fake_search->onEachSide(1)->links()}}
+						</li>
+					</ul>
+				</div> --}}
+                @endif
         @endif
 
 
-		{{-- <div class="pag">
+		<div class="pag">
 			<ul class="pagination">
 				<li class="pagination__item">
-					{{$fake_search->links()}}
+					{{$fake_search->onEachSide(1)->links()}}
 				</li>
 			</ul>
-		</div> --}}
+		</div>
 	</div>
 
 @endsection

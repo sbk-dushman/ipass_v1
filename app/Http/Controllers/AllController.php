@@ -256,7 +256,7 @@ class AllController extends Controller
         }
         // dd($request->getRequestUri());
         // $fake_search = FakeSearch::get();
-        $fake_search = FakeSearch::paginate(1)->withPath($request->getRequestUri());
+        $fake_search = FakeSearch::paginate(14)->withPath($request->getRequestUri());
         // $arr1 = new Collection;
 
         // $arr1 = $arr1->merge($resultsStud)->merge($resultsWork);

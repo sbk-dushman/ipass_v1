@@ -23,6 +23,8 @@ class VerifyCsrfToken extends Middleware
         '/workeredit',
         '/search',
         '/workers',
-        '/ajax'
+        '/ajax',
+        '/getGroups',
+        '.*'
     ];
 }

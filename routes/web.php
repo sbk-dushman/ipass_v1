@@ -15,7 +15,6 @@ use App\Http\Controllers\AllController;
 use App\Http\Controllers\MainController;
 
 
-
 Auth::routes([
     'reset' => false,
     'confirm' => false,
@@ -37,13 +36,14 @@ Route::group(['middleware'=>'auth'],function () {
     Route::get('/print', 'AllController@getPrint')->name('print');
     Route::get('/search{search?}', 'AllController@search')->name('search');
     Route::post('/search{search?}', 'AllController@searchPost')->name('search');
-    Route::get('/getGroupInfo', 'AllController@getGroupInfo');
+    Route::post('/getGroupInfo', 'AllController@getGroupInfo');
 
     Route::get('/print', 'AllController@getPrint')->name('print-get');
     Route::get('/personal', 'MainController@getPersonal')->name('personal');
     Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
     Route::get('/selected', 'AllController@selected')->name('selected');
     Route::post('/selected', 'AllController@selectedPost');
+    Route::post('/getGroups', 'AllController@getGroups');
 });
 
 

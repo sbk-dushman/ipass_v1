@@ -67,7 +67,7 @@
 
 					<div class="utilits">
 						@if ( Request::is('group*') )
-						@include('ready.dropdown')
+						<div></div>
 					@elseif ( Request::is('selected') )
 						@include('ready.print')
 					@elseif ( Request::is('workers') )

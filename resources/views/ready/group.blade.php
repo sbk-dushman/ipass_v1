@@ -91,13 +91,14 @@
 							</form>
 							@endforeach
 						</table>
+                        @if ($students->total() > $students->count())
 						<div class="pag">
 					<ul class="pagination">
 						<li class="pagination__item">
 							{{$students->onEachSide(1)->links()}}
 						</li>
 					</ul>
-				</div>
+				    </div>
 					</div>
                 @endif
                 @endif

@@ -250,7 +250,7 @@
 						<div class="photoLoaderLabel"></div>
 						<div class="container-prog">
 							<div class="progressbar">
-								<span class="percentBar"></span>
+								<span class="percentBar">(100%)</span>
 							</div>
 						</div>
 						  
@@ -290,6 +290,7 @@
 							
 						}
 						.progressbar > span {
+							text-align: center;
 							display: block;
 							height: 100%;
 							background-color: #60C4F2;
@@ -337,6 +338,7 @@
 			.then(res => res.json())
 			.then(res => {
 				$('.percentBar').css('width', `${res.percent}%`);
+				$('.percentBar').text(`${res.percent}%`);
 				$(".files").text(`${res.loaded}/${res.count}`);
 				if (res.percent !== 100) {
 					getGroupsInfo(false);
@@ -368,6 +370,7 @@
 		.then(res => {
 			console.log(1)
 			$('.percentBar').css('width', `${res.percent}%`);
+			$('.percentBar').text(`${res.percent}%`);
 			$(".files").text(`${res.loaded}/${res.count}`);
 			if (res.percent !== 100) {
 				getStudentInfo(false);
@@ -393,6 +396,7 @@
             .then(res => res.json())
             .then(res => {
                 $('.percentBar').css('width', `${res.percent}%`);
+				$('.percentBar').text(`${res.percent}%`);
 				$(".files").text(`${res.loaded}/${res.count}`);
                 if (res.loaded !== res.count-1) {
                     loadPhotos(false);

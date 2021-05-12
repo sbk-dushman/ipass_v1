@@ -40,7 +40,7 @@
 			</script>
 			<div class="table-box">
 				<div class="searchGroupBox">
-					<input onkeyup="getValue()" class="searchGroupInput" type="text">
+					<input placeholder="Поиск группы..." onkeyup="getValue()" class="searchGroupInput" type="text">
 					<ul class="groups">
 
 					</ul>
@@ -92,16 +92,15 @@
 							@endforeach
 						</table>
                         @if ($students->total() > $students->count())
-						<div class="pag">
-					<ul class="pagination">
-						<li class="pagination__item">
-							{{$students->onEachSide(1)->links()}}
-						</li>
-					</ul>
-				    </div>
+							<div class="pag">
+								<ul class="pagination">
+									<li class="pagination__item">
+										{{$students->onEachSide(1)->links()}}
+									</li>
+								</ul>
+							</div>
+						@endif
 					</div>
                 @endif
-                @endif
-
 			</div>
 @endsection

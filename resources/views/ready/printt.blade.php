@@ -30,7 +30,7 @@
                         <img src="/storage/images/logo.png">
                         </div>
                         <div class="teach-photo">
-                            <img src="/storage{{$datas->photo}}">
+                            <img src="{{$datas->photo}}">
                         </div>
                         <div class="params">
                             <div class="lastname">
@@ -65,7 +65,7 @@
                     </div>
                     <div class="data">
                         <div class="img">
-                            <img src="./1c{{$datas->photo}}"
+                            <img src="{{$datas->photo}}"
                                 alt="">
                         </div>
                         <div class="info">

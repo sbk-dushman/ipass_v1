@@ -8,7 +8,6 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<script src="{{ asset('js/app.js') }}" defer></script>
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
-</head>
 <body>
 
 	<div class="all-container">
@@ -246,31 +245,67 @@
 
 						</ul>
 				  	</nav>
-					<div style="display: flex;" class=" progress">
-						<div class="mt-2 simpleLoader">
-							<div class="label">
-								<div class="label-1">
-									<img src="loading.gif" alt="">
-									Выполняю...
-								</div>
+					<div class="progresss prog">
+						<div class="files">...</div>
+						<div class="photoLoaderLabel"></div>
+						<div class="container-prog">
+							<div class="progressbar">
+								<span class="percentBar">(100%)</span>
 							</div>
 						</div>
-						<div style="display: flex;" class="mt-2 photoLoader">
-							<div class="loadedPhotoWrap">
-								<div class="loadedPhoto"></div>
-							</div>
-							<div style="display: flex; flex-direction: row;" class="label">
-								<div class="label-1">
-									<img src="loading.gif" alt="">
-									<span class="photoLoaderLabel">Выгружаю фотографии с 1с...</span>
-								</div>
-								<div style="display: flex;" class="label-2">
-									<div class="files">...</div>
-									<div class="percent">(100%)</div>
-								</div>
-							</div>
-						</div>
+						  
 					</div>
+					<style>
+						.files {
+							margin-top: 14px;
+							margin-left: 5px;
+							grid-area: files;
+						}
+						.photoLoaderLabel {
+							grid-area: load;
+						}
+						.progresss {
+							background-color: #fff;
+							height: 50px;
+							/* margin-top: 10px; */
+							border-radius: 4px;
+							box-shadow: 0 5px 10px rgb(0, 0, 0, 0.2);
+							display: grid;
+							grid-template-columns: 100px 1fr;
+							grid-template-rows: 1fr 1fr;
+							grid-template-areas: 
+							"files load"
+							"files prog";
+						}
+						.container-prog {
+							grid-area: prog;
+							/* margin-top:4px; */
+							height: 20px;
+							margin-right: 10px;
+							background-color: rgb(209, 209, 209);
+						}
+						.progressbar {
+							height: 20px;
+							
+							
+						}
+						.progressbar > span {
+							text-align: center;
+							display: block;
+							height: 100%;
+							background-color: #60C4F2;
+							background-image: linear-gradient(
+								center bottom,
+								rgb(43,194,83) 37%,
+								rgb(84,240,84) 69%
+							);
+							box-shadow: 
+								inset 0 2px 9px  rgba(255,255,255,0.3),
+								inset 0 -2px 6px rgba(0,0,0,0.4);
+							position: relative;
+							overflow: hidden;
+							}
+					</style>
 				</header>
 
 			@show
@@ -302,13 +337,12 @@
 
 			.then(res => res.json())
 			.then(res => {
-				$('.loadedPhoto').css('width', `${res.percent}%`);
+				$('.percentBar').css('width', `${res.percent}%`);
+				$('.percentBar').text(`${res.percent}%`);
 				$(".files").text(`${res.loaded}/${res.count}`);
-				$(".percent").text(`${res.percent}%`);
 				if (res.percent !== 100) {
 					getGroupsInfo(false);
 				} else {
-                    $(".photoLoader").slideUp();
                     getStudentInfo();
                 }
 			}).catch(() => getGroupsInfo())
@@ -334,14 +368,14 @@
 	fetch('./1c/get-students-info.php')
 		.then(res => res.json())
 		.then(res => {
-			$('.loadedPhoto').css('width', `${res.percent}%`);
+			console.log(1)
+			$('.percentBar').css('width', `${res.percent}%`);
+			$('.percentBar').text(`${res.percent}%`);
 			$(".files").text(`${res.loaded}/${res.count}`);
-			$(".percent").text(`--`+`${res.percent}%`);
 			if (res.percent !== 100) {
 				getStudentInfo(false);
 				// console.log(1)
 			} else {
-				$(".photoLoader").slideUp();
 				
 				loadPhotos();
 			}
@@ -361,13 +395,12 @@
         fetch('/1c/get-images.php')
             .then(res => res.json())
             .then(res => {
-                $('.loadedPhoto').css('width', `${res.percent}%`);
-                $(".files").text(`${res.loaded}/${res.count}`);
-                $(".percent").text(`--`+`${res.percent}%`);
+                $('.percentBar').css('width', `${res.percent}%`);
+				$('.percentBar').text(`${res.percent}%`);
+				$(".files").text(`${res.loaded}/${res.count}`);
                 if (res.loaded !== res.count-1) {
                     loadPhotos(false);
                 } else {
-                    $(".photoLoader").slideUp();
 					if( res.loaded == res.count-1 ) {
 						// console.log(1)
 						ajax()

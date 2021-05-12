@@ -19,6 +19,7 @@ Auth::routes([
     'reset' => false,
     'confirm' => false,
     'verify' => false,
+    'register' => false
 ]);
 Route::get('/', 'AllController@Cardorder')->name('cardOrder-URL');
 Route::post('/', 'AllController@CardorderPost');

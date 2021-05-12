@@ -30,7 +30,7 @@
 					</td>
 					<td >
                         <div class="photo-wraper">
-                            <img style="width: 20px; height: 20px;" src="/storage{{$item->photo}}" alt="">
+                            <img style="width: 20px; height: 20px;" src="{{$item->photo}}" alt="">
                         </div>
 
 					</td>

@@ -267,7 +267,7 @@
 						.progresss {
 							background-color: #fff;
 							height: 50px;
-							margin-top: 10px;
+							/* margin-top: 10px; */
 							border-radius: 4px;
 							box-shadow: 0 5px 10px rgb(0, 0, 0, 0.2);
 							display: grid;

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use PHPUnit\Util\Getopt;
+use App\Http\Requests\CardOrderRequest;
 
 class AllController extends Controller
 {
@@ -319,7 +320,8 @@ class AllController extends Controller
         return view('ready.cardOrder');
     }
 
-    public function CardorderPost(Request $request)
+    // public function CardorderPost(Request $request)
+    public function CardorderPost(CardOrderRequest $request)
     {
         // dd($request->all());
         Worker::insert([

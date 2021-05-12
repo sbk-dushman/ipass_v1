@@ -327,7 +327,7 @@ class AllController extends Controller
             'surname' => $request->surname,
             'lastname' => $request->lastname,
             'position' => $request->position,
-            'photo' => '/images/' . date("YmdHis").'.'.$request->file('photo')->getClientOriginalExtension(),
+            'photo' => '/storage/images/' . date("YmdHis").'.'.$request->file('photo')->getClientOriginalExtension(),
         ]);
         $request->file('photo')->storeAs('public/images', date("YmdHis").'.'.$request->file('photo')->getClientOriginalExtension());
         session()->flash('card_send_succsess','Заявка  успешно отправлена');
@@ -376,7 +376,8 @@ class AllController extends Controller
         //     dd($group);
         // }
         // $arr = [];
-        // DB::table('students')->where("id", ">", "0")->delete();
+        DB::table('students')->where("id", ">", "0")->delete();
+        DB::table('groups')->where("id", ">", "0")->delete();
         foreach ($groups as $group) {
             dump($group);
             DB::table('groups')->insert([
@@ -393,7 +394,7 @@ class AllController extends Controller
                         'group_id' => trim($group['name']),
                         'date_of_enrollment' => trim($group['orderDate']),
                         'form_of_education' => trim($group['form']),
-                        'photo' => substr($item['imageFile'], 1),
+                        'photo' => '/1c' . substr($item['imageFile'], 1),
                         'code' => substr($item['code'], 1)
                     ]);
                 } else {

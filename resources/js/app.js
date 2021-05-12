@@ -153,20 +153,28 @@ $(document).ready(function() {
 	}
 
 
-	const getStudentInfo = (refresh = true) => {
-
-	fetch('./1c/get-students-info.php')
-		.then(res => res.json())
-		.then(res => {
-
-			if (res.percent !== 100) {
-				getStudentInfo(false);
-			} else {
-				loadPhotos();
-				getGroups();
-			}
-		}).catch(() => getStudentInfo())
-}
+	// const getStudentInfo = (refresh = true) => {
+	// 	$(".photoLoaderLabel").text('Выгружаю информацию о студентах...');
+    //     if (refresh) {
+    //         $(".photoLoader").slideDown();
+    //         $('.loadedPhoto').css('width', '0%');
+    //     }
+	// 	fetch('./1c/get-students-info.php')
+	// 		.then(res => res.json())
+	// 		.then(res => {
+	// 			$('.loadedPhoto').css('width', `${res.percent}%`);
+	// 			console.log(1)
+	// 			$(".files").text(`${res.loaded}/${res.count}`);
+	// 			$(".percent").text(`${res.percent}%`);
+	// 			if (res.percent !== 100) {
+	// 				getStudentInfo(false);
+	// 				console.log(1)
+	// 			} else {
+	// 				loadPhotos();
+	// 				getGroups();
+	// 			}
+	// 		}).catch(() => getStudentInfo())
+	// }
 
 
 

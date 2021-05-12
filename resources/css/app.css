@@ -30,20 +30,23 @@ button{
 	grid-template-rows: 140px 1fr 40px;
 	grid-gap: 5px;
 }
+
 header {
 	display: grid;
 	grid-template-columns: 700px 1fr 270px;
-	grid-template-rows: 100px 1fr;
-	/* align-items: center; */
+	grid-template-rows: 80px 50px;
+	/* align-items: cent; */
 	grid-template-areas:
 	"search util nav"
 	"prog prog prog";
 }
-header .progress {
+header .progresss {
 	grid-area: prog;
+	z-index: 10;
 }
 header .header-nav {
 	grid-area: nav;
+	
 }
 header .search-box {
 	grid-area: search;
@@ -75,10 +78,10 @@ header input:focus {
 }
 header nav {
 
-	padding-top: 20px;
+	/* padding-top: 30px; */
 	margin: 0;
 	/* margin-right: 16px; */
-	height: 60px;
+	/* height: 60px; */
 
 }
 header nav ul {
@@ -89,6 +92,8 @@ header nav ul {
 	list-style-type: none;
 	display: grid;
 	padding: 0;
+	margin-top: 26px;
+	height: 40px;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 	box-shadow: 0 5px 10px rgb(0, 0, 0, 0.2);
 }

@@ -93,14 +93,15 @@
 						</table>
                         @if ($students->total() > $students->count())
 						<div class="pag">
-					<ul class="pagination">
-						<li class="pagination__item">
-							{{$students->onEachSide(1)->links()}}
-						</li>
-					</ul>
-				    </div>
+							<ul class="pagination">
+								<li class="pagination__item">
+									{{$students->onEachSide(1)->links()}}
+								</li>
+							</ul>
+				    	</div>
+						@endif
 					</div>
-                @endif
+                	
                 @endif
 
 			</div>

@@ -46,7 +46,7 @@ header .progresss {
 }
 header .header-nav {
 	grid-area: nav;
-	
+
 }
 header .search-box {
 	grid-area: search;
@@ -431,7 +431,7 @@ header nav ul li:hover:last-child {
 }
 
 .table-box-selecteds table tr td:last-child {
-	position: relative;
+	/* position: relative; */
 }
 
 .table-box-selecteds table tr td:last-child .save_worker {
@@ -500,7 +500,7 @@ header nav ul li:hover:last-child {
 
 } */
 .table-box {
-	position: relative;
+	/* position: relative; */
 }
 .hidden {
 	visibility: hidden;
@@ -560,27 +560,34 @@ header nav ul li:hover:last-child {
 	width: 100%;
 }
 
-.table-box .searchGroupBox {
+.searchGroupBox {
 	background-color: #fff;
 	box-shadow: 0 50px 40px rgb(0, 0, 0, 0.2);
 	overflow: scroll;
 	overflow-x: hidden;
 	border-radius: 4px;
+    position: relative;
 }
 
-.table-box .searchGroupBox input {
-	width: 125px;
+.searchGroupBox input {
+	    width: 136px;
+        top:0;
 	margin: 3px;
 	border-radius: 4px;
 	outline: none;
 	border: 1px solid black;
-	position: sticky;
+	/* position: absolute; */
+    height: 30px;
 }
 
-.table-box .searchGroupBox ul {
+.searchGroupBox ul {
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
+}
+.select_grop-btn{
+    background-color:#0000;
+
 }
 
 .table-box .searchGroupBox ul li {
@@ -754,7 +761,7 @@ header .select-box .dropdown {
 	border-bottom: 1px solid #ddd;
 }
 
-#myInput:focus {
+/* #myInput:focus {
 	outline: none
 }
 
@@ -774,7 +781,7 @@ header .select-box .dropdown {
 	z-index: 1;
     top: 0;
     right: 0;
-}
+} */
 
 
 .dropdown-content a {
@@ -874,7 +881,7 @@ header nav ul li {
 	/* border: 1px solid black; */
 	box-shadow: 0 50px 40px rgb(0, 0, 0, 0.2);
 	background-color: #fff;
-    position: relative;
+    /* position: relative; */
 }
 .table-box-workers table {
 	width: 100%;
@@ -1077,9 +1084,6 @@ header nav ul li {
 	text-align: left;
 }
 
-.table-box-selecteds {
-	position: relative;
-}
 
 .pag {
 	position:absolute;
@@ -1392,7 +1396,8 @@ border-radius: 5px;
 }
 .photo-wraper{
     cursor: pointer;
-    z-index: 2;
+    z-index: 40;
+    border-radius: 4px;
 }
 .photo-wraper.active{
     position: absolute;

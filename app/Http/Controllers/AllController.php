@@ -329,8 +329,9 @@ class AllController extends Controller
             'position' => $request->position,
             'photo' => '/images/' . date("YmdHis").'.'.$request->file('photo')->getClientOriginalExtension(),
         ]);
-
         $request->file('photo')->storeAs('public/images', date("YmdHis").'.'.$request->file('photo')->getClientOriginalExtension());
+        session()->flash('card_send_succsess','Заявка  успешно отправлена');
+        return redirect()->back();
     }
 
     public function searchSort($sort = null)

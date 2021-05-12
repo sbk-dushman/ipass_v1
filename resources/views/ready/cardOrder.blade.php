@@ -22,6 +22,9 @@ margin-top: 20px;
     <a class="login-btn btn btn-primary" href="/login">Войти</a>
     <div class="card order-card align-items-center">
         <h2>Заявка на выпуск карты</h2>
+        @if(session()->has('card_send_succsess'))
+        <p class="alert alert-success sendCard-alert">{{ session()->get('card_send_succsess') }}</p>
+        @endif
   <div class="card-body">
           <form method="POST" enctype="multipart/form-data">
         @csrf

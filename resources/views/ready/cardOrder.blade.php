@@ -18,6 +18,10 @@
     .send-order{
 margin-top: 20px;
 }
+.order-card{
+    /* padding: 20px 0; */
+    border-bottom: none!important;
+}
     </style>
     <a class="login-btn btn btn-primary" href="/login">Войти</a>
     <div class="card order-card align-items-center">
@@ -29,6 +33,9 @@ margin-top: 20px;
           <form method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group row">
+              @error('surname')
+                <p class="alert alert-danger">{{$message}}</p>
+                        @enderror
             <label for="surname" class="col-md-4 col-form-label text-md-right">Фамилия:</label>
 
             <div class="col-md-12">
@@ -38,6 +45,9 @@ margin-top: 20px;
             </div>
         </div>
         <div class="form-group row">
+            @error('name')
+                <p class="alert alert-danger">{{$message}}</p>
+                        @enderror
             <label for="name" class="col-md-4 col-form-label text-md-right">Имя:</label>
 
             <div class="col-md-12">
@@ -50,7 +60,9 @@ margin-top: 20px;
 
   <div class="form-group row">
             <label for="lastname" class="col-md-4 col-form-label text-md-right">Отчество:</label>
-
+              @error('lastname')
+                <p class="alert alert-danger">{{$message}}</p>
+                        @enderror
             <div class="col-md-12">
                 <input id="lastname" type="text" class="form-control" name="lastname"
                        value="" required autofocus>
@@ -59,7 +71,9 @@ margin-top: 20px;
         </div>
           <div class="form-group row">
             <label for="order-position" class="col-md-4 col-form-label text-md-right">Должность:</label>
-
+              @error('position')
+                <p class="alert alert-danger">{{$message}}</p>
+                        @enderror
             <div class="col-md-12">
                 <input id="name" type="text" class="form-control" name="position"
                        value="" required autofocus>
@@ -68,7 +82,9 @@ margin-top: 20px;
         </div>
           <div class="form-group row">
             <label for="order-position" class="col-md-4 col-form-label text-md-right">Фото:</label>
-
+               @error('photo')
+                <p class="alert alert-danger">{{$message}}</p>
+                        @enderror
             <div class="col-md-12">
                 <input id="order-position" type="file" class="form-control" name="photo"
                        value="" required autofocus>

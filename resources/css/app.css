@@ -76,6 +76,7 @@ header input:focus {
 	border:none;
 	outline: none;
 }
+
 header nav {
 
 	/* padding-top: 30px; */
@@ -96,6 +97,23 @@ header nav ul {
 	height: 40px;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 	box-shadow: 0 5px 10px rgb(0, 0, 0, 0.2);
+}
+.page-link{
+text-decoration: none;
+    color: #000;
+    transition: 0.3s;
+    transition-property: opacity;
+    height: 100%;
+    width: 100%;
+}
+ .page-link:hover {
+    opacity: 0.5;
+    /* background-color: red; */
+}
+
+.page-item  {
+
+    border: 1px solid rgba(0, 0, 0, 0.198);
 }
 .login-card{
      height: 33vh;
@@ -526,7 +544,7 @@ header nav ul li:hover:last-child {
 	/* position: relative; */
 	border-radius: 5px;
 	/* border: 1px solid black; */
-	
+
 	/* background-color: #fff; */
     min-height: 296px;
 	display: grid;
@@ -669,13 +687,16 @@ header nav ul li:hover:last-child {
 	transition: 0.1s ease-in-out;
 }
 
-.table-box .table-container thead tr:first-child {
+.table-box .table-container thead tr:first-child,.table-box-search thead tr:first-child{
 	/* transition: 0.2s ease-in-out; */
 	height: 40px;
 	background-color: rgb(243, 242, 242);
 }
+.table-box-search table tr td {
+    height: 40px;
+    padding-left: 20px;
 
-
+}
 .table-box .table-container table tr:hover {
 	background-color: rgb(243, 242, 242);
 }
@@ -799,9 +820,8 @@ width: 70%;
 .btn_add{
     /* max-width: 20px; */
 }
-.order-card{
-    padding: 20px 0;
-}
+
+
 .nav-link svg{
     height: 25px;
     object-fit: cover;
@@ -1035,12 +1055,15 @@ header nav ul li {
 	/* position: absolute; */
 	right: 50px;
 }
+.table-box-search{
 
+}
 .table-box-search {
 	border-radius: 5px;
 	/* border: 1px solid black; */
 	box-shadow: 0 50px 40px rgb(0, 0, 0, 0.2);
 	background-color: #fff;
+    display: flex;
     /* overflow-y: scroll; */
 }
 
@@ -1349,11 +1372,9 @@ th.sorted[data-order="1"]::after {
     padding: 0;
 }
 .send-order{
-margin-top: 20px;
+    margin-top: 20px;
 }
-.order-card{
-    border: none!important;
-}
+
  .progress{
      background-color: #fff;
      visibility: hidden;

@@ -1,7 +1,7 @@
 @extends('ready.index')
 @section('content')
 
-	<div class=" table-box table-box-search table-box-pag">
+	<div class="table-box table-box-search table-box-pag">
         @if ($fake_search->count()<=0)
             <div class="empty-title">
                      Ой  ничего не нашлось :(

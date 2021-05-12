@@ -22,7 +22,7 @@ class AllController extends Controller
 {
     public function group($group_id = null, Selected $addStatus)
     {
-        $students = Student::where('group_id', $group_id)->paginate(13);
+        $students = Student::where('group_id', $group_id)->paginate(15);
         $groups = Group::get();
         return view('ready.group', [ 'students' => $students ], compact('groups', 'addStatus'));
     }
@@ -334,6 +334,24 @@ class AllController extends Controller
         $request->file('photo')->storeAs('public/images', date("YmdHis").'.'.$request->file('photo')->getClientOriginalExtension());
         session()->flash('card_send_succsess','Заявка  успешно отправлена');
         return redirect()->back();
+    }
+
+    public function addStudentToSelected(Request $request) {
+        foreach( Student::where('id', $request->studentid)->get() as $item ) {
+            DB::table('selecteds')->insert([
+                'name' => trim($item->name),
+                'surname' => trim($item->surname),
+                'lastname' => trim($item->lastname),
+                'code' => trim($item->code),
+                'lastname' => trim($item->lastname),
+                'group' => trim($item->group_id),
+                'form_of_education' => trim($item->form_of_education),
+                'date_of_enrollment' => trim($item->date_of_enrollment),
+                'photo' => trim($item->photo),
+                'shablon' => 1
+            ]);
+        }
+        return $request->studentid;
     }
 
     public function searchSort($sort = null)

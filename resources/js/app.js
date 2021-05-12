@@ -97,6 +97,31 @@ $(document).ready(function() {
 	})
 
 
+	$(".add_from_students").on("click", function(e) {
+		
+		e.preventDefault()
+		$(this).children('svg').remove('svg')
+		$(this).append('<svg  fill="#5fc321"viewBox="0 -46 417.81333 417" width="30px" xmlns="http://www.w3.org/2000/svg"><path d="m159.988281 318.582031c-3.988281 4.011719-9.429687 6.25-15.082031 6.25s-11.09375-2.238281-15.082031-6.25l-120.449219-120.46875c-12.5-12.5-12.5-32.769531 0-45.246093l15.082031-15.085938c12.503907-12.5 32.75-12.5 45.25 0l75.199219 75.203125 203.199219-203.203125c12.503906-12.5 32.769531-12.5 45.25 0l15.082031 15.085938c12.5 12.5 12.5 32.765624 0 45.246093zm0 0"/></svg>')
+		// $(this).children('svg').hover(function() {
+		// 	$(this).css({
+		// 		"fill": "#5fc321"
+		// 	})
+
+		// })
+		// console.log($(this).val())
+		let studentid = $(this).val();
+
+		$.ajax({
+			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+			url: '/addStudentToSelected',
+			data: { studentid },
+			method: 'POST',
+			success: function (data) {
+				console.log(data);
+			}
+		});
+	})
+
 
 	$('.select').change( function(e) {
 		console.log($(this).val())
@@ -127,71 +152,6 @@ $(document).ready(function() {
 		// let lastname_w = $(this).closest('tr').children('td').children('.input_lastname_val').val().trim()
 		// let position_w = $(this).closest('tr').children('td').children('.input_position_val').val().trim()
 	})
-
-
-
- 	$('#updateGroup').on("click", function() {
-			const updateGroups = () => {
-
-				fetch('./1c/update-groups.php').then(() => {
-					// getGroups();
-					// $(".simpleLoader").slideUp();
-					getGroupsInfo();
-				}).catch(() => updateGroups())
-		}
-	 })
-	const getGroupsInfo = () => {
-		fetch('./1c/get-group-info.php')
-			.then(res => res.json())
-			.then(res => {
-				if (res.percent !== 100) {
-					getGroupsInfo(false);
-				} else {
-					getStudentInfo();
-				}
-			}).catch(() => getGroupsInfo())
-	}
-
-
-	// const getStudentInfo = (refresh = true) => {
-	// 	$(".photoLoaderLabel").text('Выгружаю информацию о студентах...');
-    //     if (refresh) {
-    //         $(".photoLoader").slideDown();
-    //         $('.loadedPhoto').css('width', '0%');
-    //     }
-	// 	fetch('./1c/get-students-info.php')
-	// 		.then(res => res.json())
-	// 		.then(res => {
-	// 			$('.loadedPhoto').css('width', `${res.percent}%`);
-	// 			console.log(1)
-	// 			$(".files").text(`${res.loaded}/${res.count}`);
-	// 			$(".percent").text(`${res.percent}%`);
-	// 			if (res.percent !== 100) {
-	// 				getStudentInfo(false);
-	// 				console.log(1)
-	// 			} else {
-	// 				loadPhotos();
-	// 				getGroups();
-	// 			}
-	// 		}).catch(() => getStudentInfo())
-	// }
-
-
-
-
-
-	const loadPhotos = (refresh = true) => {
-
-		fetch('./1c/get-images.php')
-			.then(res => res.json())
-			.then(res => {
-
-				if (res.percent !== 100) {
-					loadPhotos(false);
-				}
-			}).catch(() => loadPhotos())
-	};
-
 
 
 	$('.save_worker_w').on("click", function() {

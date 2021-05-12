@@ -564,7 +564,6 @@ header nav ul li:hover:last-child {
 	background-color: #fff;
 	box-shadow: 0 50px 40px rgb(0, 0, 0, 0.2);
 	overflow: scroll;
-	overflow-x: hidden;
 	border-radius: 4px;
 }
 
@@ -581,6 +580,8 @@ header nav ul li:hover:last-child {
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
+	
+	/* overflow: hidden; */
 }
 
 .table-box .searchGroupBox ul li {
@@ -1084,7 +1085,7 @@ header nav ul li {
 .pag {
 	position:absolute;
 	bottom: 0;
-    width: 1030px;
+    width: 1200px;
 	height: 60px;
 	padding: 0;
 	margin: 0;
@@ -1093,8 +1094,23 @@ header nav ul li {
 	justify-content: center;
 }
 
-.pagination {
+.paggroup {
+	width: 1030px;
+	/* margin-top: 30px; */
+	position: absolute;
+	bottom: 6px;
+}
 
+.disabled {
+	display: none;
+}
+
+.groupPag {
+	margin-top: 10px;
+}
+
+.pagination {
+	/* width: 1200px; */
 	list-style-type: none;
 	display: flex;
 	justify-content: center;

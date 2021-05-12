@@ -245,7 +245,7 @@
 
 						</ul>
 				  	</nav>
-					<div class="progresss prog">
+					<div style="display: none" class="progresss">
 						<div class="files">...</div>
 						<div class="photoLoaderLabel"></div>
 						<div class="container-prog">
@@ -256,6 +256,9 @@
 						  
 					</div>
 					<style>
+						.disabled {
+							display: none;
+						}
 						.files {
 							margin-top: 14px;
 							margin-left: 5px;
@@ -320,14 +323,16 @@
 </html>
 <script>
 	const updateGroups = () => {
-	$(".simpleLoader").slideDown();
-	fetch('./1c/update-groups.php').then(() => {
-		getGroupsInfo();
-		$(".simpleLoader").slideUp();
-	}).catch(() => updateGroups())
+		$('.progresss').removeAttr('style')
+		$(".simpleLoader").slideDown();
+		fetch('./1c/update-groups.php').then(() => {
+			getGroupsInfo();
+			$(".simpleLoader").slideUp();
+		}).catch(() => updateGroups())
 	}
 
 	const getGroupsInfo = (refresh = true) => {
+		$('.progresss').removeAttr('style')
 		$(".photoLoaderLabel").text('Выгружаю информацию о группах...');
         if (refresh) {
             $(".photoLoader").slideDown();
@@ -348,16 +353,17 @@
 			}).catch(() => getGroupsInfo())
 	}
 
-	const ajax = () => {
-		fetch('/ajax', {
-			method: 'POST',
-			body: test = 1
-		})
-		.then(response => response.json())
-		.then(res => {
-			console.log(res)
-		})
-
+	const ajaxX = () => {
+		console.log(1)
+		// $('.progresss').addAttr('style')
+		// fetch('/ajax', {
+		// 	method: 'POST',
+		// 	body: test = 1
+		// })
+		// .then(response => response.json())
+		// .then(res => {
+		// 	console.log(res)
+		// })
 	}
 	const getStudentInfo = (refresh = true) => {
 	$(".photoLoaderLabel").text('Выгружаю информацию о студентах...');
@@ -398,14 +404,21 @@
                 $('.percentBar').css('width', `${res.percent}%`);
 				$('.percentBar').text(`${res.percent}%`);
 				$(".files").text(`${res.loaded}/${res.count}`);
-                if (res.loaded !== res.count-1) {
+                if (res.loaded + 1 != res.count) {
+					console.log(2)
                     loadPhotos(false);
-                } else {
-					if( res.loaded == res.count-1 ) {
-						// console.log(1)
-						ajax()
-					}
-                }
+                }  else {
+					$('.progresss').attr('style', 'display: none;')
+					fetch('/ajax', {
+					method: 'POST',
+					body: test = 1
+					})
+					.then(response => response.json())
+					.then(res => {
+						console.log(res)
+					})
+				}
+				console.log(1)
             }).catch(() => loadPhotos())
     };
 

@@ -10,6 +10,7 @@
              <table class="table_sort">
             <thead>
                 <tr>
+				<th></th>
 				<th class="sortON search_surname">Фамилия</th>
 				<th class="sortON search_name">Имя</th>
 				<th class="sortON search_lastname">Отчество</th>
@@ -24,6 +25,7 @@
 				@csrf
 				@foreach ($fake_search as $item)
 				<tr>
+					<td>{{ ($fake_search ->currentpage()-1) * $fake_search ->perpage() + $loop->index + 1 }}</td>
 					<td>{{ $item->surname }}</td>
 					<td>{{ $item->name }}</td>
 					<td>{{ $item->lastname }}</td>

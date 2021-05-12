@@ -67,7 +67,7 @@
 							<form action="" method="POST">
 								@csrf
 								<tr>
-									<td>{{$loop->iteration}}</td>
+									<td>{{ ($students ->currentpage()-1) * $students ->perpage() + $loop->index + 1 }}</td>
 									<td>{{$item->surname}}</td>
 									<td>{{$item->name}}</td>
 									<td>{{$item->lastname}}</td>
@@ -78,9 +78,9 @@
 										@else
 
 										<button
-											class="btn_add"
+											class="add_from_students"
 											type="submit"
-											name="add_to_cart"
+											name="add_from_students"
 											value="{{ $item->id }}"
 										>
 											<svg width="25px" fill="black" viewBox="0 0 448 448"  xmlns="http://www.w3.org/2000/svg"><path d="m272 184c-4.417969 0-8-3.582031-8-8v-176h-80v176c0 4.417969-3.582031 8-8 8h-176v80h176c4.417969 0 8 3.582031 8 8v176h80v-176c0-4.417969 3.582031-8 8-8h176v-80zm0 0"/></svg>
@@ -92,9 +92,9 @@
 							@endforeach
 						</table>
                         @if ($students->total() > $students->count())
-							<div class="pag">
+							<div class="paggroup">
 								<ul class="pagination">
-									<li class="pagination__item">
+									<li class="pagination__item groupPag">
 										{{$students->onEachSide(1)->links()}}
 									</li>
 								</ul>

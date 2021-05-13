@@ -39,11 +39,29 @@
 						})
 			</script>
 			<div class="table-box">
-				<div class="searchGroupBox">
+                {{-- @dd($students) --}}
+               <div class=" searchGroup-container">    <button class="group-btn">
+
+            @if ($students->count()<=0)
+            Выберите группу
+            @else
+            @foreach ($students as $item)
+            {{$item->group_id}}
+            @break
+            @endforeach
+
+            @endif
+
+            </button>
+             <div class="searchGroupBox">
+
+
 					<input placeholder="Поиск группы..." onkeyup="getValue()" class="searchGroupInput" type="text">
 					<ul class="groups">
 
 					</ul>
+            </div>
+
 				</div>
                 @if ($students->count()<=0)
                   <div class="empty-title">

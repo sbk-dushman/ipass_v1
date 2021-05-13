@@ -1423,3 +1423,17 @@ border-radius: 5px;
     left: 0;
     cursor: pointer;
 }
+.group-btn{
+    border-radius: 5px;
+height: 100%;
+background-color: #ffffff;
+height: 40px;
+width: 150px;
+font-size: 15px;
+box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
+}
+.searchGroupBox{
+    border-radius: 5px;
+    max-height: 120px;
+}
+/* новое меню группы */

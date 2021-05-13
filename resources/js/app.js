@@ -7,9 +7,14 @@ function declOfNum(number, titles) {
   return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
 }
 // меню группы
-function myFunction() {
-    document.getElementById("my Dropdown").classList.toggle("show");
-}
+
+$('.group-btn').on('click',function(e) {
+   $('.searchGroupBox').slideToggle('slow');
+});
+
+// function myFunction() {
+//     document.getElementById("my Dropdown").classList.toggle("show");
+// }
 
 
 function getStudId(contex,url) {

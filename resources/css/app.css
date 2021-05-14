@@ -46,7 +46,7 @@ header .progresss {
 }
 header .header-nav {
 	grid-area: nav;
-	
+
 }
 header .search-box {
 	grid-area: search;
@@ -431,7 +431,7 @@ header nav ul li:hover:last-child {
 }
 
 .table-box-selecteds table tr td:last-child {
-	position: relative;
+	/* position: relative; */
 }
 
 .table-box-selecteds table tr td:last-child .save_worker {
@@ -500,7 +500,7 @@ header nav ul li:hover:last-child {
 
 } */
 .table-box {
-	position: relative;
+	/* position: relative; */
 }
 .hidden {
 	visibility: hidden;
@@ -560,43 +560,68 @@ header nav ul li:hover:last-child {
 	width: 100%;
 }
 
-.table-box .searchGroupBox {
+.searchGroupBox {
 	background-color: #fff;
 	box-shadow: 0 50px 40px rgb(0, 0, 0, 0.2);
 	overflow: scroll;
 	border-radius: 4px;
+    position: relative;
 }
 
-.table-box .searchGroupBox input {
-	width: 125px;
+.searchGroupBox input {
+	    width: 136px;
+        top:0;
 	margin: 3px;
 	border-radius: 4px;
 	outline: none;
 	border: 1px solid black;
-	position: sticky;
+	/* position: absolute; */
+    height: 30px;
 }
 
-.table-box .searchGroupBox ul {
+.searchGroupBox ul {
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
 	
 	/* overflow: hidden; */
 }
+.select_grop-btn{
+    background-color:#0000;
+}
+.groups a{
+    text-decoration: none;
+    color: #000;
+}
+.LoginInput{
+    width: 356px;
+}
+.help-block{
+color: red;
+}
+
+.groups a::after{
+content: "";
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+}
 
 .table-box .searchGroupBox ul li {
-	border: 1px solid black;
+    position: relative;
+	/* border: 1px solid black; */
 	height: 30px;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: 125px;
+	/* width: 125px; */
 	margin: 3px;
 	border-radius: 3px;
 	transition: 0.2s ease-in-out;
 }
-
+searchGroupInput
 .table-box .searchGroupBox ul li a {
 	text-decoration: none;
 	color: #000;
@@ -755,7 +780,7 @@ header .select-box .dropdown {
 	border-bottom: 1px solid #ddd;
 }
 
-#myInput:focus {
+/* #myInput:focus {
 	outline: none
 }
 
@@ -775,7 +800,7 @@ header .select-box .dropdown {
 	z-index: 1;
     top: 0;
     right: 0;
-}
+} */
 
 
 .dropdown-content a {
@@ -875,7 +900,7 @@ header nav ul li {
 	/* border: 1px solid black; */
 	box-shadow: 0 50px 40px rgb(0, 0, 0, 0.2);
 	background-color: #fff;
-    position: relative;
+    /* position: relative; */
 }
 .table-box-workers table {
 	width: 100%;
@@ -1078,9 +1103,6 @@ header nav ul li {
 	text-align: left;
 }
 
-.table-box-selecteds {
-	position: relative;
-}
 
 .pag {
 	position:absolute;
@@ -1408,7 +1430,8 @@ border-radius: 5px;
 }
 .photo-wraper{
     cursor: pointer;
-    z-index: 2;
+    z-index: 40;
+    border-radius: 4px;
 }
 .photo-wraper.active{
     position: absolute;
@@ -1434,3 +1457,34 @@ border-radius: 5px;
     left: 0;
     cursor: pointer;
 }
+
+.group-btn{
+    border-radius: 5px;
+height: 100%;
+background-color: #ffffff;
+height: 40px;
+width: 150px;
+font-size: 15px;
+box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
+    margin-bottom: -5px;
+}
+.searchGroupBox{
+    /* border-radius: 4px; */
+    max-height: 673px;
+    display: none;
+    /* border-radius: 4px 4px 4px 4px; */
+}
+.searchGroupInput{
+height: 30px;
+max-width: 150px;
+
+outline: #036f99;
+border: none;
+display: none;
+border-radius: 4px 4px 3px 3px;
+padding: 0 10px;
+
+}
+
+}
+/* новое меню группы */

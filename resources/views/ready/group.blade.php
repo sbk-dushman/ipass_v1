@@ -40,7 +40,9 @@
 			</script>
 			<div class="table-box">
                 {{-- @dd($students) --}}
-               <div class=" searchGroup-container">    <button class="group-btn">
+               <div class="searchGroup-container">
+
+                <button class="group-btn">
 
             @if ($students->count()<=0)
             Выберите группу
@@ -53,10 +55,12 @@
             @endif
 
             </button>
+             <input placeholder="Поиск группы..." onkeyup="getValue()" class="searchGroupInput" type="text">
+
              <div class="searchGroupBox">
 
 
-					<input placeholder="Поиск группы..." onkeyup="getValue()" class="searchGroupInput" type="text">
+
 					<ul class="groups">
 
 					</ul>

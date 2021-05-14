@@ -10,6 +10,8 @@ function declOfNum(number, titles) {
 
 $('.group-btn').on('click',function(e) {
    $('.searchGroupBox').slideToggle('slow');
+    $('.searchGroupInput').slideToggle('slow');
+
 });
 
 // function myFunction() {

@@ -14,7 +14,7 @@ class ResetPassword extends Command
      *
      * @var string
      */
-    protected $signature = 'resetpassword {user} {password}';
+    protected $signature = 'resetpassword {password}';
 
     /**
      * The console command description.
@@ -43,7 +43,7 @@ class ResetPassword extends Command
         User::where('id', $this->argument('user'))->update([
             'password' => Hash::make($this->argument('password'))
         ]);
-        dump('Ваш логин: '. User::where('id', $this->argument('user'))->value('email'));
+        dump('Ваш логин: '. User::where('username', 'admin')->value('email'));
         dump('Ваш новый пароль: '. $this->argument('password'));
     }
 }

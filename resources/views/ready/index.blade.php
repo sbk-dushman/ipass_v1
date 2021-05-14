@@ -408,14 +408,16 @@
 					console.log(2)
                     loadPhotos(false);
                 }  else {
+					
 					$('.progresss').attr('style', 'display: none;')
+					alert('Загрузка завершена!')
 					fetch('/ajax', {
 					method: 'POST',
 					body: test = 1
 					})
 					.then(response => response.json())
 					.then(res => {
-						console.log(res)
+						
 					})
 				}
 				console.log(1)

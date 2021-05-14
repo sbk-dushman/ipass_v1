@@ -213,8 +213,6 @@ class AllController extends Controller
 
     public function search(Request $request, $page = 'page=1', $search = '1', FakeSearch $addStatus)
     {
-        // dump($request->ajax());
-        // dump(1);
         $data = $request->search;
         $sort = $request->sort;
         FakeSearch::where('id', '>', '0')->delete();
@@ -251,13 +249,13 @@ class AllController extends Controller
                 'photo' => $item->photo,
             ]);
         }
-        // dd($request->getRequestUri());
-        // $fake_search = FakeSearch::get();
-        $fake_search = FakeSearch::paginate(14)->withPath($request->getRequestUri());
-        // $arr1 = new Collection;
-
-        // $arr1 = $arr1->merge($resultsStud)->merge($resultsWork);
-        // $arr1 = paginate(1);
+        $search_uri = '';
+        foreach($request->request as $key => $req) {
+            if( $key == 'search' ) {
+                $search_uri = $req;
+            }
+        }
+        $fake_search = FakeSearch::paginate(14)->withPath('?search='.$search_uri);
         return view('ready.search', compact('fake_search', 'addStatus'));
     }
 

@@ -80,23 +80,34 @@
 								<th class="sortON">Фамилия</th>
 								<th class="sortON">Имя</th>
 								<th class="sortON">Отчество</th>
-								<th class="sortON">Группа</th>
-								<th class="sortON"></th>
+								<th class="sortON">Дата поступления</th>
+								<th></th>
+								<th></th>
 							</tr>
 							</thead>
 
 							@foreach ($students as $item)
-							<form action="" method="POST">
 								@csrf
 								<tr>
 									<td>{{ ($students ->currentpage()-1) * $students ->perpage() + $loop->index + 1 }}</td>
 									<td>{{$item->surname}}</td>
 									<td>{{$item->name}}</td>
 									<td>{{$item->lastname}}</td>
-									<td>{{$item->group_id}}</td>
+									<td>{{ $item->date_of_enrollment }}</td>
+									<td>
+										@if ( $item->photo != '' )
+											<div class="photo-wraper">
+												<img style="width: 20px; height: 20px;" src="{{$item->photo}}" alt="">
+											</div>
+										@else
+											<div class="photo-wraper">
+												<img style="width: 20px; height: 20px;" src="/storage/images/unnamed.png" alt="">
+											</div>  
+										@endif
+									</td>
 									<td>
 										@if ($addStatus->Oba($id = $item->id))
-											<svg  fill="#5fc321"viewBox="0 -46 417.81333 417" width="25px" xmlns="http://www.w3.org/2000/svg"><path d="m159.988281 318.582031c-3.988281 4.011719-9.429687 6.25-15.082031 6.25s-11.09375-2.238281-15.082031-6.25l-120.449219-120.46875c-12.5-12.5-12.5-32.769531 0-45.246093l15.082031-15.085938c12.503907-12.5 32.75-12.5 45.25 0l75.199219 75.203125 203.199219-203.203125c12.503906-12.5 32.769531-12.5 45.25 0l15.082031 15.085938c12.5 12.5 12.5 32.765624 0 45.246093zm0 0"/></svg>
+											<svg class="svg_added"  fill="#5fc321"viewBox="0 -46 417.81333 417" width="25px" xmlns="http://www.w3.org/2000/svg"><path d="m159.988281 318.582031c-3.988281 4.011719-9.429687 6.25-15.082031 6.25s-11.09375-2.238281-15.082031-6.25l-120.449219-120.46875c-12.5-12.5-12.5-32.769531 0-45.246093l15.082031-15.085938c12.503907-12.5 32.75-12.5 45.25 0l75.199219 75.203125 203.199219-203.203125c12.503906-12.5 32.769531-12.5 45.25 0l15.082031 15.085938c12.5 12.5 12.5 32.765624 0 45.246093zm0 0"/></svg>
 										@else
 
 										<button
@@ -109,8 +120,8 @@
 										</button>
 										@endif
 									</td>
+									{{-- <td>1</td> --}}
 								</tr>
-							</form>
 							@endforeach
 						</table>
                         @if ($students->total() > $students->count())

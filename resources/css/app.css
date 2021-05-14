@@ -431,11 +431,11 @@ header nav ul li:hover:last-child {
 }
 
 .table-box-selecteds table tr td:last-child {
-	/* position: relative; */
+	position: relative;
 }
 
 .table-box-selecteds table tr td:last-child .save_worker {
-	left: 45px;
+	right: -30px;
 	position: absolute;
 }
 
@@ -563,7 +563,7 @@ header nav ul li:hover:last-child {
 .searchGroupBox {
 	background-color: #fff;
 	box-shadow: 0 50px 40px rgb(0, 0, 0, 0.2);
-	overflow: scroll;
+	overflow-y: scroll;
 	border-radius: 4px;
     position: relative;
 }
@@ -658,9 +658,9 @@ searchGroupInput
 
 .table-box .table-container table tr td:last-child {
 	width: 25px;
-	display: flex;
+	/* display: flex; */
 	align-items: center;
-	padding-right: 10px;
+	/* padding-right: 10px; */
 	/* margin: 10px; */
 }
 
@@ -680,30 +680,47 @@ searchGroupInput
 }
 
 .table-box .table-container table tr td:nth-child(6) {
-	display: flex;
+	/* display: flex; */
 	justify-content: center;
 	align-items: center;
-	padding-right: 10px;
-	padding-left: 10px;
-    width: 90px;
+	/* padding-right: 10px;
+	padding-left: 10px; */
+    /* width: 90px; */
 }
 
-.table-box .table-container table tr td:nth-child(6) button {
+.svg_added {
+	/* padding-left: 10px; */
+}
+
+.table-box .table-container table tr td:nth-child(7) button {
 	outline: none;
 	border: none;
 	background: transparent;
 	/* margin-right: 10px; */
 }
 
-.table-box .table-containertable tr td:nth-child(6) button:focus {
+.table-box .table-containertable tr td:nth-child(7) button:focus {
 	outline: none;
 	border: none;
 }
 
-.table-box .table-container table tr td:nth-child(6) button:active {
+.table-box .table-container table tr td:last-child {
+	outline: none;
+	border: none;
+	width: 60px;
+	padding: 0;
+}
+
+/* .table-box .table-container table tr td:nth-child(7) button:active {
 	outline: none;
 	border: none;
 }
+
+.table-box .table-container table tr td:nth-child(7) button:active {
+	outline: none;
+	border: none;
+	width: 60px;
+} */
 
 .table-box .table-container table tr td:first-child {
 	max-width: 50px;
@@ -829,6 +846,8 @@ header .select-box .dropdown {
     justify-content: center;
 	background: #fff;
 	border-radius: 4px;
+	height: 100%;
+	box-shadow: 0 50px 40px rgb(0, 0, 0, 0.2);
 }
 /* svg{
     width: 100%;
@@ -886,6 +905,7 @@ cursor: pointer;
 }
 
 .btn_search svg{
+	margin-top: 2px;
     background: transparent;
 }
 header nav ul li {
@@ -1103,10 +1123,14 @@ header nav ul li {
 	text-align: left;
 }
 
+.table-box-selecteds .pag {
+	position: absolute;
+	bottom: 50px;
+}
 
 .pag {
 	position:absolute;
-	bottom: 0;
+	bottom: 0px;
     width: 1200px;
 	height: 60px;
 	padding: 0;
@@ -1120,7 +1144,7 @@ header nav ul li {
 	width: 1030px;
 	/* margin-top: 30px; */
 	position: absolute;
-	bottom: 6px;
+	bottom: 50px;
 }
 
 .disabled {
@@ -1313,7 +1337,7 @@ th.sorted[data-order="1"]::after {
         width: 90mm;
         height: 60mm;
         margin: 10mm;
-        border: 1px solid rgba(0,0,0,0);
+        border: none;
         padding-left: 3mm;
     }
 
@@ -1467,24 +1491,25 @@ width: 150px;
 font-size: 15px;
 box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
     margin-bottom: -5px;
+	margin-bottom: 10px;
 }
 .searchGroupBox{
     /* border-radius: 4px; */
-    max-height: 673px;
+    max-height: 653px;
     display: none;
     /* border-radius: 4px 4px 4px 4px; */
 }
 .searchGroupInput{
 height: 30px;
 max-width: 150px;
-
+box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
 outline: #036f99;
 border: none;
 display: none;
 border-radius: 4px 4px 3px 3px;
 padding: 0 10px;
-
+margin-bottom: 10px;
 }
 
-}
+
 /* новое меню группы */

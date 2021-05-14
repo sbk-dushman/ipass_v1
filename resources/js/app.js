@@ -8,16 +8,28 @@ function declOfNum(number, titles) {
 }
 // меню группы
 
-$('.group-btn').on('click',function(e) {
+$('.group-btn').on('click', function(e) {
    $('.searchGroupBox').slideToggle('slow');
     $('.searchGroupInput').slideToggle('slow');
 
 });
 
-// function myFunction() {
-//     document.getElementById("my Dropdown").classList.toggle("show");
-// }
+$('.btn_add_search').on("click", function(e) {
+	e.preventDefault()
+	$(this).children('svg').remove('svg')
+	$(this).append('<svg  fill="#5fc321"viewBox="0 -46 417.81333 417" width="25px" xmlns="http://www.w3.org/2000/svg"><path d="m159.988281 318.582031c-3.988281 4.011719-9.429687 6.25-15.082031 6.25s-11.09375-2.238281-15.082031-6.25l-120.449219-120.46875c-12.5-12.5-12.5-32.769531 0-45.246093l15.082031-15.085938c12.503907-12.5 32.75-12.5 45.25 0l75.199219 75.203125 203.199219-203.203125c12.503906-12.5 32.769531-12.5 45.25 0l15.082031 15.085938c12.5 12.5 12.5 32.765624 0 45.246093zm0 0"/></svg>')
+	let peopleid = $(this).val();
 
+	$.ajax({
+		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+		url: '/addPeopleToSelected',
+		data: { peopleid },
+		method: 'POST',
+		success: function (data) {
+			console.log(data);
+		}
+	});
+})
 
 function getStudId(contex,url) {
     let studID = $(contex).attr("data-studID");
@@ -151,7 +163,8 @@ $(document).ready(function() {
 		$(this).closest('tr').children('td').children('.input_worker').removeAttr("disabled")
 		$(this).closest('tr').children('td').children('.input_worker').css({
 			"border-radius": "5px",
-            "background-color": "#61e1f2",
+			"border-bottom": "2px solid #60C4F2",
+            "background-color": "rgba(96, 196, 242, 0.09)",
             "padding":"0 6px"
 		})
 		// let surname_w = $(this).closest('tr').children('td').children('.input_surname_val').val().trim()
@@ -249,8 +262,9 @@ $(document).ready(function() {
 		$(this).closest('tr').children('td').children('.input').removeAttr("disabled")
 		$(this).closest('tr').children('td').children('.input').css({
             "border-radius": "5px",
-            "background-color": "#61e1f2",
-            "padding": "0 6px"
+			"border-bottom": "2px solid #60C4F2",
+            "background-color": "rgba(96, 196, 242, 0.09)",
+            "padding":"0 6px"
 		})
 		// $(this).closest('tr').children('td').css({
 		// 	"background-color": "#FFEBCD"

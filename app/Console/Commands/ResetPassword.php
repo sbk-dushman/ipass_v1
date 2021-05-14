@@ -21,7 +21,7 @@ class ResetPassword extends Command
      *
      * @var string
      */
-    protected $description = 'Reset password';
+    protected $description = 'Reset admin password';
 
     /**
      * Create a new command instance.
@@ -40,10 +40,12 @@ class ResetPassword extends Command
      */
     public function handle()
     {     
-        User::where('id', $this->argument('user'))->update([
+        User::where('username', 'admin')->update([
             'password' => Hash::make($this->argument('password'))
         ]);
-        dump('Ваш логин: '. User::where('username', 'admin')->value('email'));
-        dump('Ваш новый пароль: '. $this->argument('password'));
+        echo "\n";
+        echo 'Ваш логин: '. User::where('username', 'admin')->value('username') . "\n";
+        echo 'Ваш новый пароль: '. $this->argument('password');
+        echo "\n";
     }
 }

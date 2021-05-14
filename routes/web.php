@@ -46,6 +46,7 @@ Route::group(['middleware'=>'auth'],function () {
     Route::post('/selected', 'AllController@selectedPost');
     Route::post('/getGroups', 'AllController@getGroups');
     Route::post('/addStudentToSelected', 'AllController@addStudentToSelected');
+    Route::post('/addPeopleToSelected', 'AllController@addPeopleToSelected');
 });
 
 

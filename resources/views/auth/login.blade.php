@@ -1,7 +1,14 @@
 @extends('auth.master')
 
 @section('content')
-
+<style>
+    .login-btn {
+        position: absolute;
+        top: 10px;
+        right: 55px;
+    }
+</style>
+    <a class="login-btn btn btn-primary" href="/">Назад</a>
   <form  method="POST" action="{{ route('login') }}">
                     @csrf
 

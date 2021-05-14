@@ -16,12 +16,16 @@
         transform:translateX(90vw);
     }
     .send-order{
-margin-top: 20px;
-}
-.order-card{
-    /* padding: 20px 0; */
-    border-bottom: none!important;
-}
+        margin-top: 20px;
+    }
+    .order-card{
+        /* padding: 20px 0; */
+        border: none;
+        border-bottom: none!important;
+    }
+    .login-btn {
+        margin-top: 10px;
+    }
     </style>
     <a class="login-btn btn btn-primary" href="/login">Войти</a>
     <div class="card order-card align-items-center">

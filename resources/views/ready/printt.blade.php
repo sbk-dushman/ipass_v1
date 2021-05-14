@@ -70,14 +70,14 @@
                         </div>
                         <div class="info">
                             <div class="stud">СТУДЕНЧЕСКИЙ БИЛЕТ №<span class="stud-number">{{ $datas->code }}</span></div>
-                            <div class="stud-surname">Фамилия <span class="surname">{{ $datas->lastname }}</span></div>
+                            <div class="stud-surname">Фамилия <span class="surname"> {{ $datas->surname }}</span></div>
                             <div class="stud-name">
                                 Имя
                                 <span class="name">{{ $datas->name }}</span>
                             </div>
                             <div class="stud-name">
                                 отчество
-                                <span class="name"> {{ $datas->surname }} </span>
+                                <span class="name"> {{ $datas->lastname }} </span>
                             </div>
                             <div class="stud-form">Форма обучения <span class="form">{{ $datas->form_of_education }}</span></div>
                             <div class="stud-order">Зачислен приказом от <span class="order-date">{{ $datas->date_of_enrollment }}</span> №<span

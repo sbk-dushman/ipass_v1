@@ -22,7 +22,7 @@ class AllController extends Controller
 {
     public function group($group_id = null, Selected $addStatus)
     {
-        $students = Student::where('group_id', $group_id)->paginate(13);
+        $students = Student::where('group_id', $group_id)->paginate(15);
         $groups = Group::get();
         return view('ready.group', [ 'students' => $students ], compact('groups', 'addStatus'));
     }
@@ -213,8 +213,6 @@ class AllController extends Controller
 
     public function search(Request $request, $page = 'page=1', $search = '1', FakeSearch $addStatus)
     {
-        // dump($request->ajax());
-        // dump(1);
         $data = $request->search;
         $sort = $request->sort;
         FakeSearch::where('id', '>', '0')->delete();
@@ -251,13 +249,13 @@ class AllController extends Controller
                 'photo' => $item->photo,
             ]);
         }
-        // dd($request->getRequestUri());
-        // $fake_search = FakeSearch::get();
-        $fake_search = FakeSearch::paginate(14)->withPath($request->getRequestUri());
-        // $arr1 = new Collection;
-
-        // $arr1 = $arr1->merge($resultsStud)->merge($resultsWork);
-        // $arr1 = paginate(1);
+        $search_uri = '';
+        foreach($request->request as $key => $req) {
+            if( $key == 'search' ) {
+                $search_uri = $req;
+            }
+        }
+        $fake_search = FakeSearch::paginate(14)->withPath('?search='.$search_uri);
         return view('ready.search', compact('fake_search', 'addStatus'));
     }
 
@@ -336,6 +334,24 @@ class AllController extends Controller
         return redirect()->back();
     }
 
+    public function addStudentToSelected(Request $request) {
+        foreach( Student::where('id', $request->studentid)->get() as $item ) {
+            DB::table('selecteds')->insert([
+                'name' => trim($item->name),
+                'surname' => trim($item->surname),
+                'lastname' => trim($item->lastname),
+                'code' => trim($item->code),
+                'lastname' => trim($item->lastname),
+                'group' => trim($item->group_id),
+                'form_of_education' => trim($item->form_of_education),
+                'date_of_enrollment' => trim($item->date_of_enrollment),
+                'photo' => trim($item->photo),
+                'shablon' => 1
+            ]);
+        }
+        return $request->studentid;
+    }
+
     public function searchSort($sort = null)
     {
         if( $sort == 1 ) {
@@ -353,40 +369,16 @@ class AllController extends Controller
     public function ajax()
     {
 
-        // return 1;
-        // function doRequest($url) {
-        //     $ch = curl_init();
-        //     $token = base64_encode('АгарковОВ:qzwxec123');
-        //     curl_setopt($ch, CURLOPT_HEADER, 0);
-        //     curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Basic $token"]);
-        //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        //     curl_setopt($ch, CURLOPT_URL, $url);
-
-        //     $data = curl_exec($ch);
-        //     curl_close($ch);
-
-        //     $data = json_decode($data);
-        //     return $data;
-        // }
         $groups = json_decode(file_get_contents('./1c/groups.json'), true);
-        // $url = 'http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Document_%D0%90%D0%BD%D0%BA%D0%B5%D1%82%D0%B0%D0%90%D0%B1%D0%B8%D1%82%D1%83%D1%80%D0%B8%D0%B5%D0%BD%D1%82%D0%B0?$format=json&$filter=Ref_Key%20eq%20guid%27dc220144-6aa4-11e7-f798-40167e72fa59%27';
-        // $url2 = 'http://1c.uksivt.ru/uksivt-2018/odata/standard.odata/Catalog_%D0%A1%D0%BF%D0%B5%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8?$format=json&$filter=Ref_Key%20eq%20guid%27f281b54e-6a86-11e6-a63f-005056c00008%27';
-        // dd(doRequest($url)->value);
-        // $data = 'PFN0cmluZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEi\r\nIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5z\r\ndGFuY2UiLz4=';
-        // echo base64_decode($data);
-        // foreach( $groups as $group ) {
-        //     dd($group);
-        // }
-        // $arr = [];
+
         DB::table('students')->where("id", ">", "0")->delete();
         DB::table('groups')->where("id", ">", "0")->delete();
         foreach ($groups as $group) {
-            dump($group);
+            dump(1);
             DB::table('groups')->insert([
                 'group' => trim($group['name'])
             ]);
             foreach ( $group['students'] as $item ) {
-                // dump(substr("121221", 1));
 
                 if( isset($item['imageFile']) ) {
                     DB::table('students')->insert([
@@ -413,7 +405,26 @@ class AllController extends Controller
                 }
             }
         }
-        // // return $arr;
+        return 'OK';
+    }
+
+    public function addPeopleToSelected(Request $request) {
+        // foreach( Student::where('id', $request->peopleid)->get() as $item ) {
+        //     return $item;
+        //     // DB::table('selecteds')->insert([
+        //     //     'name' => trim($item->name),
+        //     //     'surname' => trim($item->surname),
+        //     //     'lastname' => trim($item->lastname),
+        //     //     'code' => trim($item->code),
+        //     //     'lastname' => trim($item->lastname),
+        //     //     'group' => trim($item->group_id),
+        //     //     'form_of_education' => trim($item->form_of_education),
+        //     //     'date_of_enrollment' => trim($item->date_of_enrollment),
+        //     //     'photo' => trim($item->photo),
+        //     //     'shablon' => 1
+        //     // ]);
+        // }
+        return $request->peopleid;
     }
 
     public function getGroups(Request $request) {
